@@ -15,4 +15,7 @@ public $translatable=['name'];
     public function country(){
         return $this->belongsTo(country::class);
     }
+    public function salesinvs(){
+        return $this->hasMany(salesinv::class);
+    }
 }

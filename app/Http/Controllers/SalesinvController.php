@@ -13,7 +13,8 @@ class SalesinvController extends Controller
 {
     public function index()
     {
-        $salesinv = salesinv::all();
+        $salesinv = salesinv::with('client')->get();
+  //     return $salesinv->clients->name;
         return view('backend.Salesinv.index', compact('salesinv'));
     }
     public function create()
@@ -83,11 +84,10 @@ for($x=0;$x<count($details);$x++){
 
     public function saleinv( $id)
     { 
-        
+        //return $inv->products_salesinvs[0]->product_id->name;
         try{
-            $inv = salesinv::where('id',$id)->first();
-            $data = $inv->products;
-        return view('backend.Salesinv.show',compact('inv','data'));
+            $inv = salesinv::with('products','products_salesinvs')->first();
+        return view('backend.Salesinv.show',compact('inv'));
         }catch(\Exception $e){
             return redirect()
                 ->back()

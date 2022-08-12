@@ -80,37 +80,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach($data as $item)
+                                   @foreach($inv->products as $item)
                                    <tr>
                                     <td>{{$item->name}}</td>
                                     <td class="tx-12">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam...</td>
-                                    <td class="tx-center">2</td>
-                                    <td class="tx-right">$150.00</td>
+                                    <td class="tx-center">{{\App\Models\product_salesinv::find($item->id)->quantity}}</td>
+                                    <td class="tx-right">{{$item->price}}</td>
                                     <td class="tx-right">$300.00</td>
                                 </tr>
                                    @endforeach
-
-                                    <tr>
-                                        <td>Firefox Plugin</td>
-                                        <td class="tx-12">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque...</td>
-                                        <td class="tx-center">1</td>
-                                        <td class="tx-right">$1,200.00</td>
-                                        <td class="tx-right">$1,200.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>iPhone App</td>
-                                        <td class="tx-12">Et harum quidem rerum facilis est et expedita distinctio</td>
-                                        <td class="tx-center">2</td>
-                                        <td class="tx-right">$850.00</td>
-                                        <td class="tx-right">$1,700.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Android App</td>
-                                        <td class="tx-12">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut</td>
-                                        <td class="tx-center">3</td>
-                                        <td class="tx-right">$850.00</td>
-                                        <td class="tx-right">$2,550.00</td>
-                                    </tr>
                                     <tr>
                                         <td class="valign-middle" colspan="2" rowspan="4">
                                             <div class="invoice-notes">
@@ -119,20 +97,21 @@
                                             </div><!-- invoice-notes -->
                                         </td>
                                         <td class="tx-right">Sub-Total</td>
-                                        <td class="tx-right" colspan="2">$5,750.00</td>
+                                        <td class="tx-right" colspan="2">{{$inv->total}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tx-right">Tax (5%)</td>
-                                        <td class="tx-right" colspan="2">$287.50</td>
+                                        <td class="tx-right">Tax </td>
+                                        <td class="tx-right" colspan="2">{{$inv->tax_rate}}</td>
+                                        <td class="tx-right" colspan="2">{{$inv->tax_value}}</td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right">Discount</td>
-                                        <td class="tx-right" colspan="2">-$50.00</td>
+                                        <td class="tx-right" colspan="2">-{{$inv->discount}}</td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right tx-uppercase tx-bold tx-inverse">Total Due</td>
                                         <td class="tx-right" colspan="2">
-                                            <h4 class="tx-primary tx-bold">{{$inv->total}}</h4>
+                                            <h4 class="tx-primary tx-bold"></h4>
                                         </td>
                                     </tr>
                                 </tbody>

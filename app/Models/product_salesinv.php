@@ -16,6 +16,5 @@ class product_salesinv extends Model
     }
     public function products(){
         return $this->morphedByMany(product::class,'id');
-
     }
 }
