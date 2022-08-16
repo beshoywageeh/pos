@@ -16,13 +16,12 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'welcome'=>' Welcome Back !',
-    'login'=>'Login To Start',
-    'email'=>'Email',
-    'pass'=>'Password',
-    'placemail'=>'Enter Your Email',
-    'placpass'=>'Enter Your Password',
-    'log'=>'Login'
-
+    'welcome' => ' Welcome Back !',
+    'login' => 'Login To Start',
+    'email' => 'Email',
+    'pass' => 'Password',
+    'placemail' => 'Enter Your Email',
+    'placpass' => 'Enter Your Password',
+    'log' => 'Login',
 
 ];

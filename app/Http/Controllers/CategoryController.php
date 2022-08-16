@@ -12,6 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = category::all();
+
         return view('backend.Categories.index', compact('categories'));
     }
 
@@ -26,7 +27,8 @@ class CategoryController extends Controller
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'notes' => $request->notes,
             ]);
-           toastr()->success(trans('category.Add'));
+            toastr()->success(trans('category.Add'));
+
             return redirect('category');
         } catch (\Exception $e) {
             return redirect()
@@ -34,11 +36,13 @@ class CategoryController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
+
     public function show(category $category)
     {
         //return $category->id;
-        $products = product::where('category_id',$category->id)->get();
-        return view('backend.Categories.show',compact('category','products'));
+        $products = product::where('category_id', $category->id)->get();
+
+        return view('backend.Categories.show', compact('category', 'products'));
     }
 
     public function edit(category $category)
@@ -61,6 +65,7 @@ class CategoryController extends Controller
                 'notes' => $request->notes,
             ]);
             toastr()->success(trans('category.edit'));
+
             return redirect('category');
         } catch (\Exception $e) {
             return redirect()
@@ -68,11 +73,13 @@ class CategoryController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
+
     public function destroy(Request $request)
     {
         try {
             category::destroy($request->id);
             toastr()->success(trans('category.Delete'));
+
             return redirect('category');
         } catch (\Exception $e) {
             return redirect()

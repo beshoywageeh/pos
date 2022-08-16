@@ -81,9 +81,9 @@ return [
     */
 
     'locale' => 'ar',
-    'languages'=>[
-      'ar'=>'العربية',
-        'en'=>'ُEnglish',
+    'languages' => [
+        'ar' => 'العربية',
+        'en' => 'ُEnglish',
     ],
 
     /*

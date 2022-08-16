@@ -9,8 +9,9 @@ use Spatie\Translatable\HasTranslations;
 class category extends Model
 {
     use HasFactory;
-use HasTranslations;
-protected $fillable=['name','notes'];
-public $translatable=['name'];
+    use HasTranslations;
 
+    protected $fillable = ['name', 'notes'];
+
+    public $translatable = ['name'];
 }

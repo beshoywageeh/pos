@@ -15,14 +15,14 @@ class CreateSalesinvsTable extends Migration
     {
         Schema::create('salesinvs', function (Blueprint $table) {
             $table->id();
-            $table->string('inv_num','20');
+            $table->string('inv_num', '20');
             $table->date('inv_date');
             $table->foreignId('client_id')->references('id')->on('clients');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->decimal('discount','8','2')->nullable();
+            $table->decimal('discount', '8', '2')->nullable();
             $table->string('tax_rate')->nullable();
-            $table->decimal('tax_value','8','2')->nullable();
-            $table->decimal('total','8','2')->nullable();
+            $table->decimal('tax_value', '8', '2')->nullable();
+            $table->decimal('total', '8', '2')->nullable();
             $table->timestamps();
         });
     }

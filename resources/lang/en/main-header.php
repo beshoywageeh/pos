@@ -13,14 +13,13 @@ return [
     |
     */
 
-    'Profile'=>'Profile',
-    'Edit Profile'=>'Edit Profile',
-    'Inbox'=>'Inbox',
-    'Messages'=>'Messages',
-    'Account Settings'=>'Account Settings',
-    'Sign Out'=>'Sign Out',
-    'Lang'=>'Choose Language',
-'Notifications'=>'Notifications',
+    'Profile' => 'Profile',
+    'Edit Profile' => 'Edit Profile',
+    'Inbox' => 'Inbox',
+    'Messages' => 'Messages',
+    'Account Settings' => 'Account Settings',
+    'Sign Out' => 'Sign Out',
+    'Lang' => 'Choose Language',
+    'Notifications' => 'Notifications',
 
-
-    ];
+];

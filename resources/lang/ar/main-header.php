@@ -12,15 +12,13 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'Profile'=>'الصفحة الشخصبة',
-    'Edit Profile'=>'تعديل الصفحة الشخصية',
-    'Inbox'=>'الوارد',
-    'Messages'=>'رسائل',
-    'Account Settings'=>'تعديل الحساب',
-    'Sign Out'=>'خروج',
-    'Lang'=>'تغير اللفة',
-    'Notifications'=>'الاشعارات',
-
-
+    'Profile' => 'الصفحة الشخصبة',
+    'Edit Profile' => 'تعديل الصفحة الشخصية',
+    'Inbox' => 'الوارد',
+    'Messages' => 'رسائل',
+    'Account Settings' => 'تعديل الحساب',
+    'Sign Out' => 'خروج',
+    'Lang' => 'تغير اللفة',
+    'Notifications' => 'الاشعارات',
 
 ];

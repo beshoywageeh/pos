@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
-    public function client(){
+
+    public function client()
+    {
         return $this->hasmany(client::class);
     }
 }

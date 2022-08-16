@@ -15,8 +15,8 @@ return [
     */
 
     'index' => 'Dashboard',
-    'Category'=>'Category',
-    'product'=>'Products',
-    'clients'=>'Clients',
+    'Category' => 'Category',
+    'product' => 'Products',
+    'clients' => 'Clients',
 
 ];

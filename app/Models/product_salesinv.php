@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class product_salesinv extends Model
 {
     use HasFactory;
+
     public $timestamps = false;
 
-    public function salesinv(){
+    public function salesinv()
+    {
         return $this->hasOne(salesinv::class);
-
     }
-    public function products(){
-        return $this->morphedByMany(product::class,'id');
+
+    public function products()
+    {
+        return $this->belongsToMany(product::class, 'id');
     }
 }

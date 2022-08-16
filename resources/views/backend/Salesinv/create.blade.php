@@ -131,29 +131,35 @@
         prices = 0;
         list.innerHTML='';
         //Add Data to Page
-        for(i=0;i<=parsing.length;i++){
+        for(i=0;i<=product_list.length;i++){
             products.push(JSON.parse(parsing[i]));
-            let row =`<tr id="${products[i].id}">
+            let row =`<tr id="${i}">
                             <td><input name='product_id[${i}]' class="form-control form-control-sm" type='text' value="${products[i].id}"></td>
                             <td>${products[i].name.ar}</td>
                             <td><input name='product_price[${i}]' class="form-control form-control-sm price" value="${parseInt(products[i].price)} EGP" readonly></td>
                             <td><input class="form-control form-control-sm qty" type='text' id='product_qty${products[i].id}' name="product_qty[${i}]" value='1'></td>
                             <td><input name='product_total' readonly class="form-control form-control-sm total"  value="" id="total_${products[i].id}"></td>
-                            <td><button  class="btn btn-danger btn-sm btn-rounded delete" data-id="${products[i].id}"><i class="fas fa-times"></i></button></td>
+                            <td><span  class="btn btn-danger btn-sm btn-rounded delete" data-id="${products[i].id}"><i class="fas fa-times"></i></span></td>
                     </tr>`;
                     list.innerHTML+=row;
                     prices+=parseInt(products[i].price);
                     total_price.value=prices;
                           }
     });
+    </script>
+    <script>
+        document.addEventListener('click', function(e){
+            //   e.preventDefault();
+            let id = e.target.getAttribute('data-id')
+            if(e.target.classList.contains('delete')){
+                //console.log(e.target.getAttribute('data-id'));
+                product_list = product_list.indexOf(p => p == id);
+                console.log(product_list);
+                window.sessionStorage.setItem('products',JSON.stringify(product_list));
+    e.target.parentNode.parentNode.remove();
+}
+    });
 
-    
-$('body').on('click','delete',function(e){
-    e.preventDefault();
-        var id = $(this).data('id');
-        $('#'+id).remove();
-});
 
 </script>
-
 @endsection

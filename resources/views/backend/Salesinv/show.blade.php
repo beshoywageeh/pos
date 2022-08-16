@@ -84,7 +84,7 @@
                                    <tr>
                                     <td>{{$item->name}}</td>
                                     <td class="tx-12">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam...</td>
-                                    <td class="tx-center">{{\App\Models\product_salesinv::find($item->id)->quantity}}</td>
+                                    <td class="tx-center">{{\App\Models\product_salesinv::get()->where('salesinv_id',$inv->id)->where('product_id',$item->id)->first()->quantity}}</td>
                                     <td class="tx-right">{{$item->price}}</td>
                                     <td class="tx-right">$300.00</td>
                                 </tr>

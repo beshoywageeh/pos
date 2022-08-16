@@ -2,24 +2,24 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\client;
-use App\Models\country;
+use Livewire\Component;
 
 class Screarch extends Component
 {
     public $getclient;
-        protected $queryString = ['getclient'];
+
+    protected $queryString = ['getclient'];
+
     public function render()
     {
-        
-       // return view('livewire.screarch');
-        if(!empty($this->queryString)){
-            return view('livewire.screarch',[
+
+        // return view('livewire.screarch');
+        if (! empty($this->queryString)) {
+            return view('livewire.screarch', [
                 'client' => client::where('id', 'like', '%'.$this->getclient.'%')->first(),
             ]);
-    
-        }else{
+        } else {
             return view('livewire.screach');
         }
     }

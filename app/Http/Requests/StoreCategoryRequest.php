@@ -10,11 +10,12 @@ class StoreCategoryRequest extends FormRequest
     {
         return true;
     }
+
     public function rules()
     {
         return [
-            'name' => 'required | unique:categories,name->ar,' . $this->id,
-            'name_en' => 'required | unique:categories,name->en,' . $this->id,
+            'name' => 'required | unique:categories,name->ar,'.$this->id,
+            'name_en' => 'required | unique:categories,name->en,'.$this->id,
         ];
     }
 }

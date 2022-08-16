@@ -11,8 +11,9 @@ class ClientController extends Controller
 {
     public function index()
     {
-                $countries = country::all();
-$clients = client::all();
+        $countries = country::all();
+        $clients = client::all();
+
         return view('backend.client.index', compact('clients', 'countries'));
     }
 
@@ -25,18 +26,20 @@ $clients = client::all();
     {
         //
     }
+
     public function store(Request $request)
     {
         //dd($request);
         try {
             $client = new client();
-            $client->name = ['en' => $request->name_en,'ar' => $request->name];
+            $client->name = ['en' => $request->name_en, 'ar' => $request->name];
             $client->phone = $request->phone;
             $client->address = $request->address;
             $client->country_id = $request->country_id;
-$client->save();
-           // session()->flash('Add', trans('client.Add'));
-           toastr()->success('تم إضافة البيانات بنجاح');
+            $client->save();
+            // session()->flash('Add', trans('client.Add'));
+            toastr()->success('تم إضافة البيانات بنجاح');
+
             return redirect('client');
         } catch (\Exception $e) {
             return redirect()
@@ -76,18 +79,18 @@ $client->save();
      */
     public function update(Request $request)
     {//dd($request);
-        try{
+        try {
             $client = Client::findorfail($request->id);
-           // $client = new client();
-                $client->name = ['en' => $request->name_en,'ar' => $request->name];
-                $client->phone = $request->phone;
-                $client->address = $request->address;
-                $client->country_id = $request->country_id;
-                $client->save();
+            // $client = new client();
+            $client->name = ['en' => $request->name_en, 'ar' => $request->name];
+            $client->phone = $request->phone;
+            $client->address = $request->address;
+            $client->country_id = $request->country_id;
+            $client->save();
             toastr()->success('تم تعديل البيانات بنجاح');
+
             return redirect('client');
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()
                 ->back()
                 ->withErrors(['error' => $e->getMessage()]);
@@ -105,7 +108,8 @@ $client->save();
         try {
             client::destroy($request->id);
             //session()->flash('Delete', trans('category.Delete'));
-           toastr()->success('تم حذف البيانات بنجاح');
+            toastr()->success('تم حذف البيانات بنجاح');
+
             return redirect('client');
         } catch (\Exception $e) {
             return redirect()
@@ -113,10 +117,11 @@ $client->save();
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
+
     public function getclient($id)
     {
-        
         $client = DB::table('clients')->where('id', $id)->first();
+
         return json_encode($client);
     }
 }

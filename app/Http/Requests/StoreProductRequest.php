@@ -10,11 +10,12 @@ class StoreProductRequest extends FormRequest
     {
         return true;
     }
+
     public function rules()
     {
         return [
-            'name' => 'required | unique:products,name->ar,' . $this->id,
-            'name_en' => 'required | unique:products,name->en,' . $this->id,
+            'name' => 'required | unique:products,name->ar,'.$this->id,
+            'name_en' => 'required | unique:products,name->en,'.$this->id,
             'category_id' => 'required',
         ];
     }
