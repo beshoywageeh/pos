@@ -1,8 +1,16 @@
-@extends('layouts.master') @section('title') {{trans('sales.title')}} @endsection @section('css') @endsection
+@extends('layouts.master') @section('title') {{trans('sales.title')}} @endsection 
+@section('css')
+<style>
+    @media print{
+#head,.main-header-right,.main-header-left{display: none !important}
+
+}
+</style>
+@endsection
 <!-- Content Header (Page header) -->
 @section('content')
     <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between">
+    <div class="breadcrumb-header justify-content-between" id="head">
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Invoice</span>
@@ -10,33 +18,15 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
+                <button class="btn btn-danger float-left mt-3 mr-2 print">
+                    <i class="mdi mdi-printer ml-1"></i>Print
+                </button>
             </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-            </div>
-            <div class="mb-3 mb-xl-0">
-                <div class="btn-group dropdown">
-                    <button type="button" class="btn btn-primary">14 Aug 2019</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
-                        <a class="dropdown-item" href="#">2015</a>
-                        <a class="dropdown-item" href="#">2016</a>
-                        <a class="dropdown-item" href="#">2017</a>
-                        <a class="dropdown-item" href="#">2018</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div> 
     </div>
     @include('backend.msg')
 
-    <div class="row row-sm">
+    <div class="row row-sm" id='invoice'>
         <div class="col-md-12 col-xl-12">
             <div class=" main-content-body-invoice">
                 <div class="card card-invoice">
@@ -117,20 +107,20 @@
                                 </tbody>
                             </table>
                         </div>
-                        <hr class="mg-b-40">
-                        <a class="btn btn-purple float-left mt-3 mr-2" href="">
-                            <i class="mdi mdi-currency-usd ml-1"></i>Pay Now
-                        </a>
-                        <a href="#" class="btn btn-danger float-left mt-3 mr-2">
-                            <i class="mdi mdi-printer ml-1"></i>Print
-                        </a>
-                        <a href="#" class="btn btn-success float-left mt-3">
-                            <i class="mdi mdi-telegram ml-1"></i>Send Invoice
-                        </a>
+
                     </div>
                 </div>
             </div>
         </div><!-- COL-END -->
     </div>
 
-@endsection @section('js') @endsection
+@endsection @section('js') 
+<script>
+    let invoice = document.querySelector('#invoice'),
+    button = document.querySelector('.print');
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.print();
+    })
+</script>
+@endsection

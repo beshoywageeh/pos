@@ -72,7 +72,7 @@ class SalesinvController extends Controller
 
     public function saleinv($id)
     {
-       // return $inv;
+        //return $inv->products;
         try {
             $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
 

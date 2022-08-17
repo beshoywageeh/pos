@@ -27,7 +27,7 @@ class salesinv extends Model
 
     public function products()
     {
-        return $this->belongsToMany(product::class, 'product_salesinvs');
+        return $this->belongsToMany('App\Models\product','product_salesinvs');
     }
 
     public function products_salesinvs()
