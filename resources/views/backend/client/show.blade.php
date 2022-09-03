@@ -1,5 +1,11 @@
 @extends('layouts.master') @section('title') {{trans('client.title')}} @endsection 
 @section('css') 
+<link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+<link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
+<link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 <style>
     *{
         text-transform: capitalize;
@@ -10,7 +16,9 @@
 .report-header{
     display:none !important;
 }
-
+#example_filter{
+    display:none !important
+}
 @media print{
     *{
         margin:0 !important;
@@ -99,38 +107,39 @@ margin-top:0.9rem !important;
                 </div>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped text-md-nowrap text-center tx-15 tx-bold">
-                        <thead>
-                        <tr>
-                            <th class="wd-2">#</th>
-                            <th><span class='data'>{{trans('sales.inv_num')}}</span></th>
-                            <th><span class='data'>{{trans('sales.total')}}</span></th>
-                            <th><span class='data'>{{trans('sales.client')}}</span></th>
-                            <th><span class='data'>{{trans('sales.date')}}</span></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @forelse($sales as $sale)
-                            <tr role="row">
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$sale->inv_num}}</td>
-                                <td>{{$sale->formatcurrncy()}} {{env('MAIN_CURRENCY')}}</td>
-                                <td>{{$sale->user->name}}</td>
-                                <td>{{$sale->formatdate()}}</td>
-                                                           </tr>
-                             @empty
-                            <tr>
-                                <td class="text-center" colspan="4">{{trans('client.msg')}}</td>
-                            </tr>
 
-                        @endforelse
-                        </tbody>
+                <div class="table-responsive">
+                    <table id="example" class="table key-buttons text-md-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="wd-2">#</th>
+                                <th><span class='data'>{{trans('sales.inv_num')}}</span></th>
+                                <th><span class='data'>{{trans('sales.total')}}</span></th>
+                                <th><span class='data'>{{trans('sales.user')}}</span></th>
+                                <th><span class='data'>{{trans('sales.date')}}</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($sales as $sale)
+                                <tr role="row">
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$sale->inv_num}}</td>
+                                    <td>{{$sale->formatcurrncy()}} {{env('MAIN_CURRENCY')}}</td>
+                                    <td>{{$sale->user->name}}</td>
+                                    <td>{{$sale->formatdate()}}</td>
+                                                               </tr>
+                                 @empty
+                                <tr>
+                                    <td class="text-center" colspan="5">{{trans('client.report_msg')}}</td>
+                                </tr>
+    
+                            @endforelse
+                            </tbody>
                     </table>
                 </div>
             </div>
             <div class='card-footer'>
-                <h5 class='total'>{{trans('client.report_msg')}} : <em>{{$client->totalBalance()}}</em> {{env('MAIN_CURRENCY')}}</h5>
+                <h5 class='total'>{{trans('client.balance')}} : <em>{{$client->totalBalance()}}</em> {{env('MAIN_CURRENCY')}}</h5>
                
                     
             </div>
@@ -147,5 +156,22 @@ margin-top:0.9rem !important;
         window.print();
     })
 </script>
-
+<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
+<!--Internal  Datatable js -->
+<script src="{{URL::asset('assets/js/table-data.js')}}"></script>
  @endsection

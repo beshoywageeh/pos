@@ -57,11 +57,11 @@
                                     <div class="dropdown">
                                         <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-gray-700" data-toggle="dropdown" id="dropdownMenuButton" type="button"><i class="fas fa-caret-down ml-1"></i></button>
                                         <div class="dropdown-menu tx-13">
-                                            <button class="dropdown-item bg-danger text-white tx-15" data-target="#Deletesales{{$sales->id}}" data-toggle="modal" aria-controls="example" type="button">
-                                                <i class="typcn typcn-delete mr-2"></i>{{trans('sales.delete')}}
+                                            <button class="dropdown-item bg-danger text-white tx-15" data-target="#Deletesale{{$sales->id}}" data-toggle="modal" aria-controls="example" type="button">
+                                                <i class="typcn typcn-delete mr-2"></i>{{trans('client.delete')}}
                                             </button>
-                                            <button class="dropdown-item bg-warning text-white tx-15" data-target="#Editsales{{$sales->id}}" data-toggle="modal" aria-controls="example" type="button">
-                                                <i class="typcn typcn-edit mr-2"></i> {{trans('sales.Edit')}}
+                                            <button class="dropdown-item bg-warning text-white tx-15" data-target="#Editclient{{$sales->id}}" data-toggle="modal" aria-controls="example" type="button">
+                                                <i class="typcn typcn-edit mr-2"></i> {{trans('client.edit')}}
                                             </button>
                                         </div>
                                     </div>

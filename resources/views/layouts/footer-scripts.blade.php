@@ -40,6 +40,7 @@
 <script src="{{URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
 <!--Internal  pickerjs js -->
 <script src="{{URL::asset('assets/plugins/pickerjs/picker.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/pickerjs/picker.min.js')}}"></script>
 <!-- Internal form-elements js -->
 <script src="{{URL::asset('assets/js/form-elements.js')}}"></script>
 @if(App::getLocale()=='en')

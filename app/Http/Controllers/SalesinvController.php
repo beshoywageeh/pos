@@ -95,8 +95,21 @@ class SalesinvController extends Controller
         //
     }
 
-    public function destroy(salesinv $salesinv)
+    public function destroy(Request $request)
     {
-        //
+        try {
+           $data =  product_salesinv::where('salesinv_id',$request->id)->get();
+           foreach($data as $product) {
+               $product::destroy($product);
+            }
+            salesinv::destroy($request->id);
+            toastr()->success('تم حذف البيانات بنجاح');
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

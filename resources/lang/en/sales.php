@@ -24,5 +24,6 @@ return [
     'chcat' => '-- إختر قسم من القائمة --',
     'category' => ' القسم',
     'date'=>'invoice date',
+    'user'=>'user name'
 
 ];

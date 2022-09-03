@@ -18,7 +18,7 @@
                         <div class="pb-0 mt-0">
                             <div class="d-flex">
                                 <div class="">
-                                    <h4 class="tx-20 fw-bold mb-1 text-white">{{count(\App\Models\category::all())}}</h4>
+                                    <h4 class="tx-20 fw-bold mb-1 text-white">{{DB::table('categories')->count()}}</h4>
                                     <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                                 </div>
                                 <span class="float-end my-auto ms-auto"> <i class="fas fa-arrow-circle-up text-white"></i> <span class="text-white op-7"> +427</span> </span>
@@ -35,7 +35,7 @@
                         <div class="pb-0 mt-0">
                             <div class="d-flex">
                                 <div class="">
-                                    <h4 class="tx-20 fw-bold mb-1 text-white">{{count(\App\Models\client::all())}}</h4>
+                                    <h4 class="tx-20 fw-bold mb-1 text-white">{{DB::table('clients')->count()}}</h4>
                                     <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                                 </div>
                                 <span class="float-end my-auto ms-auto"> <i class="fas fa-arrow-circle-down text-white"></i> <span class="text-white op-7"> -23.09%</span> </span>
@@ -52,7 +52,7 @@
                         <div class="pb-0 mt-0">
                             <div class="d-flex">
                                 <div class="">
-                                    <h4 class="tx-20 fw-bold mb-1 text-white">{{number_format(\App\Models\salesinv::all()->sum('total'))}} {{env('MAIN_CURRENCY')}}</h4>
+                                    <h4 class="tx-20 fw-bold mb-1 text-white">{{number_format(DB::table('salesinvs')->sum('total'))}} {{env('MAIN_CURRENCY')}}</h4>
                                     <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                                 </div>
                                 <span class="float-end my-auto ms-auto"> <i class="fas fa-arrow-circle-up text-white"></i> <span class="text-white op-7"> 52.09%</span> </span>

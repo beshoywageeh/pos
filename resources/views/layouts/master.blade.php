@@ -6,7 +6,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		@include('layouts.head')
 	</head>
-    <style>*{text-transform: capitalize;}</style>
+    <style>*{
+        font-family: 'Roboto', sans-serif;
+        text-transform: capitalize;
+        }</style>
     @if(App::getLocale()=='en')
 <style>
     .main-header{
@@ -20,7 +23,6 @@
     </style>
     @else
     <style>
-
         .main-header{
             right:0 !important;
             padding-right: 240px !important;

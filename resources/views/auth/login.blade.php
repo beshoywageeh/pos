@@ -30,10 +30,16 @@
 												<form action="{{route('login')}}" method="post">
                                                     @csrf
 													<div class="form-group">
-														<label>{{trans('auth.email')}}</label> <input class="form-control" placeholder="{{trans('auth.placemail')}}" type="text" name="email">
+														<label>{{trans('auth.email')}}</label> <input class="form-control @error('email') is-invalid @enderror" placeholder="{{trans('auth.placemail')}}" type="text" name="email" required>
+														@error('email')
+														<div class="alert alert-danger">{{$message}}</div>
+														@enderror
 													</div>
 													<div class="form-group">
-														<label>{{trans('auth.pass')}}</label> <input class="form-control" placeholder="{{trans('auth.placpass')}}" type="password" name="password">
+														<label>{{trans('auth.pass')}}</label> <input class="form-control @error('password') is-invalid @enderror" placeholder="{{trans('auth.placpass')}}" type="password" name="password" required>
+														@error('password')
+														<div class="alert alert-danger">{{$message}}</div>
+														@enderror
 													</div><button class="btn btn-main-primary btn-block">{{trans('auth.log')}}</button>
 												</form>
 											</div>

@@ -26,7 +26,7 @@ return [
     'price' => 'السعر',
     'chcat' => '-- إختر قسم من القائمة --',
     'category' => ' القسم',
-'report_msg'=>'total client balance',
+'report_msg'=>'no invoices to show',
 'balance'=>'client balance',
 'chooseclient'=>'choose client',
 ];
