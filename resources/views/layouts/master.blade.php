@@ -6,8 +6,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		@include('layouts.head')
 	</head>
-<style>
+    <style>*{text-transform: capitalize;}</style>
     @if(App::getLocale()=='en')
+<style>
     .main-header{
         left:0 !important;
         padding-left: 240px !important;
@@ -16,17 +17,21 @@
     .float-end.my-auto.ms-auto{
         margin-left: auto;
     }
+    </style>
     @else
-    .main-header{
-        right:0 !important;
-        padding-right: 240px !important;
-        position: fixed !important;
-    }
-    .float-end.my-auto.ms-auto{
-        margin-right: auto;
-    }
+    <style>
+
+        .main-header{
+            right:0 !important;
+            padding-right: 240px !important;
+            position: fixed !important;
+        }
+        .float-end.my-auto.ms-auto{
+            margin-right: auto;
+        }
+        </style>
     @endif
-</style>
+
 	<body class="main-body app sidebar-mini">
 		<!-- Loader -->
 		<div id="global-loader">

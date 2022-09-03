@@ -1,0 +1,32 @@
+
+<?php
+
+return [
+    'title' => 'clients',
+    'main' => 'main',
+    'add' => 'add',
+    'name' => 'name',
+    'phone' => 'phone number',
+    'address' => 'address',
+    'country' => 'city',
+    'msg' => 'no data to show',
+    'save' => 'save',
+    'arabicname' => 'Arabic Name',
+    'englishname' => 'english name',
+    'note' => 'notes',
+    'delete' => 'delete',
+    'edit' => 'edit',
+    'action' => 'أختر عمليه',
+    'actions' => 'عمليات',
+    'notemsg' => 'لا توجد ملاحظات للعرض',
+    'Add' => 'تمت الاضافة بنجاح ',
+    'Edit' => 'تم التعديل بنجاح ',
+    'Delete' => 'تم الحذف',
+    'delconfirm' => 'هل انت متاكد من الحذف',
+    'price' => 'السعر',
+    'chcat' => '-- إختر قسم من القائمة --',
+    'category' => ' القسم',
+'report_msg'=>'total client balance',
+'balance'=>'client balance',
+'chooseclient'=>'choose client',
+];

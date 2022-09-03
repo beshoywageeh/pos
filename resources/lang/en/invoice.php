@@ -25,5 +25,6 @@ return [
     'rejctsalesinvoice' => 'Client Reject',
     'supplyinvoce' => 'Supply',
     'rejctsupplyinvoice' => 'Supply Reject',
+    'totalinvocie' => 'total invoice',
 
 ];

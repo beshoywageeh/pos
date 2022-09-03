@@ -17,7 +17,7 @@
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between col-sm-12 col-md-4">
                     <h4 class="card-title mg-b-0">{{trans('sidebar.setting')}}</h4>
-                    <a class="btn btn-primary-gradient mg-b-0 align-right" href="{{route('create')}}"><i class="fa fa-plus"></i> &nbsp;&nbsp; تعديل</a>
+                    <a class="btn btn-primary-gradient mg-b-0 align-right" href="{{route('edit',['id'=>1])}}"><i class="fa fa-plus"></i> &nbsp;&nbsp; تعديل</a>
                 </div>
             </div>
             <div class="card-body">
@@ -28,7 +28,7 @@
                                 <div class="main-img-user profile-user">
 
 
-                                    <img alt="" src="{{($data->photo=='') ? URL::asset('assets/img/brand/favicon.png') : URL::asset('assets/img/'),$data->photo}}">
+                                    <img alt="" src="{{($data->photo==null) ? URL::asset('assets/img/brand/favicon.png') : URL::asset('assets/img/'),$data->photo}}">
                                 </div>
                                 <div class="d-flex justify-content-between mg-b-20">
                                     <div>

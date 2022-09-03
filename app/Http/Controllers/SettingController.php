@@ -13,24 +13,18 @@ class SettingController extends Controller
     {
         $data = setting::get()->first();
         $countries = country::get();
-
+//return $data;
         return view('backend.Settings.index', compact('data', 'countries'));
     }
 
     public function create()
     {
-        return view('backend.Settings.create');
     }
 
     public function store(Request $request)
     {
-        DB::table('settings')->insert([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'address' => $request->address,
-        ]);
+        
 
-        return redirect()->back();
     }
 
     public function show(setting $setting)
@@ -39,10 +33,27 @@ class SettingController extends Controller
 
     public function edit(setting $setting)
     {
+        return view('backend.Settings.create');
+
     }
 
     public function update(Request $request, setting $setting)
     {
+        try {
+            $store = setting::findorfail($request->id);
+           // $store = new setting();
+            $store->name = $request->name;
+            $store->phone = $request->phone;
+            $store->address = $request->address;
+            $store->save();
+            toastr()->success('تم اضافة المتجر بنجاح');
+
+            return redirect('settings');
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function destroy(setting $setting)

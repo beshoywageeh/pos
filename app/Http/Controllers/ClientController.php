@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\client;
 use App\Models\country;
+use App\Models\salesinv;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -56,7 +57,8 @@ class ClientController extends Controller
      */
     public function show(client $client)
     {
-        //
+        $sales = salesinv::where('client_id',$client->id)->get();
+        return view('backend.client.show',compact('sales','client'));
     }
 
     /**

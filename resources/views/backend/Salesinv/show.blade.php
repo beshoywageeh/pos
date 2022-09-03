@@ -1,28 +1,51 @@
-@extends('layouts.master') @section('title') {{trans('sales.title')}} @endsection 
+@extends('layouts.master') @section('title')
+    {{ trans('sales.title') }}
+@endsection
 @section('css')
-<style>
-    @media print{
-#head,.main-header-right,.main-header-left{display: none !important}
+    <style>
+        * {
+            text-transform: capitalize;
 
-}
-</style>
+        }
+
+        @media print {
+            #invoice {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            #head,
+            .main-header-right,
+            .main-header-left,
+            .no,
+            .print {
+                display: none !important
+            }
+
+            #invoice_data {
+                width: 100vw !important
+            }
+        }
+
+    </style>
 @endsection
 <!-- Content Header (Page header) -->
 @section('content')
     <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between" id="head">
+    <div class="breadcrumb-header justify-content-between no" id="head">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Invoice</span>
+                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    Invoice</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
                 <button class="btn btn-danger float-left mt-3 mr-2 print">
-                    <i class="mdi mdi-printer ml-1"></i>Print
+                    <i class="mdi mdi-printer ml-1"></i>{{ trans('general.print') }}
                 </button>
             </div>
-        </div> 
+        </div>
     </div>
     @include('backend.msg')
 
@@ -34,31 +57,32 @@
                         <div class="invoice-header">
                             <h1 class="invoice-title">Invoice</h1>
                             <div class="billed-from">
-                                <h6>{{\App\Models\setting::all()}}</h6>
-                                <p>201 Something St., Something Town, YT 242, Country 6546<br>
-                                Tel No: 324 445-4544<br>
-                                Email: youremail@companyname.com</p>
+                                <h6>{{ $setting->name }}</h6>
+                                <p>{{ $setting->address }}<br>
+                                    Tel No: {{ $setting->phone }}<br>
+                                </p>
                             </div><!-- billed-from -->
                         </div><!-- invoice-header -->
                         <div class="row mg-t-20">
                             <div class="col-md">
                                 <label class="tx-gray-600">Billed To</label>
                                 <div class="billed-to">
-                                    <h6>Juan Dela Cruz</h6>
-                                    <p>4033 Patterson Road, Staten Island, NY 10301<br>
-                                    Tel No: 324 445-4544<br>
-                                    Email: youremail@companyname.com</p>
+                                    <h6>{{ $inv->client->name }}</h6>
+                                    <p>{{ $inv->client->address }}<br>
+                                        Tel No: {{ $inv->client->phone }}<br>
+                                        Country: {{ $inv->client->country->city_name_ar }}</p>
                                 </div>
                             </div>
                             <div class="col-md">
                                 <label class="tx-gray-600">Invoice Information</label>
-                                <p class="invoice-info-row"><span>Invoice No</span> <span>{{$inv->inv_num}}</span></p>
+                                <p class="invoice-info-row"><span>Invoice No</span> <span>{{ $inv->inv_num }}</span></p>
                                 <p class="invoice-info-row"><span>Project ID</span> <span>32334300</span></p>
-                                <p class="invoice-info-row"><span>Date Created:</span> <span>{{$inv->inv_date}}</span></p>
+                                <p class="invoice-info-row"><span>Date Created:</span> <span>{{ $inv->inv_date }}</span>
+                                </p>
                                 <p class="invoice-info-row"><span>Due Date:</span> <span>November 30, 2017</span></p>
                             </div>
                         </div>
-                        <div class="table-responsive mg-t-40">
+                        <div class="table-responsive mg-t-40 invoice_data">
                             <table class="table table-invoice border text-md-nowrap mb-0">
                                 <thead>
                                     <tr>
@@ -70,38 +94,45 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach($inv->products as $item)
-                                   <tr>
-                                    <td>{{$item->name}}</td>
-                                    <td class="tx-12">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam...</td>
-                                    <td class="tx-center">{{\App\Models\product_salesinv::get()->where('salesinv_id',$inv->id)->where('product_id',$item->id)->first()->quantity}}</td>
-                                    <td class="tx-right">{{$item->price}}</td>
-                                    <td class="tx-right">$300.00</td>
-                                </tr>
-                                   @endforeach
+                                    @foreach ($inv->products as $item)
+                                        <tr>
+                                            <td>{{ $item->name }}</td>
+                                            <td class="tx-left">Sed ut perspiciatis unde omnis iste natus error sit
+                                                voluptatem accusantium doloremque laudantium, totam rem aperiam...</td>
+                                            <td class="tx-center">
+                                                {{ \App\Models\product_salesinv::get()->where('salesinv_id', $inv->id)->where('product_id', $item->id)->first()->quantity }}
+                                            </td>
+                                            <td class="tx-right">{{ $item->price }} {{ env('MAIN_CURRENCY') }}</td>
+                                            <td class="tx-right">$300.00 {{ env('MAIN_CURRENCY') }}</td>
+                                        </tr>
+                                    @endforeach
                                     <tr>
                                         <td class="valign-middle" colspan="2" rowspan="4">
                                             <div class="invoice-notes">
-                                                <label class="main-content-label tx-13">Notes</label>
-                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                                <label class="main-content-label tx-13"></label>
+                                                <p></p>
                                             </div><!-- invoice-notes -->
                                         </td>
                                         <td class="tx-right">Sub-Total</td>
-                                        <td class="tx-right" colspan="2">{{$inv->total}}</td>
+                                        <td class="tx-right" colspan="2">{{ $inv->total }}
+                                            {{ env('MAIN_CURRENCY') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right">Tax </td>
-                                        <td class="tx-right" colspan="2">{{$inv->tax_rate}}</td>
-                                        <td class="tx-right" colspan="2">{{$inv->tax_value}}</td>
+                                        <td class="tx-right" colspan="1">{{ $inv->tax_rate }} % <i
+                                                class="fa fa-arrow-right"></i></td>
+                                        <td class="tx-right" colspan="1">{{ $inv->tax_value }}
+                                            {{ env('MAIN_CURRENCY') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right">Discount</td>
-                                        <td class="tx-right" colspan="2">-{{$inv->discount}}</td>
+                                        <td class="tx-right" colspan="2">-{{ $inv->discount }}
+                                            {{ env('MAIN_CURRENCY') }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tx-right tx-uppercase tx-bold tx-inverse">Total Due</td>
+                                        <td class="tx-right tx-uppercase tx-bold tx-inverse">Total Due </td>
                                         <td class="tx-right" colspan="2">
-                                            <h4 class="tx-primary tx-bold"></h4>
+                                            <h4 class="tx-primary tx-bold">{{ env('MAIN_CURRENCY') }}</h4>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -113,14 +144,12 @@
             </div>
         </div><!-- COL-END -->
     </div>
-
-@endsection @section('js') 
-<script>
-    let invoice = document.querySelector('#invoice'),
-    button = document.querySelector('.print');
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.print();
-    })
-</script>
+    @endsection @section('js')
+    <script>
+        let button = document.querySelector('.print');
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.print();
+        })
+    </script>
 @endsection

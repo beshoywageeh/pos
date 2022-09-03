@@ -37,9 +37,10 @@ Route::group(
                 Route::resource('client', ClientController::class);
                 Route::resource('sales', SalesinvController::class);
                 Route::get('saleinv/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
+                //Route::get('client/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
                 Route::get('settings', [SettingController::class, 'index'])->name('index');
-                Route::get('settings/add', [SettingController::class, 'create'])->name('create');
-                Route::post('settings/save', [SettingController::class, 'store'])->name('store');
+                Route::get('settings/add/{id}', [SettingController::class, 'edit'])->name('edit');
+                Route::post('settings/save', [SettingController::class, 'update'])->name('update');
             });
 
         require __DIR__.'/auth.php';

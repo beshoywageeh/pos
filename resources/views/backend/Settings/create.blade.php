@@ -15,7 +15,7 @@
     </div>
     @include('backend.msg')
 
-    <form action="{{ route('store') }}" method="post" enctype="multipart/form-datat">
+    <form action="{{ route('update') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="col-lg-12 col-md-12">
             <div class="card">
@@ -26,9 +26,10 @@
                             <div class="p-4">
                                 <div class="row">
                                     <div class="form-group col">
+                                        <input hidden value="1" name='id'>
                                         <label>الاسم</label>
                                         <input class="form-control" placeholder="لاسم" type="text"
-                                               name="name">
+                                               name="name" >
                                     </div>
                                     <div class="form-group col">
                                         <label>رقم التليفون</label>

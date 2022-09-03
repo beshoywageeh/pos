@@ -40,6 +40,7 @@ class SalesinvController extends Controller
         $total_inv = explode(' ', $request->total_inv);
 
         $details = [];
+        //return $request;
         for ($i = 0; $i < count($request->product_id); $i++) {
             $details[$i]['product_id'] = $request->product_id[$i];
             $details[$i]['quantity'] = $request->product_qty[$i];
@@ -75,9 +76,10 @@ class SalesinvController extends Controller
         //return $inv->products;
         try {
             $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
-
-            return view('backend.Salesinv.show', compact('inv'));
-        } catch (\Exception $e) {
+            $setting = \App\Models\setting::get()->first();
+            return view('backend.Salesinv.show', compact('inv','setting'));
+//return $inv->client;  
+} catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }

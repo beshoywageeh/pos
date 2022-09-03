@@ -25,6 +25,8 @@
                     <h4 class="card-title mg-b-0">{{trans('client.title')}}</h4>
                 </div>
             </div>
+        
+
             <div class="card-body">
                 <div class="row mb-2">
                     <div class="col-sm-12 col-md-6">
@@ -81,7 +83,7 @@
                 </div>
             </div>
             <div class="card-footer">
-       
+    
             </div>
         </div>
         @include('backend.client.create')
