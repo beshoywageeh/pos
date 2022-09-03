@@ -114,14 +114,14 @@
                                             </div><!-- invoice-notes -->
                                         </td>
                                         <td class="tx-right">Sub-Total</td>
-                                        <td class="tx-right" colspan="2">{{ $inv->total }}
+                                        <td class="tx-right" colspan="2">{{ number_format($inv->total) }}
                                             {{ env('MAIN_CURRENCY') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right">Tax </td>
                                         <td class="tx-right" colspan="1">{{ $inv->tax_rate }} % <i
                                                 class="fa fa-arrow-right"></i></td>
-                                        <td class="tx-right" colspan="1">{{ $inv->tax_value }}
+                                        <td class="tx-right" colspan="1">{{ number_format($inv->tax_value) }}
                                             {{ env('MAIN_CURRENCY') }}</td>
                                     </tr>
                                     <tr>
