@@ -17,8 +17,8 @@ class CreateSalesinvsTable extends Migration
             $table->id();
             $table->string('inv_num', '20');
             $table->date('inv_date');
-            $table->foreignId('client_id')->references('id')->on('clients');
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->bigInteger('client_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->decimal('discount', '8', '2')->nullable();
             $table->string('tax_rate')->nullable();
             $table->decimal('tax_value', '8', '2')->nullable();

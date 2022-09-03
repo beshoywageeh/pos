@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('price', 8, 2);
-            $table->foreignId('category_id')->references('id')->on('categories');
+            $table->biginteger('category_id')->unsigned();
             $table->text('notes')->nullable();
             $table->timestamps();
         });

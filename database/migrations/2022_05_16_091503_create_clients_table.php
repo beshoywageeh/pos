@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('address');
-            $table->foreignId('country_id')->references('id')->on('countries');
+            $table->bigInteger('country_id')->unsigned();
             $table->timestamps();
         });
     }

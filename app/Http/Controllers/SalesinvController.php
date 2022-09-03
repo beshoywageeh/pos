@@ -99,10 +99,10 @@ class SalesinvController extends Controller
     {
         try {
            $data =  product_salesinv::where('salesinv_id',$request->id)->get();
-           foreach($data as $product) {
-               $product::destroy($product);
-            }
-            salesinv::destroy($request->id);
+           for($i=0;$i<count($data);$i++){
+            echo $data[$i];
+           }
+            //salesinv::destroy($request->id);
             toastr()->success('تم حذف البيانات بنجاح');
 
             return redirect()->back();
