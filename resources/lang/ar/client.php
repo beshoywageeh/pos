@@ -28,5 +28,6 @@ return [
     'category' => ' القسم',
 'report_msg'=>'لا يوجد فواتير للعرض',
 'balance'=>'رصيد العميل',
-'chooseclient'=>'اختر العميل'
+'chooseclient'=>'اختر العميل',
+'code'=>'كود',
 ];

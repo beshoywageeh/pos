@@ -23,7 +23,7 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-                    <button class="btn ripple btn-danger-gradient" type="submit">{{trans('sales.delete')}} </button>
+                    <button class="btn ripple btn-danger-gradient" type="submit">{{trans('sales.Delete')}} </button>
                     </div>
                 </form>
 

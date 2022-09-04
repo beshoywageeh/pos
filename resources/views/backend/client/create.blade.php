@@ -41,7 +41,7 @@
                                     @foreach($countries as $country)
                                     <option value="{{$country->id}}">
                                         {{$country->id}} - 
-                                        {{$country->city_name_ar}}
+                                        {{$country->name}}
                                     </option>
                                     @endforeach
                                 </select>

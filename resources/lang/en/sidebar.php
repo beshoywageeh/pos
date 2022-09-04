@@ -18,5 +18,5 @@ return [
     'Category' => 'Category',
     'product' => 'Products',
     'clients' => 'Clients',
-
+'setting'=>'settings'
 ];

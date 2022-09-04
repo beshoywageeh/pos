@@ -1,4 +1,8 @@
-@extends('layouts.master') @section('title') {{trans('sales.title')}} @endsection @section('css') @endsection
+@extends('layouts.master') @section('title') {{trans('sales.title')}} @endsection @section('css') 
+<style>
+    *{text-transform: capitalize !important;}
+</style>
+@endsection
 <!-- Content Header (Page header) -->
 @section('content')
     <!-- breadcrumb -->
@@ -25,11 +29,6 @@
                         <a class="btn btn-success buttons-add btn-with-icon buttons-html5 tx-15 tx-bold" tabindex="0" aria-controls="example" type="button" href="{{route('sales.create')}}">
                             <i class="typcn typcn-document-add"></i><span>{{trans('sales.add')}}</span>
                         </a>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="example_filter" class="dataTables_filter">
-                            <label><input type="search" class="form-control form-control-sm" placeholder="Search..." aria-controls="example" /></label>
-                        </div>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -69,7 +68,7 @@
                             </tr>
                             @include('backend.Salesinv.edit') @include('backend.Salesinv.delete') @empty
                             <tr>
-                                <td class="text-center" colspan="4">{{trans('sales.msg')}}</td>
+                                <td class="text-center" colspan="6">{{trans('sales.msg')}}</td>
                             </tr>
 
                         @endforelse

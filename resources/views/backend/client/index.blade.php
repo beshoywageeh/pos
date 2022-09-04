@@ -1,6 +1,11 @@
 @extends('layouts.master') 
 @section('title') {{trans('client.title')}} @endsection 
 @section('css')
+<style type="text/css">
+.select2
+{width:100% !important;}
+
+</style>
 <link href="{{URL::asset('assets/plugins/prism/prism.css')}}" rel="stylesheet">
 <!--- Custom-scroll -->
 <link href="{{URL::asset('assets/plugins/custom-scroll/jquery.mCustomScrollbar.css')}}" rel="stylesheet">
@@ -42,7 +47,7 @@
                     <table class="table table-bordered table-striped text-md-nowrap text-center tx-15 tx-bold">
                         <thead>
                         <tr >
-                            <th class="wd-2">كود</th>
+                            <th class="wd-2">{{trans('client.code')}}</th>
                             <th>{{trans('client.name')}}</th>
                             <th>{{trans('client.phone')}}</th>
                             <th>{{trans('client.address')}}</th>

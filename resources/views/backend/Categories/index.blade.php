@@ -26,11 +26,6 @@
                             <i class="typcn typcn-document-add"></i><span>{{trans('category.add')}}</span>
                         </button>
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="example_filter" class="dataTables_filter">
-                            <label><input type="search" class="form-control form-control-sm" placeholder="Search..." aria-controls="example" /></label>
-                        </div>
-                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped text-md-nowrap text-center tx-15 tx-bold">

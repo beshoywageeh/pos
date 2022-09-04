@@ -54,12 +54,6 @@
                                             <span>Address</span> <span>{{$data->address}}</span>
                                         </div>
                                     </div>
-                                    <select class="form-control @error('country_id') is-invalid @enderror" name="category_id">
-                                        <option value="" disabled selected>{{trans('product.chcat')}}</option>
-                                        @foreach($countries as $country)
-                                            <option value="{{$country->id}}">{{$country->governorate_id}} - {{$country->city_name_ar}}</option>
-                                        @endforeach
-                                    </select>
                             </div><!-- main-profile-overview -->
                         </div>
                     </div>

@@ -1,6 +1,11 @@
 @extends('layouts.master') @section('title')
     {{ trans('product.title') }}
     @endsection @section('css')
+    <style>
+        *{
+            text-transform: capitalize !important;
+        }
+    </style>
 @endsection
 <!-- Content Header (Page header) -->
 @section('content')
@@ -31,10 +36,10 @@
                             <i class="typcn typcn-document-add"></i><span>{{ trans('product.add') }}</span>
                         </button>
                     </div>
+                   <div class="col-md-6">
                     <form action="{{ route('search') }}" method="POST">
                         @csrf
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="input-group">
                                     <input type="search" name="search" class="form-control form-control"
                                         placeholder="Search..." aria-controls="example" />
@@ -47,14 +52,9 @@
                                         </button>
                                     </span>
                                 </div>
-
-
                             </div>
-                        </div>
-
-
-
                     </form>
+                    </div> 
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped mg-b-0 text-md-nowrap text-center tx-15 tx-bold">
@@ -99,7 +99,7 @@
                                 </tr>
                             @include('backend.Products.edit') @include('backend.Products.delete') @empty
                                 <tr>
-                                    <td class="text-center" colspan="5">{{ trans('product.msg') }}</td>
+                                    <td class="text-center" colspan="6">{{ trans('product.msg') }}</td>
                                 </tr>
                             @endforelse
                         </tbody>
