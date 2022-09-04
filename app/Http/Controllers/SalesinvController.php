@@ -98,8 +98,10 @@ class SalesinvController extends Controller
     public function destroy(Request $request)
     {
         try {
-           product_salesinv::where('salesinv_id',$request->id)->delete();
-            salesinv::destroy($request->id);
+            $id = $request->id;
+            salesinv::findorfail($id);
+           product_salesinv::where('salesinv_id',$id)->delete();
+            salesinv::destroy($id);
             toastr()->success('تم حذف البيانات بنجاح');
 
             return redirect()->back();
