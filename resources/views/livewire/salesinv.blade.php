@@ -1,7 +1,7 @@
 <div class="dataTables-filter my-5 mx-auto">
   <div class="row">
     <div class="col-xl-11">
-      <input type="search" wire:model="getproduct"  id="productid" class="form-control" placeholder="اضف منتج" value="" autocomplete="off">
+      <input type="search" wire:model="getproduct"  id="productid" class="form-control" placeholder="{{trans('invoice.add_product')}}" value="" autocomplete="off">
     </div>
   </div>
   <div class="table-responsive mt-2 col-xl-11">
@@ -30,7 +30,9 @@
                 </tr>
                 @empty
                 <tr>
-                  <th colspan="4"><span class="text-muted"> No Data To Show</span></th>
+                  <th colspan="4"><span class="text-muted"> {{trans('product.msg')}}</span>
+
+                  </th>
                 </tr>
             @endforelse
 

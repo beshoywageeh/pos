@@ -26,5 +26,11 @@ return [
     'supplyinvoce' => 'Supply',
     'rejctsupplyinvoice' => 'Supply Reject',
     'totalinvocie' => 'total invoice',
-
+    'date' =>'date',
+    'time'=>'time',
+    'add_product' =>'add product',
+    'product' =>'product name',
+    'quantity' =>'quantity',
+    'newinv'=>'new invoice',
+    'newproduct'=>'add product'
 ];

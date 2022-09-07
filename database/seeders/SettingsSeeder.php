@@ -20,7 +20,7 @@ class SettingsSeeder extends Seeder
         DB::table('settings')->insert([
             'name'=>'Loop Labs',
             'phone'=>'01201026745',
-            'photo'=>'1.jpg',
+            'photo'=>'default.png',
             'address'=>'12'
         ]);
     }

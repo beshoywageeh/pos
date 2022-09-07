@@ -23,6 +23,10 @@ return new class extends Migration
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('user_id')->references('id')->on('users');
         });
+        Schema::table('product_salesinvs', function (Blueprint $table) {
+            $table->foreign('salesinv_id')->references('id')->on('salesinvs')->onDelete('Cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('Cascade');
+        });
     }
 
     /**
@@ -41,6 +45,10 @@ return new class extends Migration
         Schema::table('salesinvs', function (Blueprint $table) {
             $table->dropforeign('client_id');
             $table->dropforeign('user_id');
+        });
+        Schema::table('product_salesinvs', function (Blueprint $table) {
+            $table->dropforeign('salesinv_id');
+            $table->dropforeign('product_id');
         });
     }
 };

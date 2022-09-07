@@ -29,23 +29,24 @@
                                         <input hidden value="1" name='id'>
                                         <label>الاسم</label>
                                         <input class="form-control" placeholder="لاسم" type="text"
-                                               name="name" >
+                                               name="name" value="{{$getData->name}}">
                                     </div>
                                     <div class="form-group col">
                                         <label>رقم التليفون</label>
                                         <input class="form-control" placeholder="رقم التليفون" type="text"
-                                               name="phone">
+                                               name="phone" value="{{$getData->phone}}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col">
                                         <label>العنوان</label>
                                         <input class="form-control" placeholder="العنوان" name="address"
-                                               type="text">
+                                               type="text" value="{{$getData->address}}">
                                     </div>
                                     <div class="form-group col">
                                         <label>الشعار</label>
-                                        <input class="form-control" type="file" name="photo">
+                                        <input class="form-control" accept="image/*" type="file" name="photo" id="logo" onchange="showPreview(event)">
+                                        <img src="{{URL::asset('assets/img/') .'/'. $getData->photo}}" class="img img-responsive img-thumbnail w-50" id="preview">
                                     </div>
                                 </div>
                             </div>
@@ -58,4 +59,5 @@
         </div>
     </form>
 @endsection @section('js')
+                <script src="{{URL::asset('assets/js/custom_loop.js')}}"></script>
 @endsection

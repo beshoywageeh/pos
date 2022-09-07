@@ -10,7 +10,7 @@
     <div class="main-sidemenu">
         <div class="app-sidebar__user clearfix">
             <div class="dropdown user-pro-body">
-                <div class=""><img alt="user-img" class="avatar avatar-xl brround" src="{{URL::asset('assets/img/brand/favicon.png')}}" /></div>
+                <div class=""><img alt="user-img" class="avatar avatar-xl brround" src="{{URL::asset('assets/img/user.png')}}" /></div>
                 <div class="user-info">
                     <h4 class="font-weight-semibold mt-3 mb-0">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h4>
                     <span class="mb-0 text-muted">{{Auth::user()->email}}</span>

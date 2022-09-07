@@ -25,5 +25,12 @@ return [
     'rejctsalesinvoice' => 'مرتجع مبيعات',
     'supplyinvoce' => 'توريد',
     'rejctsupplyinvoice' => 'مرتجع توريد',
+    'date' =>'التاريخ',
+    'time'=>'الساعه',
+    'totalinvocie' => 'إجمالي الفاتورة',
+    'add_product' => 'اضف منتج',
+    'product' =>'اسم المنتج',
+    'quantity' =>'الكميه',
+    'newinv'=>'فاتورة جديدة'
 
 ];

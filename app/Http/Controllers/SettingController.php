@@ -12,9 +12,9 @@ class SettingController extends Controller
     public function index()
     {
         $data = setting::get()->first();
-        $countries = country::get();
+
 //return $data;
-        return view('backend.Settings.index', compact('data', 'countries'));
+        return view('backend.Settings.index', compact('data'));
     }
 
     public function create()
@@ -23,7 +23,7 @@ class SettingController extends Controller
 
     public function store(Request $request)
     {
-        
+
 
     }
 
@@ -33,7 +33,8 @@ class SettingController extends Controller
 
     public function edit(setting $setting)
     {
-        return view('backend.Settings.create');
+        $getData = setting::get()->first();
+        return view('backend.Settings.create',compact('getData'));
 
     }
 
@@ -41,11 +42,24 @@ class SettingController extends Controller
     {
         try {
             $store = setting::findorfail($request->id);
+$oldPhoto = $store->photo;
+            if($request->has('photo')){
+                $request->validate(['photo'=>'required|mimes:png,jpg,jpeg|max:2000']);
+                $photofile = uploadImage('assets/img',$request->photo);
+            }else{
+                $photofile = $store->photo;
+            }
+            if(file_exists('assets/img/'.$oldPhoto)){
+                unlink('assets/img/'.$oldPhoto);
+            }
            // $store = new setting();
             $store->name = $request->name;
             $store->phone = $request->phone;
             $store->address = $request->address;
+            $store->photo = $photofile;
+
             $store->save();
+
             toastr()->success('تم اضافة المتجر بنجاح');
 
             return redirect('settings');

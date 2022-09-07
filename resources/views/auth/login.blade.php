@@ -30,17 +30,19 @@
 												<form action="{{route('login')}}" method="post">
                                                     @csrf
 													<div class="form-group">
-														<label>{{trans('auth.email')}}</label> <input class="form-control @error('email') is-invalid @enderror" placeholder="{{trans('auth.placemail')}}" type="text" name="email" required>
+														<label>{{trans('auth.email')}}</label>
+                                                        <input id='email' class="form-control verifed @error('email') is-invalid @enderror" placeholder="{{trans('auth.placemail')}}" type="text" name="email" id="email" required>
 														@error('email')
 														<div class="alert alert-danger">{{$message}}</div>
 														@enderror
 													</div>
 													<div class="form-group">
-														<label>{{trans('auth.pass')}}</label> <input class="form-control @error('password') is-invalid @enderror" placeholder="{{trans('auth.placpass')}}" type="password" name="password" required>
+														<label>{{trans('auth.pass')}}</label>
+                                                        <input id='password' class="form-control verifed @error('password') is-invalid @enderror" placeholder="{{trans('auth.placpass')}}" type="password" id="password" name="password" required>
 														@error('password')
 														<div class="alert alert-danger">{{$message}}</div>
 														@enderror
-													</div><button class="btn btn-main-primary btn-block">{{trans('auth.log')}}</button>
+													</div><button id="submit" class="btn btn-main-primary btn-block text-bold" disabled>{{trans('auth.log')}}</button>
 												</form>
 											</div>
 										</div>
@@ -54,4 +56,20 @@
 		</div>
 @endsection
 @section('js')
+<script>
+
+    let verify = document.querySelectorAll('.verifed'),
+        email = document.querySelector('#email'),
+        password = document.querySelector('#password'),
+        submit = document.querySelector('#submit');
+
+window.addEventListener('keyup',handelButton);
+    function handelButton() {
+        if(password.value===""|| email.value==="") {
+            submit.disabled = true;
+        } else {
+            submit.disabled = false;
+        }
+    }
+</script>
 @endsection

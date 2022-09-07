@@ -1,5 +1,5 @@
 @extends('layouts.master') @section('title')
-    {{ trans('sales.title') }}
+    {{ trans('invoice.newinv') }}
 @endsection
 @section('css')
     @livewireStyles
@@ -10,7 +10,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{ trans('sales.title') }}</h4>
+                <h4 class="content-title mb-0 my-auto">{{ trans('invoice.newinv') }}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ trans('sales.main') }}</span>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h4 class="card-title mg-b-0">{{ trans('sales.title') }}</h4>
+                        <h4 class="card-title mg-b-0">{{ trans('invoice.newinv') }}</h4>
                     </div>
                 </div>
             </div>
@@ -54,30 +54,30 @@
                             </select>
                         </div>
                         <div class="col-lg-2">
-                            <label for="date">التاريخ</label>
+                            <label for="date">{{trans('invoice.date')}}</label>
                             <input type="date" class="form-control form-control-sm" name='date'
                                 value="{{ date('Y-m-d') }}">
                         </div>
                         <div class="col-lg-2">
-                            <label for="time">الساعه</label>
-                            <input type="time" class="form-control form-control-sm" />
+                            <label for="time">{{trans('invoice.time')}}</label>
+                            <input value="" id="time" class="form-control form-control-sm" />
                         </div>
                     </div>
                     <div class='row'>
                         <div class='col-lg-6'>
                             <livewire:salesinv />
-                            
+
                         </div>
                         <div class='col-lg-6 my-5'>
-                            <div class="col-xl-12">
+                            <div class="col-lg -12">
                                 <table class="table table-striped table-responsive">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Product</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Action</th>
+                                            <th>{{trans('invoice.product')}}</th>
+                                            <th>{{trans('invoice.quantity')}}</th>
+                                            <th>{{trans('product.price')}}</th>
+                                            <th>{{trans('product.action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="order_list" name="products_list">
@@ -86,8 +86,8 @@
                                 </table>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-sm-6 d-flex justify-content-center align-items-center text-center">
-                                    <label>{{ trans('invoice.totalinvocie') }}</label>
+                                <div class="col-sm-12 d-flex justify-content-center align-items-center text-center">
+                                    <label style="width: 50%;">{{ trans('invoice.totalinvocie') }}</label>
                                     <input class="form-control form-control-sm mx-2" id="total_inv" name='total_inv'
                                         readonly>
                                     <span class='d-inline'>{{ env('MAIN_CURRENCY') }}</span>
@@ -104,66 +104,10 @@
 
         </div>
     </div>
+    @include('backend.products.create')
 @endsection
 @section('js')
     @livewireScripts
-    <script type="text/javascript">
-        let inv_num = document.querySelector('#inv_num'),
-            main = 'pos-',
-            last_pos = document.querySelector('#last').value,
-            parse = parseInt(last_pos) + 1;
-        inv_num.value = main + parse;
-        let date = $('.fc-datepicker').datepicker({
-            dateFormat: 'yy-mm-dd'
-        }).val();
-    </script>
+    <script src="{{URL::asset('assets/js/custom_loop.js')}}"></script>
 
-    <script>
-        let add_product = document.querySelectorAll('.add-product');
-        for (let i = 0; i < add_product.length; i++) {
-            add_product[i].addEventListener('click', function(e) {
-                e.preventDefault();
-                let product_id = e.target.getAttribute('data-id'),
-                    product_name = e.target.getAttribute('data-name'),
-                    product_price = e.target.getAttribute('data-price'),
-                    html = `
-            <tr>
-                <td><input hidden name="product_id[]" type='text' value='${product_id}'></td>
-                <td>${product_id}</td>
-                <td>${product_name}</td>
-                <td><input class="form-control form-control-sm qty" data-price="${product_price}" type='text' name="product_qty[]" value='1'></td>
-                <td class="product_price">${product_price}</td>
-                <td><a class="btn btn-danger btn-sm remove-product"><i class="fa fa-trash"></i></a></td>
-            </tr>
-     `,
-                    order_list = document.querySelector("#order_list");
-                order_list.innerHTML += html;
-                calTotal();
-            });
-        }
-    </script>
-    <script>
-        $('body').on('click', '.remove-product', function(e) {
-            e.preventDefault();
-            $(this).closest('tr').remove();
-            calTotal();
-        });
-        $('body').on('keyup chage', '.qty', function() {
-            let quantity = parseFloat($(this).val()),
-                price = $(this).data('price');
-            $(this).closest('tr').find('.product_price').html(quantity * price);
-            calTotal();
-        });
-    </script>
-    <script>
-        function calTotal() {
-            let total = 0,
-                prices = document.querySelectorAll('#order_list .product_price'),
-                total_price = document.querySelector('#total_inv');
-            for (let i = 0; i < prices.length; i++) {
-                total += parseFloat(prices[i].innerHTML);
-            }
-            total_price.value = total;
-        }
-    </script>
 @endsection

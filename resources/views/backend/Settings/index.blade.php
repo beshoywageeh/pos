@@ -25,14 +25,12 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="pl-0">
                             <div class="main-profile-overview">
-                                <div class="main-img-user profile-user">
-
-
-                                    <img alt="" src="{{($data->photo==null) ? URL::asset('assets/img/brand/favicon.png') : URL::asset('assets/img/'),$data->photo}}">
+                                <div class="col-lg-4">
+                      <img class="img img-responsive img-thumbnail" alt="" src="{{URL::asset('assets/img/')}}/{{$data->photo}}">
                                 </div>
                                 <div class="d-flex justify-content-between mg-b-20">
                                     <div>
-                                        <h5 class="main-profile-name">{{($data->name == '') ? 'LoopLabs' : $data->name}}</h5>
+                                        <h5 class="main-profile-name">{{$data->name}}</h5>
                                     </div>
                                 </div>
                                 <hr class="mg-y-30">

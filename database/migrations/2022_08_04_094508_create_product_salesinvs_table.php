@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('product_salesinvs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('salesinv_id');
-            $table->integer('product_id');
+            $table->bigInteger('salesinv_id')->unsigned();
+            $table->bigInteger('product_id')->unsigned();
             $table->integer('quantity')->default(1);
         });
     }

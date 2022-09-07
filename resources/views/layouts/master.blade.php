@@ -7,9 +7,14 @@
 		@include('layouts.head')
 	</head>
     <style>*{
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Cairo', sans-serif;
         text-transform: capitalize;
-        }</style>
+        }
+        .table thead th{
+            font-size:1.3rem;
+        }
+
+    </style>
     @if(App::getLocale()=='en')
 <style>
     .main-header{

@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                     </form>
-                    </div> 
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped mg-b-0 text-md-nowrap text-center tx-15 tx-bold">
@@ -105,10 +105,15 @@
                         </tbody>
                     </table>
                 </div>
+
+            </div>
+            <div class="card-footer">
+                {{$products->links()}}
+
             </div>
         </div>
         @include('backend.Products.create')
     </div>
     @endsection @section('js')
-   
+
 @endsection
