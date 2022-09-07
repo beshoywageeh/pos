@@ -52,7 +52,13 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @error('client')
+                            <div class="alert alert-solid-danger mg-b-0 my-2" role="alert">
+                                <span class="text-white"><strong>{{$message}}</strong></span>
+                            </div>
+                            @enderror
                         </div>
+
                         <div class="col-lg-2">
                             <label for="date">{{trans('invoice.date')}}</label>
                             <input type="date" class="form-control form-control-sm" name='date'
@@ -73,6 +79,7 @@
                                 <table class="table table-striped table-responsive">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>#</th>
                                             <th>{{trans('invoice.product')}}</th>
                                             <th>{{trans('invoice.quantity')}}</th>
@@ -93,6 +100,11 @@
                                     <span class='d-inline'>{{ env('MAIN_CURRENCY') }}</span>
                                 </div>
                             </div>
+                            @error('products_list')
+                            <div class="alert alert-solid-danger mg-b-0 my-2" role="alert">
+                                <span class="text-white"><strong>{{$message}}</strong></span>
+                            </div>
+                            @enderror
                         </div>
                     </div>
                 </div>

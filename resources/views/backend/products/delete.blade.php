@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{trans('product.delete')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{trans('general.delete')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
                 <form action="{{route('product.destroy','test')}}" method="POST" autocomplete="off">
                     @method('DELETE')
@@ -23,7 +23,7 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-                    <button class="btn ripple btn-danger-gradient" type="submit">{{trans('product.delete')}} </button>
+                    <button class="btn ripple btn-danger-gradient" type="submit">{{trans('general.delete')}} </button>
                     </div>
                 </form>
 

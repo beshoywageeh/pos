@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{trans('product.add')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{trans('general.add')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
                 <form action="{{route('product.store')}}" method="POST" autocomplete="off">
                     @csrf
@@ -56,7 +56,7 @@
                     </div>
                     </div>
 <div class="modal-footer">
-                    <button class="btn ripple btn-primary" type="submit">{{trans('product.save')}} </button>
+                    <button class="btn ripple btn-primary" type="submit">{{trans('general.save')}} </button>
 </div>
                 </form>
         </div>

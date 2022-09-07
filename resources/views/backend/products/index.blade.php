@@ -1,11 +1,7 @@
 @extends('layouts.master') @section('title')
     {{ trans('product.title') }}
     @endsection @section('css')
-    <style>
-        *{
-            text-transform: capitalize !important;
-        }
-    </style>
+
 @endsection
 <!-- Content Header (Page header) -->
 @section('content')
@@ -33,30 +29,18 @@
                         <button data-target="#AddCategory" data-toggle="modal"
                             class="btn btn-success buttons-add btn-with-icon buttons-html5 tx-15 tx-bold" tabindex="0"
                             aria-controls="example" type="button">
-                            <i class="typcn typcn-document-add"></i><span>{{ trans('product.add') }}</span>
+                            <i class="typcn typcn-document-add"></i><span>{{ trans('general.add') }}</span>
                         </button>
                     </div>
                    <div class="col-md-6">
-                    <form action="{{ route('search') }}" method="POST">
-                        @csrf
-                            <div class="col-sm-12 col-md-6">
-                                <div class="input-group">
-                                    <input type="search" name="search" class="form-control form-control"
-                                        placeholder="Search..." aria-controls="example" />
-
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-outline-primary btn-inline" type="submit">
-                                            <span class="input-group-btn">
-                                                <i class="fa fa-search"></i>
-                                            </span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
+                    <form  method="POST">
+                        <input id="search" placeholder='{{trans('general.codeSearch')}}' name="name" class="form-control">
+                        <input id="token" hidden value="{{csrf_token()}}"/>
+                        <input id="ajax_url" hidden value="{{route('product_search')}}">
                     </form>
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive" id="list">
                     <table class="table table-bordered table-striped mg-b-0 text-md-nowrap text-center tx-15 tx-bold">
                         <thead>
                             <tr role="row">
@@ -70,7 +54,7 @@
                         </thead>
                         <tbody>
                             @forelse($products as $product)
-                                <tr role="row">
+                                <tr role="row" >
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
@@ -86,12 +70,12 @@
                                                 <button class="dropdown-item bg-danger text-white tx-15"
                                                     data-target="#DeleteProduct{{ $product->id }}" data-toggle="modal"
                                                     aria-controls="example" type="button">
-                                                    <i class="typcn typcn-delete mr-2"></i>{{ trans('product.delete') }}
+                                                    <i class="typcn typcn-delete mr-2"></i>{{ trans('general.delete') }}
                                                 </button>
                                                 <button class="dropdown-item bg-warning text-white tx-15"
                                                     data-target="#EditProduct{{ $product->id }}" data-toggle="modal"
                                                     aria-controls="example" type="button">
-                                                    <i class="typcn typcn-edit mr-2"></i> {{ trans('product.edit') }}
+                                                    <i class="typcn typcn-edit mr-2"></i> {{ trans('general.edit') }}
                                                 </button>
                                             </div>
                                         </div>
@@ -115,5 +99,29 @@
         @include('backend.Products.create')
     </div>
     @endsection @section('js')
+<script>
+    $(document).on('input','#search',function (e){make_search()});
+    function make_search(){
+        var search=$("#search").val();
+        var token_search=$("#token").val();
+        var ajax_search_url=$("#ajax_url").val();
 
+        jQuery.ajax({
+            url:ajax_search_url,
+            type:'post',
+            dataType:'html',
+            cache:false,
+            data:{search:search,"_token":token_search},
+            success:function(products){
+
+                $("#list").html(products);
+            },
+            error:function(){
+
+            }
+        });
+
+    }
+
+</script>
 @endsection

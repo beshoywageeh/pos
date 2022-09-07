@@ -53,7 +53,7 @@ $('body').on('click', '.remove-product', function(e) {
     $(this).closest('tr').remove();
     calTotal();
 });
-$('body').on('keyup chage', '.qty', function() {
+$('body').on('keyup change', '.qty', function() {
     let quantity = parseFloat($(this).val()),
         price = $(this).data('price');
     $(this).closest('tr').find('.product_price').html(quantity * price);
@@ -90,6 +90,4 @@ function digitalClock(){
     document.querySelector('#time').value = final;
 }
 digitalClock();
-
-
 //========end digital clock ===============//

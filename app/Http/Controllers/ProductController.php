@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\product;
 use Illuminate\Http\Request;
+use Flasher\Prime\FlasherInterface;
+use Flasher\Toastr\Prime\ToastrFactory;
 
 class ProductController extends Controller
 {
@@ -20,7 +22,7 @@ class ProductController extends Controller
         //
     }
 
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request,ToastrFactory $flasher)
     {
         // dd($request);
         try {
@@ -30,13 +32,13 @@ class ProductController extends Controller
                 'category_id' => $request->category_id,
                 'notes' => $request->notes,
             ]);
-            toastr()->success(trans('product.Add'));
-
+            $flasher->addSuccess(trans('general.add_msg'));
             return redirect('product');
         } catch (\Exception $e) {
             return redirect()
                 ->back()
                 ->withErrors(['error' => $e->getMessage()]);
+
         }
     }
 
@@ -50,7 +52,7 @@ class ProductController extends Controller
         //
     }
 
-    public function update(StoreProductRequest $request)
+    public function update(StoreProductRequest $request,ToastrFactory $flasher)
     {
         $product = product::findorfail($request->id);
         try {
@@ -60,7 +62,7 @@ class ProductController extends Controller
                 'category_id' => $request->category_id,
                 'notes' => $request->notes,
             ]);
-            toastr()->success(trans('product.edit'));
+            $flasher->AddSuccess(trans('general.edit_msg'));
 
             return redirect('product');
         } catch (\Exception $e) {
@@ -70,11 +72,11 @@ class ProductController extends Controller
         }
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request,ToastrFactory $flasher)
     {
         try {
             product::destroy($request->id);
-            toastr()->success(trans('product.delete'));
+            $flasher->AddSuccess(trans('general.delete_msg'));
 
             return redirect('product');
         } catch (\Exception $e) {
@@ -82,5 +84,13 @@ class ProductController extends Controller
                 ->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
+    }
+    public function product_search(Request $request){
+
+if($request->ajax()){
+    $products =  product::where('id', 'LIKE','%'.$request->search.'%')->get();
+    return view('backend.products.search',compact('products'));
+}
+
     }
 }

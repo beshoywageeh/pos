@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\salesinvrequest;
 use App\Models\client;
 use App\Models\product;
 use App\Models\product_salesinv;
@@ -35,7 +36,7 @@ class SalesinvController extends Controller
         return view('backend.Salesinv.create', compact('ex', 'clients', 'products'));
     }
 
-    public function store(Request $request)
+    public function store(salesinvrequest $request)
     {
         $total_inv = explode(' ', $request->total_inv);
 
@@ -78,7 +79,7 @@ class SalesinvController extends Controller
             $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
             $setting = \App\Models\setting::get()->first();
             return view('backend.Salesinv.show', compact('inv','setting'));
-//return $inv->client;  
+//return $inv->client;
 } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);

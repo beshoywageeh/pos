@@ -32,8 +32,8 @@ Route::group(
                     return view('backend.dashboard');
                 })->name('dashboard');
                 Route::resource('category', CategoryController::class);
+                Route::post('product_search', [ProductController::class,'product_search'])->name('product_search');
                 Route::resource('product', ProductController::class);
-                Route::post('product_search', [ProductController::class, 'search'])->name('search');
                 Route::resource('client', ClientController::class);
                 Route::resource('sales', SalesinvController::class);
                 Route::get('saleinv/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
