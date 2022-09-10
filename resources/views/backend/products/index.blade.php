@@ -45,6 +45,7 @@
                         <thead>
                             <tr role="row">
                                 <th class="wd-2">#</th>
+                                <th>{{ trans('product.barcode') }}</th>
                                 <th>{{ trans('product.name') }}</th>
                                 <th>{{ trans('product.price') }}</th>
                                 <th>{{ trans('product.category') }}</th>
@@ -56,6 +57,7 @@
                             @forelse($products as $product)
                                 <tr role="row" >
                                     <td>{{ $loop->iteration }}</td>
+                                    <td ><svg class="barcode" jsbarcode-value="{{ $product->barcode}}" jsbarcode-displayvalue="false" jsbarcode-width="1" jsbarcode-height="10"></svg></td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->category->name }}</td>
@@ -91,6 +93,7 @@
                 </div>
 
             </div>
+
             <div class="card-footer">
                 {{$products->links()}}
 
@@ -98,30 +101,8 @@
         </div>
         @include('backend.Products.create')
     </div>
-    @endsection @section('js')
-<script>
-    $(document).on('input','#search',function (e){make_search()});
-    function make_search(){
-        var search=$("#search").val();
-        var token_search=$("#token").val();
-        var ajax_search_url=$("#ajax_url").val();
-
-        jQuery.ajax({
-            url:ajax_search_url,
-            type:'post',
-            dataType:'html',
-            cache:false,
-            data:{search:search,"_token":token_search},
-            success:function(products){
-
-                $("#list").html(products);
-            },
-            error:function(){
-
-            }
-        });
-
-    }
-
-</script>
-@endsection
+    @endsection
+    @section('js')
+        <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+        <script src="{{URL::asset('assets/js/custom_loop_product.js')}}"></script>
+    @endsection

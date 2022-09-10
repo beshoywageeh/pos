@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\product;
 use Illuminate\Http\Request;
-use Flasher\Prime\FlasherInterface;
 use Flasher\Toastr\Prime\ToastrFactory;
 
 class ProductController extends Controller
@@ -26,9 +25,11 @@ class ProductController extends Controller
     {
         // dd($request);
         try {
+
             product::create([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'price' => $request->price,
+                'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
                 'notes' => $request->notes,
             ]);
@@ -56,9 +57,11 @@ class ProductController extends Controller
     {
         $product = product::findorfail($request->id);
         try {
+
             $product->update([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'price' => $request->price,
+                'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
                 'notes' => $request->notes,
             ]);
@@ -85,12 +88,12 @@ class ProductController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function product_search(Request $request){
-
-if($request->ajax()){
-    $products =  product::where('id', 'LIKE','%'.$request->search.'%')->get();
-    return view('backend.products.search',compact('products'));
-}
+    public function product_search(Request $request)
+    {
+        if($request->ajax()){
+            $products =  product::where('id', 'LIKE','%'.$request->search.'%')->get();
+            return view('backend.products.search',compact('products'));
+        }
 
     }
 }

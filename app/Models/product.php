@@ -11,7 +11,7 @@ class product extends Model
     use HasFactory;
     use HasTranslations;
 
-    protected $fillable = ['name', 'price', 'category_id'];
+    protected $fillable = ['name', 'price', 'category_id','barcode'];
 
     public $translatable = ['name'];
 

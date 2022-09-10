@@ -8,7 +8,18 @@
                 <form action="{{route('product.store')}}" method="POST" autocomplete="off">
                     @csrf
                     <div class="modal-body">
-
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="barcode">{{trans('product.barcode')}}</label>
+                                <span for="">{{trans('product.barcode_msg')}}</span>
+                                <input type="text" name="barcode" id="barcode" class="form-control @error('barcode') is-invalid @enderror" placeholder="{{trans('product.barcode')}}">
+                                @error('barcode')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <img class="barcode img-responsive" id="code">
+                            </div>
                    <div class="row">
                        <div class="form-group col-sm-6">
                            <label for="arabic">{{trans('product.arabicname')}}</label>
@@ -36,7 +47,7 @@
                             <div class="form-group col-sm-6">
                                 @php {{$categories = \App\Models\category::all(); }} @endphp
                                 <label for="category">{{trans('product.category')}}</label>
-                                    <select class="form-control @error('category_id') is-invalid @enderror" name="category_id">
+                                    <select id="category_id" class="form-control @error('category_id') is-invalid @enderror" name="category_id">
                                         <option value="" disabled selected>{{trans('product.chcat')}}</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>

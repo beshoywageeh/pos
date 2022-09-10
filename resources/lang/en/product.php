@@ -35,4 +35,7 @@ return [
     'price' => 'Price',
     'chcat' => '-- Choose Category From List --',
     'category' => 'Choose Category',
+    'barcode'=>'barcode',
+    'barcode_msg'=>"in case didn't enter barcode it will auto generated"
+
 ];
