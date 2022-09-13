@@ -10,7 +10,7 @@
             <tr role="row">
                 <th class="wd-2">#</th>
                 <th>{{ trans('product.name') }}</th>
-                <th>{{ trans('product.price') }}</th>
+                <th>{{ trans('product.sales_price') }}</th>
                 <th>{{ trans('product.add') }}</th>
 
             </tr>
@@ -20,11 +20,11 @@
                 <tr role="row">
                     <th class="wd-2">#</th>
                     <th>{{ $product->name }}</th>
-                    <th>{{ $product->price }}</th>
+                    <th>{{ $product->sales_price }}</th>
                     <th><a href="" id="product-{{ $product->id }}"
                             class='btn btn-success btn-sm add-product'
                             data-id='{{ $product->id }}' data-name='{{ $product->name }}'
-                            data-price='{{ $product->price }}'><i class='fa fa-plus'></i></a>
+                            data-price='{{ $product->sales_price }}'><i class='fa fa-plus'></i></a>
                     </th>
 
                 </tr>

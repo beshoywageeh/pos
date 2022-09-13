@@ -11,7 +11,7 @@ class product extends Model
     use HasFactory;
     use HasTranslations;
 
-    protected $fillable = ['name', 'price', 'category_id','barcode'];
+    protected $fillable = ['name', 'sales_price','opening_balance', 'purchase_price','category_id','barcode'];
 
     public $translatable = ['name'];
 
@@ -20,8 +20,4 @@ class product extends Model
         return $this->belongsTo(category::class);
     }
 
-    public function products()
-    {
-        return $this->hasMany(products::class);
-    }
 }

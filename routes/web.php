@@ -37,6 +37,7 @@ Route::group(
             Route::resource('client', ClientController::class);
             Route::resource('sales', SalesinvController::class);
             Route::get('saleinv/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
+            Route::get('print/{id}', [SalesinvController::class, 'print'])->name('print');
             //Route::get('client/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
             Route::get('settings', [SettingController::class, 'index'])->name('index');
             Route::get('settings/add/{id}', [SettingController::class, 'edit'])->name('edit');
@@ -44,5 +45,5 @@ Route::group(
         });
 
     require __DIR__ . '/auth.php';
-    Route::get('/{page}', [AdminController::class, 'index']);
+    //Route::get('/{page}', [AdminController::class, 'index']);
 });

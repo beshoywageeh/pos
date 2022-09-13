@@ -15,7 +15,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = product::paginate(10);
+        $products = product::all();
         return view('backend.products.index', compact('products'));
     }
 
@@ -23,8 +23,7 @@ class ProductController extends Controller
     {
         try {
             $cats = category::get();
-            $data = $this->GetData();
-            return view('backend.products.create', compact('cats'), $data);
+            return view('backend.products.create', compact('cats'), $this->GetData());
         } catch (\Exception $e) {
             return redirect()
                 ->back()
@@ -35,14 +34,16 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request, ToastrFactory $flasher)
     {
-        // dd($request);
+      //  return($request);
         try {
 
             product::create([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
-                'price' => $request->price,
                 'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
+                'opening_balance'=>$request->opening_balance,
+                'purchase_price'=>$request->purchase_price,
+                'sales_price'=>$request->sales_price,
                 'notes' => $request->notes,
             ]);
             $flasher->addSuccess(trans('general.add_msg'));

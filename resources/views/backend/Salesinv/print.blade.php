@@ -1,36 +1,32 @@
-@extends('layouts.master') @section('title')
-    {{ trans('sales.title') }}
+@extends('layouts.master_print') @section('title')
+    {{ trans('general.print') }}
 @endsection
 @section('css')
-
+<style>
+    *{
+        background-color:white;
+        margin:0;
+        padding: 0;
+    }
+    #invoice{
+        border:none;
+        box-shadow: 0;
+margin:auto;
+    }
+</style>
 @endsection
 <!-- Content Header (Page header) -->
 @section('content')
-    <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between no" id="head">
-        <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Invoice</span>
-            </div>
-        </div>
-        <div class="d-flex my-xl-auto right-content">
-            <div class="pr-1 mb-3 mb-xl-0">
-                <a class="btn btn-danger float-left mt-3 mr-2 print" href="{{route('print',['id'=>$inv->id])}}">
-                    <i class="mdi mdi-printer ml-1"></i>{{ trans('general.print') }}
-                </a>
-            </div>
-        </div>
-    </div>
     @include('backend.msg')
 
     <div class="row row-sm" id='invoice'>
         <div class="col-md-12 col-xl-12">
             <div class=" main-content-body-invoice">
-                <div class="card card-invoice">
+                <div class=" card-invoice">
                     <div class="card-body">
                         <div class="invoice-header">
-                            <h1 class="invoice-title">Invoice</h1>
+                            <img class="invoice-title img-responsive" style="width: 10%" alt='{{ $data['name']}}' src="{{URL::asset('assets/img').'/'.  $data['photo']}}">
+
                             <div class="billed-from">
                                 <h6>{{ $data['name']}}</h6>
                                 <p>{{ $data['address'] }}<br>
@@ -52,8 +48,8 @@
                                 <label class="tx-gray-600">Invoice Information</label>
                                 <p class="invoice-info-row"><span>Invoice No</span> <span>{{ $inv->inv_num }}</span></p>
                                 <p class="invoice-info-row"><span>Project ID</span> <span>32334300</span></p>
-                                <p class="invoice-info-row"><span>Date Created:</span> <span>{{ $inv->inv_date }}</span>
-                                </p>
+                                <p class="invoice-info-row"><span>Date Created:</span> <span>{{ $inv->inv_date }}</span></p>
+                                <p class="invoice-info-row"><span>Print Date:</span> <span>{{ Carbon\Carbon::now()->format('Y-m-d') }}</span></p>
                                 <p class="invoice-info-row"><span>Due Date:</span> <span>November 30, 2017</span></p>
                             </div>
                         </div>
@@ -121,4 +117,7 @@
         </div><!-- COL-END -->
     </div>
 @endsection @section('js')
+<script>
+    window.print();
+</script>
 @endsection

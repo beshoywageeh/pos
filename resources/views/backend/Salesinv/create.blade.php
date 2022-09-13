@@ -45,9 +45,9 @@
                         <div class="col-lg-4 mg-t-20 mg-lg-t-0">
                             <label class="mg-b-10">{{ trans('client.chooseclient') }}</label>
                             <select class="form-control form-control-sm select2" name="client">
-                                <option label="Choose one">
-                                </option>
-                                @foreach ($clients as $client)
+                                <option selected disabled>{{trans('client.chooseclient')}}</option>
+
+                            @foreach ($clients as $client)
                                     <option value="{{ $client->id }}">
                                         {{ $client->name }}
                                     </option>
