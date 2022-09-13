@@ -28,4 +28,8 @@ class client extends Model
         $sales = number_format(salesinv::where('client_id',$this->id)->sum('total'),'2');
         return $sales;
     }
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 }

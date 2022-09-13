@@ -3,25 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Traits\SettingTrait;
+use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
 use Flasher\Toastr\Prime\ToastrFactory;
 
 class ProductController extends Controller
 {
+    use SettingTrait;
+
     public function index()
     {
         $products = product::paginate(10);
-
         return view('backend.products.index', compact('products'));
     }
 
     public function create()
     {
-        //
+        try {
+            $cats = category::get();
+            $data = $this->GetData();
+            return view('backend.products.create', compact('cats'), $data);
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withErrors(['error' => $e->getMessage()]);
+
+        }
     }
 
-    public function store(StoreProductRequest $request,ToastrFactory $flasher)
+    public function store(StoreProductRequest $request, ToastrFactory $flasher)
     {
         // dd($request);
         try {
@@ -53,7 +65,7 @@ class ProductController extends Controller
         //
     }
 
-    public function update(StoreProductRequest $request,ToastrFactory $flasher)
+    public function update(StoreProductRequest $request, ToastrFactory $flasher)
     {
         $product = product::findorfail($request->id);
         try {
@@ -75,7 +87,7 @@ class ProductController extends Controller
         }
     }
 
-    public function destroy(Request $request,ToastrFactory $flasher)
+    public function destroy(Request $request, ToastrFactory $flasher)
     {
         try {
             product::destroy($request->id);
@@ -88,11 +100,12 @@ class ProductController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
+
     public function product_search(Request $request)
     {
-        if($request->ajax()){
-            $products =  product::where('id', 'LIKE','%'.$request->search.'%')->get();
-            return view('backend.products.search',compact('products'));
+        if ($request->ajax()) {
+            $products = product::where('barcode', 'LIKE', '%' . $request->search . '%')->get();
+            return view('backend.products.search', compact('products'));
         }
 
     }

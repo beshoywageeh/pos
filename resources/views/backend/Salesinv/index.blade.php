@@ -1,4 +1,4 @@
-@extends('layouts.master') @section('title') {{trans('sales.title')}} @endsection @section('css') 
+@extends('layouts.master') @section('title') {{trans('sales.title')}} @endsection @section('css')
 <style>
     *{text-transform: capitalize !important;}
 </style>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped text-md-nowrap text-center tx-15 tx-bold">
+                    <table id="mainInvoiceList" class="table table-bordered table-striped text-md-nowrap text-center tx-15 tx-bold">
                         <thead>
                         <tr >
                             <th class="wd-2">#</th>
@@ -79,4 +79,6 @@
         </div>
     </div>
 
-@endsection @section('js') @endsection
+@endsection @section('js')
+
+@endsection

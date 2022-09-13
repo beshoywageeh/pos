@@ -12,9 +12,10 @@ class Salesinv extends Component
 
     public function render()
     {
-            return view('livewire.salesinv', [
-                'products' => product::where('id', 'like', '%'.$this->getproduct.'%')->get(),
-            ]);
+
+         $products = product::where('barcode','LIKE','%'.$this->getproduct.'%')->get();
+         return view('livewire.salesinv',compact('products'));
+
     }
 
 }

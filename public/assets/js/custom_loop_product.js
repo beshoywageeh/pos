@@ -1,20 +1,35 @@
-JsBarcode(".barcode").init();
+JsBarcode(".barcode_index").init();
 
 //========start barcode ===============//
-let barcode_input = document.querySelector('#barcode'),
-    category_id = document.querySelector('#category_id'),
+let barcode_input = document.querySelector('#barcode');
+let  category_id = document.querySelector('#category_id'),
     min = Math.ceil(Math.random()),
-    max = Math.floor(Math.random());
-category_id.addEventListener('change',function(e) {
-    let catval = category_id.value,
-        barcode = `${catval} - ${Math.floor(Math.random())}${min}${max}`;
-    barcode_input.value = barcode;
-    JsBarcode(".barcode",barcode, {
-        height: 30,
+    max = Math.floor(Math.random()),
+    data = new Date(),
+    hour = data.getHours(),
+    mintes = data.getMinutes(),
+    secounds = data.getSeconds(),
+    slogan = document.querySelector('#slogan').value.toUpperCase(),
+    barcode ='';
+if(barcode_input.value == null){
+    category_id.addEventListener('change',function(e) {
+        let catval = category_id.value,
+            barcode = `${slogan}${catval}-${hour}${mintes}${secounds}${Math.floor(Math.random())}${min}${max}`;
+        barcode_input.value = barcode;
+        JsBarcode(".barcode",barcode, {
+            height: 30,
+        });
+        let barcodepre = document.querySelector("#code");
+        console.log(barcodepre.src)
     });
-    let barcodepre = document.querySelector("#code");
-    console.log(barcodepre.src)
-});
+}else{
+    barcode_input.addEventListener('change',function (){
+        barcode = barcode_input.value;
+        JsBarcode(".barcode",barcode, {
+            height: 30,
+        });
+    });
+}
 
 //========end barcode ===============//
 

@@ -4,6 +4,7 @@
             <thead>
             <tr role="row">
                 <th class="wd-2">#</th>
+                <th>{{ trans('product.barcode') }}</th>
                 <th>{{ trans('product.name') }}</th>
                 <th>{{ trans('product.price') }}</th>
                 <th>{{ trans('product.category') }}</th>
@@ -15,6 +16,7 @@
             @forelse($products as $product)
                 <tr role="row" >
                     <td>{{ $loop->iteration }}</td>
+                    <td ><svg class="barcode" jsbarcode-value="{{ $product->barcode}}" jsbarcode-displayvalue="false" jsbarcode-width="1" jsbarcode-height="10"></svg></td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->category->name }}</td>

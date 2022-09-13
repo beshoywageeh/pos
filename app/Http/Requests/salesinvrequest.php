@@ -25,13 +25,11 @@ class salesinvrequest extends FormRequest
     {
         return [
             'client' => 'required',
-            'products_list'=>'required'
         ];
     }
     public function messages(){
         return[
             'client.required' =>'اسم العميل مطلوب',
-            'products_list.required' =>'يجب ادخال منتج واحد علي الاقل',
         ];
     }
 }

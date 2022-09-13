@@ -17,11 +17,13 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         DB::table('settings')->delete();
-        DB::table('settings')->insert([
-            'name'=>'Loop Labs',
-            'phone'=>'01201026745',
-            'photo'=>'default.png',
-            'address'=>'12'
-        ]);
+        $data = [
+            ['key'=>'name','value'=>'Loop Labs'],
+            ['key'=>'phone','value'=>'01201026745'],
+            ['key'=>'photo','value'=>'default.png'],
+            ['key'=>'address','value'=>'11'],
+            ['key'=>'slogan','value'=>'LL'],
+        ];
+        DB::table('settings')->insert($data);
     }
 }

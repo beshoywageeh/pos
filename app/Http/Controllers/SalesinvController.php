@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\salesinvrequest;
+use App\Http\Traits\SettingTrait;
 use App\Models\client;
 use App\Models\product;
 use App\Models\product_salesinv;
 use App\Models\salesinv;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SalesinvController extends Controller
 {
+use SettingTrait;
     public function index()
     {
         $salesinv = salesinv::with('client')->get();
@@ -21,7 +25,7 @@ class SalesinvController extends Controller
     public function create()
     {
         if (salesinv::latest()
-            ->first() == null) {
+                ->first() == null) {
             $id = 'pos-0000';
             $ex = explode('-', $id);
         } else {
@@ -33,10 +37,10 @@ class SalesinvController extends Controller
         $clients = client::all();
         $products = product::all();
 
-        return view('backend.Salesinv.create', compact('ex', 'clients', 'products'));
+        return view('backend.Salesinv.create', compact('ex', 'clients', 'products'),$this->GetData());
     }
 
-    public function store(salesinvrequest $request)
+    public function store(salesinvrequest $request, ToastrFactory $flasher)
     {
         $total_inv = explode(' ', $request->total_inv);
 
@@ -51,7 +55,7 @@ class SalesinvController extends Controller
             $salesinvs->inv_num = $request->inv_num;
             $salesinvs->inv_date = $request->date;
             $salesinvs->client_id = $request->client;
-            $salesinvs->user_id = $request->user_id;
+            $salesinvs->user_id = Auth::user()->id;
             $salesinvs->total = $total_inv[0];
             $salesinvs->save();
             $id = salesinv::latest()->first();
@@ -59,7 +63,7 @@ class SalesinvController extends Controller
             $invdata->salesinv_id = $id->id;
             $salesinvs->products()
                 ->attach($details);
-            toastr()->success('تم إضافة البيانات بنجاح');
+            $flasher->AddSuccess(trans('general.add_msg'));
 
             return redirect('sales');
         } catch (\Exception $e) {
@@ -77,10 +81,9 @@ class SalesinvController extends Controller
         //return $inv->products;
         try {
             $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
-            $setting = \App\Models\setting::get()->first();
-            return view('backend.Salesinv.show', compact('inv','setting'));
+            return view('backend.Salesinv.show', compact('inv'),$this->GetData());
 //return $inv->client;
-} catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
@@ -101,7 +104,7 @@ class SalesinvController extends Controller
         try {
             $id = $request->id;
             salesinv::findorfail($id);
-           product_salesinv::where('salesinv_id',$id)->delete();
+            product_salesinv::where('salesinv_id', $id)->delete();
             salesinv::destroy($id);
             toastr()->success('تم حذف البيانات بنجاح');
 

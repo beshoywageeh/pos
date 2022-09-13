@@ -5,13 +5,14 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		@include('layouts.head')
-	</head>
+
+    </head>
     <style>*{
         font-family: 'Cairo', sans-serif;
         text-transform: capitalize;
         }
         .table thead th{
-            font-size:1.3rem;
+            font-size:1rem;
         }
 
     </style>
@@ -38,7 +39,6 @@
         }
         </style>
     @endif
-
 	<body class="main-body app sidebar-mini">
 		<!-- Loader -->
 		<div id="global-loader">

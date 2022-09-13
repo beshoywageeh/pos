@@ -11,10 +11,16 @@ function showPreview(event){
 //========start get and set inv number===========//
 
 let inv_num = document.querySelector('#inv_num'),
-    main = 'pos-',
     last_pos = document.querySelector('#last').value,
-    parse = parseInt(last_pos) + 1;
-    inv_num.value = main + parse;
+    parse = parseInt(last_pos) + 1,
+    slogan = document.querySelector('#slogan').value;
+if(slogan == ''){
+    inv_num.value = `pos-${parse}`;
+
+}else{
+    inv_num.value = `${slogan}-${parse}`;
+
+}
 let date = $('.fc-datepicker').datepicker({
     dateFormat: 'yy-mm-dd'
 }).val();
@@ -91,11 +97,6 @@ function digitalClock(){
 }
 digitalClock();
 //========end digital clock ===============//
-//========start barcode ===============//
-let barcode_input = document.getElementById('barcode');
-alert('done');
-//========end barcode ===============//
-
 //========start ajax search ===============//
 $(document).on('input','#search',function (e){make_search()});
 function make_search(){

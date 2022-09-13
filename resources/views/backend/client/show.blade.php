@@ -1,5 +1,5 @@
-@extends('layouts.master') @section('title') {{trans('client.title')}} @endsection 
-@section('css') 
+@extends('layouts.master') @section('title') {{trans('client.title')}} @endsection
+@section('css')
 <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -45,6 +45,7 @@ margin-top:0.9rem !important;
 .text_data{display:flex !important}
 }
 .data{font-size:1rem;}
+
 </style>
 @endsection
 <!-- Content Header (Page header) -->
@@ -56,7 +57,7 @@ margin-top:0.9rem !important;
                 <h4 class="content-title mb-0 my-auto">{{trans('client.title')}}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{trans('client.main')}}</span>
             </div>
-   
+
         </div>
     </div>
     @include('backend.msg')
@@ -87,7 +88,7 @@ margin-top:0.9rem !important;
                                 </button>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <hr>
                 <div class="client_data">
@@ -109,7 +110,7 @@ margin-top:0.9rem !important;
             <div class="card-body">
 
                 <div class="table-responsive">
-                    <table id="example" class="table key-buttons text-md-nowrap">
+                    <table id="example" class="table key-buttons text-md-nowrap report_table">
                         <thead>
                             <tr>
                                 <th class="wd-2">#</th>
@@ -125,14 +126,14 @@ margin-top:0.9rem !important;
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$sale->inv_num}}</td>
                                     <td>{{$sale->formatcurrncy()}} {{env('MAIN_CURRENCY')}}</td>
-                                    <td>{{$sale->user->name}}</td>
+                                    <td>{{$sale->user->first_name}}</td>
                                     <td>{{$sale->formatdate()}}</td>
                                                                </tr>
                                  @empty
                                 <tr>
                                     <td class="text-center" colspan="5">{{trans('client.report_msg')}}</td>
                                 </tr>
-    
+
                             @endforelse
                             </tbody>
                     </table>
@@ -140,19 +141,21 @@ margin-top:0.9rem !important;
             </div>
             <div class='card-footer'>
                 <h5 class='total'>{{trans('client.balance')}} : <em>{{$client->totalBalance()}}</em> {{env('MAIN_CURRENCY')}}</h5>
-               
-                    
+
+
             </div>
         </div>
 
     </div>
 
-@endsection 
-@section('js') 
+@endsection
+@section('js')
 <script>
-    let button = document.querySelector('.print');
+    let button = document.querySelector('.print'),
+        report = document.querySelector('.report_table');
     button.addEventListener('click', function(e) {
         e.preventDefault();
+        report.removeAttribute('id');
         window.print();
     })
 </script>

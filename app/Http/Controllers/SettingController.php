@@ -2,64 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\country;
+use App\Http\Traits\SettingTrait;
 use App\Models\setting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class SettingController extends Controller
 {
+    use SettingTrait;
+
     public function index()
     {
-        $data = setting::get()->first();
-
-//return $data;
-        return view('backend.Settings.index', compact('data'));
-    }
-
-    public function create()
-    {
-    }
-
-    public function store(Request $request)
-    {
-
-
-    }
-
-    public function show(setting $setting)
-    {
+        return view('backend.Settings.index', $this->GetData());
     }
 
     public function edit(setting $setting)
     {
-        $getData = setting::get()->first();
-        return view('backend.Settings.create',compact('getData'));
-
+        return view('backend.Settings.create', $this->GetData());
     }
 
     public function update(Request $request, setting $setting)
     {
         try {
-            $store = setting::findorfail($request->id);
-$oldPhoto = $store->photo;
-            if($request->has('photo')){
-                $request->validate(['photo'=>'required|mimes:png,jpg,jpeg|max:2000']);
-                $photofile = uploadImage('assets/img',$request->photo);
-            }else{
-                $photofile = $store->photo;
+            $info = $request->except('_token', 'photo');
+            foreach ($info as $key => $value) {
+                setting::where('key', $key)->update(['value' => $value]);
             }
-            if(file_exists('assets/img/'.$oldPhoto)){
-                unlink('assets/img/'.$oldPhoto);
+            if ($request->has('photo')) {
+                $request->validate(['photo' => 'required|mimes:png,jpg,jpeg|max:2000']);
+                $photofile = uploadImage('assets/img', $request->photo);
+                setting::where('key', 'photo')->update(['value' => $photofile]);
             }
-           // $store = new setting();
-            $store->name = $request->name;
-            $store->phone = $request->phone;
-            $store->address = $request->address;
-            $store->photo = $photofile;
-
-            $store->save();
-
+            $oldPhoto = setting::where('key', 'photo')->get('value')->first();
+            if (file_exists('assets/img/' . $oldPhoto)) {
+                unlink('assets/img/' . $oldPhoto);
+            }
             toastr()->success('تم اضافة المتجر بنجاح');
 
             return redirect('settings');
@@ -68,9 +45,5 @@ $oldPhoto = $store->photo;
                 ->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
-    }
-
-    public function destroy(setting $setting)
-    {
     }
 }

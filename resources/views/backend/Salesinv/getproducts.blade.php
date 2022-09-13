@@ -5,6 +5,7 @@
             <div class="modal-header">
                 <h6 class="modal-title">عرض المنتجات</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
+
             <div class="modal-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped mg-b-0 text-md-nowrap text-center tx-15 tx-bold">
@@ -26,7 +27,7 @@
                                         <button type="button" class="btn btn-success btn-rounded"><i class="fa fa-plus"></i></button>
                                     </td>
                                 </tr>
-                            
+
                             @endforeach
                         </tbody>
                     </table>

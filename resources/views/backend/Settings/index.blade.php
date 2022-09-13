@@ -26,11 +26,11 @@
                         <div class="pl-0">
                             <div class="main-profile-overview">
                                 <div class="col-lg-4">
-                      <img class="img img-responsive img-thumbnail" alt="" src="{{URL::asset('assets/img/')}}/{{$data->photo}}">
+                      <img class="img img-responsive img-thumbnail" alt="" src="{{URL::asset('assets/img/')}}/{{$data['photo']}}">
                                 </div>
                                 <div class="d-flex justify-content-between mg-b-20">
                                     <div>
-                                        <h5 class="main-profile-name">{{$data->name}}</h5>
+                                        <h5 class="main-profile-name">{{$data['name']}}</h5>
                                     </div>
                                 </div>
                                 <hr class="mg-y-30">
@@ -41,7 +41,7 @@
                                             <i class="fa fa-phone"></i>
                                         </div>
                                         <div class="media-body">
-                                            <span>Phone</span> <span>{{($data->phone == '') ? '01201026745' : $data->phone}}</span>
+                                            <span>Phone</span> <span>{{$data['phone']}}</span>
                                         </div>
                                     </div>
                                     <div class="media">
@@ -49,7 +49,7 @@
                                             <i class="fa fa-book"></i>
                                         </div>
                                         <div class="media-body">
-                                            <span>Address</span> <span>{{$data->address}}</span>
+                                            <span>Address</span> <span>{{$data['address']}}</span>
                                         </div>
                                     </div>
                             </div><!-- main-profile-overview -->

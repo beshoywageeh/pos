@@ -20,19 +20,20 @@
 @if(App::getLocale()=='en')
     <!--- Style css -->
     <link href="{{URL::asset('assets/css/style.css')}}" rel="stylesheet">
-
     <!---Skinmodes css-->
     <link href="{{URL::asset('assets/css/skin-modes.css')}}" rel="stylesheet">
     <!-- Sidemenu css -->
     <link rel="stylesheet" href="{{URL::asset('assets/css/sidemenu.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('assets/css/icons.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('assets/css/edit.css')}}">
 @else
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css" integrity="sha384-+4j30LffJ4tgIMrq9CwHvn0NjEvmuDCOfk6Rpg2xg7zgOxWWtLtozDEEVvBPgHqE" crossorigin="anonymous">
     <!--- Style css -->
     <link href="{{URL::asset('assets/css-rtl/style.css')}}" rel="stylesheet">
-    <!---Skinmodes css-->
-    <link href="{{URL::asset('assets/css-rtl/skin-modes.css')}}" rel="stylesheet">
-    <!-- Sidemenu css -->
     <link rel="stylesheet" href="{{URL::asset('assets/css-rtl/sidemenu.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('assets/css-rtl/icons.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('assets/css-rtl/animate.css')}}">
 @endif
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
