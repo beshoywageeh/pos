@@ -1,13 +1,18 @@
-@extends('layouts.master') 
-@section('title') {{trans('client.title')}} @endsection 
+@extends('layouts.master')
+@section('title') {{trans('client.title')}} @endsection
 @section('css')
 <style type="text/css">
 .select2
 {width:100% !important;}
 
 </style>
+<link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"/>
+<link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet"/>
+<link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/prism/prism.css')}}" rel="stylesheet">
-<!--- Custom-scroll -->
 <link href="{{URL::asset('assets/plugins/custom-scroll/jquery.mCustomScrollbar.css')}}" rel="stylesheet">
 @livewireStyles @endsection
 <!-- Content Header (Page header) -->
@@ -30,7 +35,7 @@
                     <h4 class="card-title mg-b-0">{{trans('client.title')}}</h4>
                 </div>
             </div>
-        
+
 
             <div class="card-body">
                 <div class="row mb-2">
@@ -40,18 +45,19 @@
                         </button>
                     </div>
                     <div class="col-sm-12 col-md-6">
-              
+
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped text-md-nowrap text-center tx-15 tx-bold">
-                        <thead>
+                    <table id="example2" class="table text-md-nowrap report-table text-center" style="padding: 0; width:98%">
+                        <thead class='alert-success'>
                         <tr >
-                            <th class="wd-2">{{trans('client.code')}}</th>
+                            <th class="wd-2" style="padding: 0;wdith:4px;">{{trans('client.code')}}</th>
+
                             <th>{{trans('client.name')}}</th>
                             <th>{{trans('client.phone')}}</th>
                             <th>{{trans('client.address')}}</th>
-                            <th style="width: 1rem;">{{trans('client.actions')}}</th>
+                            <th>{{trans('client.actions')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,14 +69,18 @@
                                 <td>{{$client->address}}</td>
                                 <td>
                                     <div class="dropdown">
-                                        <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-gray-700" data-toggle="dropdown" id="dropdownMenuButton" type="button"><i class="fas fa-caret-down ml-1"></i></button>
-                                        <div class="dropdown-menu tx-13">
-                                            <button class="dropdown-item bg-danger text-white tx-15" data-target="#Deleteclient{{$client->id}}" data-toggle="modal" aria-controls="example" type="button">
-                                                <i class="typcn typcn-delete mr-2"></i>{{trans('client.delete')}}
+                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm ripple btn-info" data-toggle="dropdown" id="dropdownMenuButton" type="button">{{trans('client.actions')}}<i class="fas fa-caret-down ml-1"></i></button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item" data-target="#Deleteclient{{$client->id}}" data-toggle="modal" aria-controls="example" type="button">
+                                                <i class="fas fa-trash text-danger mx-2"></i>{{trans('client.delete')}}
                                             </button>
-                                            <button class="dropdown-item bg-warning text-white tx-15" data-target="#Editclient{{$client->id}}" data-toggle="modal" aria-controls="example" type="button">
-                                                <i class="typcn typcn-edit mr-2"></i> {{trans('client.edit')}}
+                                            <button class="dropdown-item" data-target="#Editclient{{$client->id}}" data-toggle="modal" aria-controls="example" type="button">
+                                                <i class="fas fa-pen mx-2 text-warning"></i> {{trans('client.edit')}}
                                             </button>
+                                            <a class="dropdown-item" target="_blank"
+                                               aria-controls="example" type="button" href="{{route('print_client_balance',$client->id)}}">
+                                                <i class="fas fa-print  text-primary mx-2 fa-1x"></i> {{trans('general.print').' '.trans('client.balance')}}
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
@@ -88,7 +98,7 @@
                 </div>
             </div>
             <div class="card-footer">
-    
+
             </div>
         </div>
         @include('backend.client.create')
@@ -96,4 +106,24 @@
 
 @endsection @section('js')
 @livewireScripts
+
+<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
+<!--Internal  Datatable js -->
+<script src="{{URL::asset('assets/js/table-data.js')}}"></script>
+
 @endsection

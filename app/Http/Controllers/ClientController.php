@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\SettingTrait;
 use App\Models\client;
 use App\Models\country;
 use App\Models\salesinv;
@@ -10,20 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
+    use SettingTrait;
     public function index()
     {
         $countries = country::all();
         $clients = client::all();
 
         return view('backend.client.index', compact('clients', 'countries'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    }public function create()
     {
         //
     }
@@ -57,6 +52,7 @@ class ClientController extends Controller
      */
     public function show(client $client)
     {
+//        $clients = client::findorfail($client->id);
         $sales = salesinv::where('client_id',$client->id)->get();
         return view('backend.client.show',compact('sales','client'));
     }
@@ -119,11 +115,21 @@ class ClientController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
     public function getclient($id)
     {
         $client = DB::table('clients')->where('id', $id)->first();
-
         return json_encode($client);
+    }
+    public function print($id)
+    {
+        try {
+            $client = client::findorfail($id);
+            $sales = salesinv::where('client_id',$id)->get();
+            return view('backend.client.print_client_balance',compact('sales','client'), $this->GetData());
+            //return view('backend.Salesinv.print', compact('inv'));
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

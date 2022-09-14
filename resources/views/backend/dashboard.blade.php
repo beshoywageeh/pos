@@ -53,7 +53,9 @@
                             <div class="d-flex">
                                 <div class="">
                                     <h4 class="tx-20 fw-bold mb-1 text-white">{{number_format(DB::table('salesinvs')->sum('total'))}} {{env('MAIN_CURRENCY')}}</h4>
-                                    <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                                    <p class="mb-0 tx-12 text-white op-7">Compared to yestarday</p>
+                                    <br>
+                                    <p class="mb-0 text-white">{{DB::table('salesinvs')->where('inv_date',\Carbon\Carbon::yesterday()->format('Y-m-d'))->sum('total')}} {{env('MAIN_CURRENCY')}}</p>
                                 </div>
                                 <span class="float-end my-auto ms-auto"> <i class="fas fa-arrow-circle-up text-white"></i> <span class="text-white op-7"> 52.09%</span> </span>
                             </div>

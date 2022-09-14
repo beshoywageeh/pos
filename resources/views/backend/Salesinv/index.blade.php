@@ -40,19 +40,19 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive hoverable-table">
+
+                    <div class="table-responsive hoverable-table mt-4 text-center">
                         @if($salesinv->count() > 0)
-                            <table id="example" class="table text-md-nowrap report-table">
-                                <thead>
+                            <table id="example2" class="table text-md-nowrap report-table" style="padding: 0; width:98%">
+                                <thead class='alert-success'>
                                 <tr>
 
-                                    <th class="wd-2">#</th>
+                                    <th class="wd-2" style="padding: 0;wdith:4px;">#</th>
                                     <th><span class="data">{{trans('sales.inv_num')}}</span></th>
-                                    <th>{{trans('sales.client')}}</th>
-                                    <th>{{trans('sales.date')}}</th>
-                                    <th>{{trans('sales.total')}}</th>
-                                    <th style="width: 1rem;">{{trans('sales.actions')}}</th>
+                                    <th><span class="data">{{trans('sales.client')}}</span></th>
+                                    <th><span class="data">{{trans('sales.date')}}</span></th>
+                                    <th><span class="data">{{trans('sales.total')}}</span></th>
+                                    <th ><span class="data">{{trans('sales.actions')}}</span></th>
 
                                 </tr>
                                 </thead>
@@ -68,30 +68,29 @@
                                             <a href="{{route('client.show',['client'=>$sales->client_id])}}">{{$sales->client->name}}</a>
                                         </td>
                                         <td>{{$sales->inv_date}}</td>
-                                        <td>{{$sales->total}}</td>
+                                        <td>{{number_format($sales->total).' '. env('MAIN_CURRENCY')}}</td>
                                         <td>
-                                            <div class="dropdown">
-                                                <button aria-expanded="false" aria-haspopup="true"
-                                                        class="btn ripple btn-sm btn-gray-700" data-toggle="dropdown"
-                                                        id="dropdownMenuButton" type="button"><i
-                                                        class="fas fa-caret-down ml-1"></i></button>
+                                            <div class="dropdown" style="width:130%">
+                                                <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm ripple btn-info"
+                                                data-toggle="dropdown" type="button">{{trans('sales.actions')}}<i class="fas fa-caret-down mx-2"></i></button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item"
-                                                            href="#">
+                                                            data-target="#Deletesale{{$sales->id}}" data-toggle="modal" aria-controls="example">
                                                         <i class="fas fa-trash fa-1x text-danger mx-2"></i>{{trans('general.delete')}}
                                                     </a>
-                                                    <button class="dropdown-item"
+                                                    <a class="dropdown-item"
                                                             data-target="#Editclient{{$sales->id}}" data-toggle="modal"
                                                             aria-controls="example" type="button">
                                                         <i class="fas fa-pen fa-1x text-warning mx-2"></i> {{trans('general.edit')}}
-                                                    </button>
-                                                    <a class="dropdown-item"
+                                                    </a>
+                                                    <a class="dropdown-item" target="_blank"
                                                             aria-controls="example" type="button" href="{{route('print',['id'=>$sales->id])}}">
                                                         <i class="fas fa-print  text-primary mx-2 fa-1x"></i> {{trans('general.print')}}
                                                     </a>
                                                 </div>
                                             </div>
                                         </td>
+
                                     </tr>
                                     @include('backend.Salesinv.edit') @include('backend.Salesinv.delete')
                                 @empty
@@ -127,5 +126,7 @@
     <script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
+    <!--Internal  Datatable js -->
+    <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 
 @endsection

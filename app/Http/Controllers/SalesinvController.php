@@ -8,50 +8,59 @@ use App\Models\client;
 use App\Models\product;
 use App\Models\product_salesinv;
 use App\Models\salesinv;
+use Carbon\Carbon;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SalesinvController extends Controller
 {
-use SettingTrait;
+    use SettingTrait;
+
     public function index()
     {
         $salesinv = salesinv::with('client')->get();
-
         return view('backend.Salesinv.index', compact('salesinv'));
     }
 
     public function create()
     {
-        if (salesinv::latest()
-                ->first() == null) {
-            $id = 'pos-0000';
-            $ex = explode('-', $id);
-        } else {
-            $id = salesinv::latest()->first()->id;
-            $data = salesinv::find($id);
+        try {
+            if (salesinv::latest()
+                    ->first() == null) {
+                $id = 'pos-0000';
+                $ex = explode('-', $id);
+            } else {
+                $id = salesinv::latest()->first()->id;
+                $data = salesinv::find($id);
 
-            $ex = explode('-', $data->inv_num);
+                $ex = explode('-', $data->inv_num);
+            }
+            $clients = client::all();
+            $products = product::all();
+
+            return view('backend.Salesinv.create', compact('ex', 'clients', 'products'), $this->GetData());
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withErrors(['error' => $e->getMessage()]);
         }
-        $clients = client::all();
-        $products = product::all();
-
-        return view('backend.Salesinv.create', compact('ex', 'clients', 'products'),$this->GetData());
     }
 
     public function store(salesinvrequest $request, ToastrFactory $flasher)
     {
-        $total_inv = explode(' ', $request->total_inv);
-
-        $details = [];
-        //return $request;
-        for ($i = 0; $i < count($request->product_id); $i++) {
-            $details[$i]['product_id'] = $request->product_id[$i];
-            $details[$i]['quantity'] = $request->product_qty[$i];
-        }
         try {
+            $total_inv = explode(' ', $request->total_inv);
+
+            $details = [];
+            for ($i = 0; $i < count($request->product_id); $i++) {
+                $details[$i]['product_id'] = $request->product_id[$i];
+                $details[$i]['quantity'] = $request->product_qty[$i];
+            }
+            $code = Carbon::now()->format('YmdHms');
+            //return $code;
+
             $salesinvs = new salesinv();
+            $salesinvs->id = $code;
             $salesinvs->inv_num = $request->inv_num;
             $salesinvs->inv_date = $request->date;
             $salesinvs->client_id = $request->client;
@@ -81,7 +90,7 @@ use SettingTrait;
         //return $inv->products;
         try {
             $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
-            return view('backend.Salesinv.show', compact('inv'),$this->GetData());
+            return view('backend.Salesinv.show', compact('inv'), $this->GetData());
 //return $inv->client;
         } catch (\Exception $e) {
             return redirect()->back()
@@ -99,15 +108,12 @@ use SettingTrait;
         //
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, ToastrFactory $flasher)
     {
         try {
             $id = $request->id;
-            salesinv::findorfail($id);
-            product_salesinv::where('salesinv_id', $id)->delete();
-            salesinv::destroy($id);
-            toastr()->success('تم حذف البيانات بنجاح');
-
+            salesinv::findorfail($id)->delete();
+            $flasher->AddError(trans('general.delete_msg'));
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
@@ -115,10 +121,12 @@ use SettingTrait;
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function print($id){
+
+    public function print($id)
+    {
         try {
             $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
-            return view('backend.Salesinv.print', compact('inv'),$this->GetData());
+            return view('backend.Salesinv.print', compact('inv'), $this->GetData());
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);

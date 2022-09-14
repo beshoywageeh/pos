@@ -51,7 +51,7 @@
                             <div class="col-md">
                                 <label class="tx-gray-600">Invoice Information</label>
                                 <p class="invoice-info-row"><span>Invoice No</span> <span>{{ $inv->inv_num }}</span></p>
-                                <p class="invoice-info-row"><span>Project ID</span> <span>32334300</span></p>
+                                <p class="invoice-info-row"><span>Project ID</span> <span>{{ $inv->id }}</span></p>
                                 <p class="invoice-info-row"><span>Date Created:</span> <span>{{ $inv->inv_date }}</span>
                                 </p>
                                 <p class="invoice-info-row"><span>Due Date:</span> <span>November 30, 2017</span></p>
