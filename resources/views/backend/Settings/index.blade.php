@@ -1,4 +1,6 @@
-@extends('layouts.master') @section('title') {{trans('sidebar.setting')}} @endsection @section('css') @endsection
+@extends('layouts.master') @section('title')
+    {{trans('sidebar.setting')}}
+@endsection @section('css') @endsection
 <!-- Content Header (Page header) -->
 @section('content')
     <!-- breadcrumb -->
@@ -13,35 +15,38 @@
     @include('backend.msg')
 
     <div class="col-xl-12">
-        <div class="card mg-b-20">
-            <div class="card-header pb-0">
-                <div class="d-flex justify-content-between col-sm-12 col-md-4">
-                    <h4 class="card-title mg-b-0">{{trans('sidebar.setting')}}</h4>
-                    <a class="btn btn-primary-gradient mg-b-0 align-right" href="{{route('edit',['id'=>1])}}"><i class="fa fa-plus"></i> &nbsp;&nbsp; تعديل</a>
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between col-sm-12 col-md-12">
+                    <h4 class="card-title">{{trans('sidebar.setting')}}</h4>
+                    <a class="btn btn-primary" href="{{route('edit',['id'=>1])}}"><i
+                            class="fa fa-plus"></i> &nbsp;&nbsp; تعديل</a>
                 </div>
             </div>
+            <hr>
             <div class="card-body">
-                <div class="row mb-2">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="pl-0">
-                            <div class="main-profile-overview">
-                                <div class="col-lg-4">
-                      <img class="img img-responsive img-thumbnail" alt="" src="{{URL::asset('assets/img/')}}/{{$data['photo']}}">
-                                </div>
-                                <div class="d-flex justify-content-between mg-b-20">
+                <div class="col-sm-12 col-md-12">
+                    <div class="pl-0">
+                        <div class="row my-4">
+                            <div class="d-flex col-lg-4 justify-content-around align-items-center ">
+                                <img class="img img-responsive img-thumbnail w-75" alt=""
+                                     src="{{URL::asset('assets/img/')}}/{{$data['photo']}}">
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="d-flex">
                                     <div>
                                         <h5 class="main-profile-name">{{$data['name']}}</h5>
                                     </div>
                                 </div>
-                                <hr class="mg-y-30">
-                                <label class="main-content-label tx-13 mg-b-20">Contact</label>
+                                <hr class="mg-y-10">
+                                <h4 class="main-content-label tx-13 mg-b-20 display-4">Contact</h4>
                                 <div class="main-profile-social-list">
                                     <div class="media">
                                         <div class="media-icon bg-success-transparent text-success">
                                             <i class="fa fa-phone"></i>
                                         </div>
                                         <div class="media-body">
-                                            <span>Phone</span> <span>{{$data['phone']}}</span>
+                                            <h6>Phone</h6> <h5>{{$data['phone']}}</h5>
                                         </div>
                                     </div>
                                     <div class="media">
@@ -49,9 +54,11 @@
                                             <i class="fa fa-book"></i>
                                         </div>
                                         <div class="media-body">
-                                            <span>Address</span> <span>{{$data['address']}}</span>
+                                            <h6>Address</h6> <h5>{{$data['address']}}</h5>
                                         </div>
                                     </div>
+
+                                </div>
                             </div><!-- main-profile-overview -->
                         </div>
                     </div>

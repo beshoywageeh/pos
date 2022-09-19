@@ -64,7 +64,7 @@
                         @forelse($clients as $client)
                             <tr role="row">
                                 <td>{{$client->id}}</td>
-                                <td><a href="{{route('client.show',['client'=>$client->id])}}">{{$client->name}}</a></td>
+                                <td>{{$client->name}}</td>
                                 <td>{{$client->phone}}</td>
                                 <td>{{$client->address}}</td>
                                 <td>
@@ -77,9 +77,8 @@
                                             <button class="dropdown-item" data-target="#Editclient{{$client->id}}" data-toggle="modal" aria-controls="example" type="button">
                                                 <i class="fas fa-pen mx-2 text-warning"></i> {{trans('client.edit')}}
                                             </button>
-                                            <a class="dropdown-item" target="_blank"
-                                               aria-controls="example" type="button" href="{{route('print_client_balance',$client->id)}}">
-                                                <i class="fas fa-print  text-primary mx-2 fa-1x"></i> {{trans('general.print').' '.trans('client.balance')}}
+                                            <a class="dropdown-item" href="{{route('client.show',['client'=>$client->id])}}">
+                                                <i class="fas fa-info  text-info mx-2 fa-1x"></i> {{trans('client.details')}}
                                             </a>
                                         </div>
                                     </div>
@@ -106,6 +105,7 @@
 
 @endsection @section('js')
 @livewireScripts
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 
 <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>

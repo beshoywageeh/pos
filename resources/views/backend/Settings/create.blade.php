@@ -23,47 +23,58 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="p-4">
-                                <div class="row">
-                                    <div class="form-group col">
-                                        <input hidden value="1" name='id'>
-                                        <label>الاسم</label>
-                                        <input class="form-control" placeholder="لاسم" type="text"
-                                               name="name" value="{{$data['name']}}">
+
+                            <div class="row">
+                                <div class="form-group col-lg-4 col-sm-12">
+                                    <div class="d-flex justify-content-center align-items-center my-2">
+                                        <label class="mx-2" style="width: 16%">الشعار</label>
+                                        <input class="form-control" accept="image/*" type="file" name="photo"
+                                               id="logo"
+                                               onchange="showPreview(event)">
+
                                     </div>
-                                    <div class="form-group col">
-                                        <label>رقم التليفون</label>
-                                        <input class="form-control" placeholder="رقم التليفون" type="text"
-                                               name="phone" value="{{$data['phone']}}">
+                                    <div class="d-flex align-items-center justify-content-center my-2">
+                                        <img src="{{URL::asset('assets/img/') .'/'. $data['photo']}}"
+                                             class="img img-responsive img-thumbnail w-75" id="preview">
                                     </div>
+
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col">
-                                        <label>العنوان</label>
-                                        <input class="form-control" placeholder="العنوان" name="address"
-                                               type="text" value="{{$data['address']}}">
-                                    </div>
+                                <div class="form-group col-lg-8 col-sm-12">
+                                    <input hidden value="1" name='id'>
                                     <div class="row">
-                                        <div class="form-group col">
-                                            <label>اختصار</label>
+                                        <div class="d-flex align-items-center justify-content-center my-2">
+                                            <label class="mx-2" style="width: 16%">الاسم</label>
+                                            <input class="form-control" placeholder="لاسم" type="text"
+                                                   name="name" value="{{$data['name']}}">
+                                        </div>
+
+                                        <div class="d-flex align-items-center justify-content-center my-2">
+                                            <label class="mx-2" style="width: 16%">رقم التليفون</label>
+                                            <input class="form-control" placeholder="رقم التليفون" type="text"
+                                                   name="phone" value="{{$data['phone']}}">
+                                        </div>
+
+                                        <div class="d-flex align-items-center justify-content-center my-2">
+                                            <label class="mx-2" style="width: 16%">العنوان</label>
+                                            <input class="form-control" placeholder="العنوان" name="address"
+                                                   type="text" value="{{$data['address']}}">
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center my-2">
+                                            <label class="mx-2" style="width: 16%">اختصار</label>
                                             <input class="form-control" placeholder="العنوان" name="slogan"
                                                    type="text" value="{{$data['slogan']}}">
                                         </div>
-                                    <div class="form-group col">
-                                        <label>الشعار</label>
-                                        <input class="form-control" accept="image/*" type="file" name="photo" id="logo"
-                                               onchange="showPreview(event)">
-                                        <img src="{{URL::asset('assets/img/') .'/'. $data['photo']}}"
-                                             class="img img-responsive img-thumbnail w-50" id="preview">
+
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary-gradient pd-x-20">حفظ</button>
-                </div>
+            </div>
+            <div class=" d-flex justify-content-end">
+                <button class="btn btn-primary"><i class="fas fa-plus mx-2"></i>حفظ</button>
             </div>
         </div>
     </form>

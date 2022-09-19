@@ -6,6 +6,7 @@ use App\Http\Controllers\clientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesinvController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -28,9 +29,7 @@ Route::group(
     ], function () {
     Route::group(['middleware' => ['auth']],
         function () {
-            Route::get('/', function () {
-                return view('backend.dashboard');
-            })->name('dashboard');
+Route ::get('/',[HomeController::class,'index'])->name('dashboard');
             Route::resource('category', CategoryController::class);
             Route::post('product_search', [ProductController::class, 'product_search'])->name('product_search');
             Route::resource('product', ProductController::class);
@@ -38,6 +37,9 @@ Route::group(
             Route::resource('sales', SalesinvController::class);
             Route::get('saleinv/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
             Route::get('sales_invoice/{id}', [SalesinvController::class, 'print'])->name('print');
+            Route::post('salesproduct', [SalesinvController::class, 'salesproduct'])->name('salesproduct');
+            Route::get('getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('getinvoicedata');
+            Route::post('deleteproduct', [SalesinvController::class, 'deleteproduct'])->name('deleteproduct');
             Route::get('client_balance/{id}', [ClientController::class, 'print'])->name('print_client_balance');
 
             //Route::get('client/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');

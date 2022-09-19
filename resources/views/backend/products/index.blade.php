@@ -7,6 +7,7 @@
     <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+
 @endsection
 <!-- Content Header (Page header) -->
 @section('content')
@@ -50,10 +51,12 @@
 
                 <div class="table-responsive hoverable-table my-4">
 
-                                <table id="example-delete" class="table text-md-nowrap">
-                                    <thead>
+                    <table id="example2" class="table text-md-nowrap report-table" style="padding: 0; width:98%">
+
+                                    <thead class="alert-success">
                                     <tr>
-                                        <th class="wd-2">#</th>
+                                        <th class="wd-2" style="padding: 0;wdith:4px;">#</th>
+
                                         <th>{{ trans('product.name') }}</th>
                                         <th>{{ trans('product.category') }}</th>
                                         <th>{{ trans('product.purchase_price') }}</th>
@@ -76,21 +79,27 @@
                                             <td>
                                                 <div class="dropdown">
                                                     <button aria-expanded="false" aria-haspopup="true"
-                                                            class="btn ripple btn-gray-700" data-toggle="dropdown"
-                                                            id="dropdownMenuButton" type="button"><i
-                                                            class="fas fa-caret-down ml-1"></i></button>
-                                                    <div class="dropdown-menu tx-13">
-                                                        <button class="dropdown-item tx-15"
+                                                            class="btn ripple btn-info btn-sm" data-toggle="dropdown"
+                                                            id="dropdownMenuButton" type="button">{{ trans('product.actions') }}<i
+                                                            class="fas fa-caret-down mx-2"></i></button>
+                                                    <div class="dropdown-menu">
+                                                        <button class="dropdown-item"
                                                                 data-target="#DeleteProduct{{ $product->id }}"
                                                                 data-toggle="modal"
                                                                 aria-controls="example" type="button">
-                                                            <i class="typcn typcn-delete mr-2 text-danger"></i>{{ trans('general.delete') }}
+                                                            <i class="fas fa-trash fa-1x mx-2 text-danger"></i>{{ trans('general.delete') }}
                                                         </button>
-                                                        <button class="dropdown-item tx-15"
+                                                        <button class="dropdown-item"
                                                                 data-target="#EditProduct{{ $product->id }}"
                                                                 data-toggle="modal"
                                                                 aria-controls="example" type="button">
-                                                            <i class="typcn typcn-edit mr-2 text-warning"></i> {{ trans('general.edit') }}
+                                                            <i class="fas fa-pen mx-2 text-warning"></i> {{ trans('general.edit') }}
+                                                        </button>
+                                                        <button class="dropdown-item"
+                                                                data-target="#EditProduct{{ $product->id }}"
+                                                                data-toggle="modal"
+                                                                aria-controls="example" type="button">
+                                                            <i class="fas fa-info mx-2 text-info"></i> {{ trans('product.info') }}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -132,5 +141,7 @@
                     <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
                     <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
                     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+                    <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
+
                     <script src="{{URL::asset('assets/js/custom_loop_product.js')}}"></script>
 @endsection

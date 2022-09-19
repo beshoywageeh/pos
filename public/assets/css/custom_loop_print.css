@@ -1,0 +1,17 @@
+*{
+    background-color:white;
+    margin:0;
+    padding: 0;
+}
+#print{
+    border:none;
+    box-shadow: none;
+    margin:auto;
+}
+@media print{
+    @page{
+        size: A4 !important;
+        margin: 0;
+        padding: 0;
+    }
+}

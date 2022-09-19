@@ -119,7 +119,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="opening_balance">{{trans('product.opening_balance')}}</label>
-                                <input type='number' class="form-control @error('notes') is-invalid @enderror" name="opening_balance"
+                                <input type='number' class="form-control @error('opening_balance') is-invalid @enderror" name="opening_balance"
                                        placeholder="{{trans('product.opening_balance')}}" id="opening_balance">
                                 @error('opening_balance')
                                 <div class="alert alert-danger">{{$message}}</div>
@@ -130,7 +130,7 @@
                             <div class="form-group">
                                 <label for="img">{{trans('product.img')}}</label>
                                 <input type="file" accept="image/*"
-                                       class="form-control @error('notes') is-invalid @enderror" name="img"
+                                       class="form-control @error('img') is-invalid @enderror" name="img"
                                        placeholder="{{trans('product.img')}}"></input>
                                 @error('img')
                                 <div class="alert alert-danger">{{$message}}</div>

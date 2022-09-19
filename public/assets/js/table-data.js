@@ -23,7 +23,7 @@ $(function(e) {
 	});
 	$('#example2').DataTable({
         lengthChange: true,
-        lengthMenu: [ 4, 8, 16, 32 ],
+        lengthMenu: [ 10, 20, 30, 40 ],
 
         responsive: true,
 		language: {

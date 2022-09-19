@@ -2,7 +2,6 @@
     {{ trans('invoice.newinv') }}
 @endsection
 @section('css')
-    @livewireStyles
 @endsection
 <!-- Content Header (Page header) -->
 @section('content')
@@ -31,7 +30,7 @@
             <hr>
 
 
-            <form action="{{ route('sales.store') }}" method="post">
+            <form action="{{ route('sales.store') }}" method="post" onkeypress="e.preventDefault()">
                 @method ('post')@csrf
                 <div class="card-body" id="print_area">
                     <input type="hidden" id='last' value="{{ $ex[1] }}">
@@ -47,7 +46,7 @@
                             <select class="form-control form-control-sm select2" name="client">
                                 <option selected disabled>{{trans('client.chooseclient')}}</option>
 
-                            @foreach ($clients as $client)
+                                @foreach ($clients as $client)
                                     <option value="{{ $client->id }}">
                                         {{ $client->name }}
                                     </option>
@@ -70,37 +69,78 @@
                             <input value="" id="time" class="form-control form-control-sm"/>
                         </div>
                     </div>
-                    <div class='row'>
-                        <div class='col-lg-6'>
-                            <livewire:salesinv/>
-
-                        </div>
-                        <div class='col-lg-6 my-5'>
-                            <div class="col-lg -12">
-                                <table class="table table-striped table-responsive">
+                    <div class='row my-4'>
+                        <div class='col-lg-12'>
+                            <from method="POST" onkeypress="e.preventDefault()">
+                                <input type="text" placeholder="{{trans('invoice.add_product')}}" class="form-control"
+                                       id="barcode">
+                                <input type="hidden" id="csrf" value="{{csrf_token()}}">
+                                <input type="hidden" id="urladd" value="{{route('salesproduct')}}">
+                                <span class="alert-error" id="text"></span>
+                            </from>
+                            <input type="hidden" value="{{route('getinvoicedata')}}" id="getData">
+                            <div class="table-responsive my-4">
+                                <table class="table table-bordered">
                                     <thead>
-                                    <tr>
-                                        <th></th>
+                                    <tr class="table-info">
                                         <th>#</th>
                                         <th>{{trans('invoice.product')}}</th>
                                         <th>{{trans('invoice.quantity')}}</th>
                                         <th>{{trans('product.price')}}</th>
-                                        <th>{{trans('product.action')}}</th>
+                                        <th>{{trans('product.total')}}</th>
+                                        <th>{{trans('general.delete')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody id="order_list" name="products_list">
-
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{trans('invoice.product')}}</td>
+                                        <td>{{trans('invoice.quantity')}}</td>
+                                        <td>{{trans('invoice.total')}}</td>
+                                        <td><input class="form-control form-control-sm" disabled></td>
+                                        <td><a class="btn btn-danger-gradient btn-sm" href="#"><i
+                                                    class="fas fa-trash"></i></a></td>
+                                    </tr>
                                     </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td><label>{{ trans('invoice.discount') }}</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input class="form-control form-control-sm w-50"
+                                                   name='discount' id="discount">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td><label>{{ trans('invoice.tax') }}</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input class="form-control form-control-sm w-25" id="tax_rate"
+                                                   name='tax_rate'
+                                            >
+                                            <span></span>
+                                            <input class="form-control form-control-sm w-25" id="tax_value"
+                                                   name='tax_value' readonly
+                                            >
+                                            <span> {{env('MAIN_CURRENCY')}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td><label>{{ trans('invoice.totalinvocie') }}</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input class="form-control form-control-sm w-50" id="total_inv"
+                                                   name='total_inv'
+                                                   readonly value="50">
+                                        </td>
+                                    </tr>
+                                    </tfoot>
                                 </table>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-sm-12 d-flex justify-content-center align-items-center text-center">
-                                    <label style="width: 50%;">{{ trans('invoice.totalinvocie') }}</label>
-                                    <input class="form-control form-control-sm mx-2" id="total_inv" name='total_inv'
-                                           readonly>
-                                    <span class='d-inline'>{{ env('MAIN_CURRENCY') }}</span>
-                                </div>
-                            </div>
+
                             @error('products_list')
                             <div class="alert alert-solid-danger mg-b-0 my-2" role="alert">
                                 <span class="text-white"><strong>{{$message}}</strong></span>
@@ -110,17 +150,16 @@
                     </div>
                 </div>
                 <div class=card-footer>
-                    <button class="btn btn-success tx-15 tx-bold" type="submit">حفظ<i class="mr-2 fa fa-save"></i>
+                    <button onkeypress="e.preventDefault()" class="btn btn-success tx-15 tx-bold" type="submit">حفظ<i
+                            class="mr-2 fa fa-save"></i>
                     </button>
                 </div>
             </form>
-
 
         </div>
     </div>
 @endsection
 @section('js')
-    @livewireScripts
     <script src="{{URL::asset('assets/js/custom_loop.js')}}"></script>
 
 @endsection

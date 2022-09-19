@@ -10,6 +10,10 @@ return [
     'edit_msg'=>'edited successfully',
     'delete_msg'=>'deleted successfully',
     'save'=>'save',
-    'codeSearch'=>'Search By Code'
+    'codeSearch'=>'Search By Code',
+    'welcome'=>'Hi, welcome back!',
+    'lastten'=>'Last Ten Transaction on system',
+    'sales'=>'sales graph',
+    'tsales'=>'total sales'
 
 ];

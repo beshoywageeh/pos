@@ -2,25 +2,15 @@
     {{ trans('general.print') }}
 @endsection
 @section('css')
-<style>
-    *{
-        background-color:white;
-        margin:0;
-        padding: 0;
-    }
-    #invoice{
-        border:none;
-        box-shadow: none;
-        margin:auto;
-    }
-</style>
+    <link href="{{URL::asset('assets/css/custom_loop_print.css')}}" rel="stylesheet">
+
 @endsection
 <!-- Content Header (Page header) -->
 @section('content')
     @include('backend.msg')
 
     <div class="col-xl-12">
-        <div class="card mg-b-20" id="invoice">
+        <div class="card mg-b-20" id="print">
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col-sm-12 col-md-8">

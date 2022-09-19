@@ -36,6 +36,13 @@ return [
     'chcat' => '-- Choose Category From List --',
     'category' => 'Choose Category',
     'barcode'=>'barcode',
-    'barcode_msg'=>"in case didn't enter barcode it will auto generated"
+    'barcode_msg'=>"in case didn't enter barcode it will auto generated",
+    'purchase_price'=>'purchase price',
+    'purchase_unit'=>'purchase unit',
+    'sales_price'=>'sales price',
+    'sales_unit'=>'sales unit',
+    'opening_balance'=>'opening balance',
+    'img'=>'select product image',
+    'info'=>'product details'
 
 ];

@@ -1,12 +1,3 @@
-//========start image preview===========//
-function showPreview(event){
-    if(event.target.files.length > 0){
-        let src = URL.createObjectURL(event.target.files[0]),
-            preview = document.getElementById("preview");
-        preview.src = src;
-    }
-}
-//========end image preview===========//
 
 //========start get and set inv number===========//
 
@@ -27,53 +18,10 @@ let date = $('.fc-datepicker').datepicker({
 //========end get and set inv number===========//
 
 
-//========start get and set invoice data===========//
-let add_product = document.querySelectorAll('.add-product');
-for (let i = 0; i < add_product.length; i++) {
-    add_product[i].addEventListener('click', function(e) {
-        e.preventDefault();
-        let product_id = e.target.getAttribute('data-id'),
-            product_name = e.target.getAttribute('data-name'),
-            product_price = e.target.getAttribute('data-price'),
-            html = `
-            <tr>
-                <td><input hidden name="product_id[]" type='text' value='${product_id}'></td>
-                <td>${product_id}</td>
-                <td>${product_name}</td>
-                <td><input class="form-control form-control-sm qty" data-price="${product_price}" type='text' name="product_qty[]" value='1'></td>
-                <td class="product_price">${product_price}</td>
-                <td><a class="btn btn-danger btn-sm remove-product"><i class="fa fa-trash"></i></a></td>
-            </tr>
-     `,
-            order_list = document.querySelector("#order_list");
-        order_list.innerHTML += html;
-        calTotal();
-    });
-}
-
 //========end get and set invoice data===========//
 
-//========start calculate total ===============//
-$('body').on('click', '.remove-product', function(e) {
-    e.preventDefault();
-    $(this).closest('tr').remove();
-    calTotal();
-});
-$('body').on('keyup change', '.qty', function() {
-    let quantity = parseFloat($(this).val()),
-        price = $(this).data('price');
-    $(this).closest('tr').find('.product_price').html(quantity * price);
-    calTotal();
-});
-function calTotal() {
-    let total = 0,
-        prices = document.querySelectorAll('#order_list .product_price'),
-        total_price = document.querySelector('#total_inv');
-    for (let i = 0; i < prices.length; i++) {
-        total += parseFloat(prices[i].innerHTML);
-    }
-    total_price.value = total;
-}
+
+
 //========end calculate total ===============//
 
 //========start digital clock ===============//
@@ -97,27 +45,86 @@ function digitalClock(){
 }
 digitalClock();
 //========end digital clock ===============//
-//========start ajax search ===============//
-$(document).on('input','#search',function (e){make_search()});
-function make_search(){
-    var search=$("#search").val();
-    var token_search=$("#token").val();
-    var ajax_search_url=$("#ajax_url").val();
+$(function () {
+    let csrf = document.querySelector('#csrf').value,
+        urlAdd = document.querySelector('#urladd').value;
+    $('#barcode').on('keyup', function () {
+        let barcode = document.querySelector('#barcode').value;
+        $.ajax({
+            method: "POST",
+            url: urlAdd,
+            data: {barcode: barcode,'_token': csrf},
+            success: function (data, status) {
+                $('#barcode').val('');
+                flasher.success("product added");
+            },
+        });
+        getdata();
+    });
+});
 
-    jQuery.ajax({
-        url:ajax_search_url,
-        type:'post',
-        dataType:'html',
-        cache:false,
-        data:{search:search,"_token":token_search},
-        success:function(products){
+function getdata() {
+    let orderList = document.querySelector('#order_list'),
+        getData = document.querySelector('#getData').value;
+    $.ajax({
+        method: "GET",
+        url: getData,
+        datatype: 'html',
+        cache: false,
+        success: function (data) {
 
-            $("#list").html(products);
-        },
-        error:function(){
 
+            $("#order_list").html(data);
         }
     });
+    calTotal()
 }
-//========end ajax search ===============//
 
+function deleteproduct(id) {
+    let csrf_delete = document.querySelector('#csrf_delete').value,
+        urlDelete = document.querySelector('#url_delete').value;
+    $.ajax({
+        method: "POST",
+        url: urlDelete,
+        cache: false,
+        data: {id: id, '_token': csrf_delete},
+        success: function () {
+            flasher.error("product deleted");
+        }
+    });
+    getdata()
+}
+
+function showPreview(event){
+    if(event.target.files.length > 0){
+        let src = URL.createObjectURL(event.target.files[0]),
+            preview = document.getElementById("preview");
+        preview.src = src;
+    }
+}
+function calTotal() {
+    let total = 0,
+        prices = document.querySelectorAll('#order_list .product_price').values(),
+        total_price = document.querySelector('#total_inv');
+    for (let i = 0; i < prices.length; i++) {
+        total += parseFloat(prices[i].innerHTML);
+    }
+    total_price.value = total;
+}
+function Total_product(){
+$('body').on('keyup',function(){
+    let qty = parseFloat($(this).val()),
+        prices = parseFloat($(this).data('price'));
+    $(this).closest('tr').find('.product_price').html(qty * prices);
+    console.log(qty); //Number
+
+    console.log("qty"); //Number
+    console.log(typeof qty); //Number
+    console.log(qty); //Number
+    console.log("prices"); //Number
+    console.log(typeof prices); //Number
+    console.log(prices); //Number
+
+calTotal()
+});
+}

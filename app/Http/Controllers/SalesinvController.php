@@ -8,10 +8,12 @@ use App\Models\client;
 use App\Models\product;
 use App\Models\product_salesinv;
 use App\Models\salesinv;
+use App\Models\transinv;
 use Carbon\Carbon;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SalesinvController extends Controller
 {
@@ -48,6 +50,7 @@ class SalesinvController extends Controller
 
     public function store(salesinvrequest $request, ToastrFactory $flasher)
     {
+ //       return $request;
         try {
             $total_inv = explode(' ', $request->total_inv);
 
@@ -60,10 +63,13 @@ class SalesinvController extends Controller
             //return $code;
 
             $salesinvs = new salesinv();
-            $salesinvs->id = $code;
+            //$salesinvs->id = $code;
             $salesinvs->inv_num = $request->inv_num;
             $salesinvs->inv_date = $request->date;
             $salesinvs->client_id = $request->client;
+            $salesinvs->discount = $request->discount;
+            $salesinvs->tax_rate = $request->tax_rate;
+            $salesinvs->tax_value = $request->tax_value;
             $salesinvs->user_id = Auth::user()->id;
             $salesinvs->total = $total_inv[0];
             $salesinvs->save();
@@ -72,6 +78,7 @@ class SalesinvController extends Controller
             $invdata->salesinv_id = $id->id;
             $salesinvs->products()
                 ->attach($details);
+DB::table('transinvs')->truncate();
             $flasher->AddSuccess(trans('general.add_msg'));
 
             return redirect('sales');
@@ -130,6 +137,25 @@ class SalesinvController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+    public function salesproduct(Request $request){
+        if ($request->ajax()) {
+                transinv::create([
+                    'barcode' => $request->barcode,
+                ]);
+
+        }
+    }
+    public function getinvoicedata(){
+        $ids = transinv::all('barcode');
+        $products= product::whereIn('barcode',$ids)->get();
+        //var_dump($products);
+        return view('backend.salesinv.data',compact('products'));
+    }
+    public function deleteproduct(Request $request, ToastrFactory $flasher){
+        if ($request->ajax()){
+            transinv::where('barcode',$request->id)->delete();
         }
     }
 }
