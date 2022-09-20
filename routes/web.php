@@ -29,7 +29,7 @@ Route::group(
     ], function () {
     Route::group(['middleware' => ['auth']],
         function () {
-Route ::get('/',[HomeController::class,'index'])->name('dashboard');
+            Route::get('/', [HomeController::class, 'index'])->name('dashboard');
             Route::resource('category', CategoryController::class);
             Route::post('product_search', [ProductController::class, 'product_search'])->name('product_search');
             Route::resource('product', ProductController::class);

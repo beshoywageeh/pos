@@ -23,6 +23,7 @@ class HomeController extends Controller
         $data['clientlast']=client::latest()->take(10)->get();
         $data['saleslast']=salesinv::latest()->take(5)->get();
         $data['name']= \Auth::user()->first_name;
+ 
         return view('backend/dashboard',['data'=>$data]);
     }
 }

@@ -134,7 +134,7 @@
                                         <td colspan="2">
                                             <input class="form-control form-control-sm w-50" id="total_inv"
                                                    name='total_inv'
-                                                   readonly value="50">
+                                                   readonly value="0">
                                         </td>
                                     </tr>
                                     </tfoot>

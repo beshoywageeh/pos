@@ -12,7 +12,7 @@
 
 @endsection
 <!-- Content Header (Page header) -->
-@section('content')
+@section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
@@ -22,6 +22,9 @@
             </div>
         </div>
     </div>
+@endsection
+@section('content')
+
     @include('backend.msg')
 
     <div class="col-xl-12">
@@ -84,7 +87,7 @@
                                                         <i class="fas fa-pen fa-1x text-warning mx-2"></i> {{trans('general.edit')}}
                                                     </a>
                                                     <a class="dropdown-item" target="_blank"
-                                                            aria-controls="example" type="button" href="{{route('print',['id'=>$sales->id])}}">
+                                                       type="button" href="{{route('print',['id'=>$sales->id])}}">
                                                         <i class="fas fa-print  text-primary mx-2 fa-1x"></i> {{trans('general.print')}}
                                                     </a>
                                                 </div>

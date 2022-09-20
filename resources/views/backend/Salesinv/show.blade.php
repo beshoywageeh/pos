@@ -5,7 +5,7 @@
 
 @endsection
 <!-- Content Header (Page header) -->
-@section('content')
+@section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between no" id="head">
         <div class="my-auto">
@@ -16,12 +16,15 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <a class="btn btn-danger float-left mt-3 mr-2 print" href="{{route('print',['id'=>$inv->id])}}">
+                <a class="btn btn-danger float-left mt-3 mr-2 print" target="_blank" href="{{route('print',['id'=>$inv->id])}}">
                     <i class="mdi mdi-printer ml-1"></i>{{ trans('general.print') }}
                 </a>
             </div>
         </div>
     </div>
+@endsection
+@section('content')
+
     @include('backend.msg')
 
     <div class="row row-sm" id='invoice'>
