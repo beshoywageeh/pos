@@ -32,5 +32,8 @@ return [
     'product' =>'product name',
     'quantity' =>'quantity',
     'newinv'=>'new invoice',
-    'newproduct'=>'add product'
+    'newproduct'=>'add product',
+    'total_product'=>'Total Product',
+    'tax'=>'Tax',
+    'discount'=>'Discount'
 ];

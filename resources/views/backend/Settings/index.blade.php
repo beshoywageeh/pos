@@ -2,7 +2,7 @@
     {{trans('sidebar.setting')}}
 @endsection @section('css') @endsection
 <!-- Content Header (Page header) -->
-@section('content')
+@section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
@@ -12,6 +12,9 @@
             </div>
         </div>
     </div>
+@endsection
+@section('content')
+
     @include('backend.msg')
 
     <div class="col-xl-12">
@@ -20,7 +23,7 @@
                 <div class="d-flex justify-content-between col-sm-12 col-md-12">
                     <h4 class="card-title">{{trans('sidebar.setting')}}</h4>
                     <a class="btn btn-primary" href="{{route('edit',['id'=>1])}}"><i
-                            class="fa fa-plus"></i> &nbsp;&nbsp; تعديل</a>
+                            class="fa fa-plus"></i> &nbsp;&nbsp; {{trans('general.edit')}}</a>
                 </div>
             </div>
             <hr>
@@ -39,14 +42,14 @@
                                     </div>
                                 </div>
                                 <hr class="mg-y-10">
-                                <h4 class="main-content-label tx-13 mg-b-20 display-4">Contact</h4>
+                                <h4 class="main-content-label tx-13 mg-b-20 display-4">{{trans('settings.contact')}}</h4>
                                 <div class="main-profile-social-list">
                                     <div class="media">
                                         <div class="media-icon bg-success-transparent text-success">
                                             <i class="fa fa-phone"></i>
                                         </div>
                                         <div class="media-body">
-                                            <h6>Phone</h6> <h5>{{$data['phone']}}</h5>
+                                            <h6>{{trans('settings.phone')}}</h6> <h5>{{$data['phone']}}</h5>
                                         </div>
                                     </div>
                                     <div class="media">
@@ -54,7 +57,7 @@
                                             <i class="fa fa-book"></i>
                                         </div>
                                         <div class="media-body">
-                                            <h6>Address</h6> <h5>{{$data['address']}}</h5>
+                                            <h6>{{trans('settings.adress')}}</h6> <h5>{{$data['address']}}</h5>
                                         </div>
                                     </div>
 

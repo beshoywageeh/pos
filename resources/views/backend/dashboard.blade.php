@@ -132,41 +132,43 @@
                                             <li><a href="#tab5" class="nav-link"
                                                    data-toggle="tab">{{ trans('invoice.invoice') }}</a></li>
                                             <li><a href="#tab6" class="nav-link"
-                                                   data-toggle="tab">{{trans('general.expenses')}}</a></li>
+                                                   data-toggle="tab">{{trans('general.money_transaction')}}</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="panel-body tabs-menu-body main-content-body-right border">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab4">
-                                            <div class="table">
-                                                <table
-                                                    class="table report-table text-md-nowrap table-bordered text-center">
-                                                    <thead class='alert-success'>
-                                                    <tr>
-                                                        <th>{{ trans('client.code') }}</th>
-                                                        <th>{{ trans('client.name') }}</th>
-                                                        <th>{{ trans('client.phone') }}</th>
 
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @forelse ($data['clientlast'] as $client)
+                                                <div class="table">
+                                                    <table
+                                                        class="table report-table text-md-nowrap table-bordered text-center">
+                                                        <thead class='alert-success'>
                                                         <tr>
-                                                            <td>{{ $client->id }}</td>
-                                                            <td>{{ $client->name }}</td>
-                                                            <td>{{ $client->phone }}</td>
+                                                            <th>{{ trans('client.code') }}</th>
+                                                            <th>{{ trans('client.name') }}</th>
+                                                            <th>{{ trans('client.phone') }}</th>
+
                                                         </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td colspan="3">{{ trans('clien.msg') }}</tr>
-                                                        </tr>
-                                                    @endforelse
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                        </thead>
+                                                        <tbody>
+                                                        @forelse ($data['clientlast'] as $client)
+                                                            <tr>
+                                                                <td>{{ $client->id }}</td>
+                                                                <td>{{ $client->name }}</td>
+                                                                <td>{{ $client->phone }}</td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="3">{{ trans('client.msg') }}</tr>
+                                                            </tr>
+                                                        @endforelse
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                         </div>
                                         <div class="tab-pane" id="tab5">
+
                                             <div class="table">
                                                 <table
                                                     class="table-reponsive report-table text-md-nowrap table-bordered text-center">
@@ -189,12 +191,13 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="3">{{ trans('clien.msg') }}</tr>
+                                                            <td colspan="4">{{ trans('client.msg') }}</tr>
                                                         </tr>
                                                     @endforelse
                                                     </tbody>
                                                 </table>
                                             </div>
+
                                         </div>
                                         <div class="tab-pane" id="tab6">
                                             <div class="table">

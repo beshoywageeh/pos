@@ -31,6 +31,8 @@ return [
     'add_product' => 'اضف منتج',
     'product' =>'اسم المنتج',
     'quantity' =>'الكميه',
-    'newinv'=>'فاتورة جديدة'
-
+    'newinv'=>'فاتورة جديدة',
+    'total_product'=>'اجمالي المنتج',
+    'tax'=>'الضريبة',
+    'discount'=>'الخصم'
 ];

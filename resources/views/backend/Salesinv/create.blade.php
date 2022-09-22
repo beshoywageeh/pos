@@ -87,7 +87,7 @@
                                         <th>{{trans('invoice.product')}}</th>
                                         <th>{{trans('invoice.quantity')}}</th>
                                         <th>{{trans('product.price')}}</th>
-                                        <th>{{trans('product.total')}}</th>
+                                        <th>{{trans('invoice.total_product')}}</th>
                                         <th>{{trans('general.delete')}}</th>
                                     </tr>
                                     </thead>
@@ -150,8 +150,8 @@
                     </div>
                 </div>
                 <div class=card-footer>
-                    <button onkeypress="e.preventDefault()" class="btn btn-success tx-15 tx-bold" type="submit">حفظ<i
-                            class="mr-2 fa fa-save"></i>
+                    <button onkeypress="e.preventDefault()" class="btn btn-success tx-15 tx-bold" type="submit">{{trans('general.save')}}<i
+                            class="mx-2 fa fa-save"></i>
                     </button>
                 </div>
             </form>

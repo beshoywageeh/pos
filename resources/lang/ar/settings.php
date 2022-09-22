@@ -15,11 +15,9 @@ return [
     */
 
     'index' => 'الرئيسية',
-    'Category' => 'الاقسام',
-    'product' => 'المنتجات',
-    'setting' => 'الاعدادات',
-    'clients' => 'العملاء',
-    'money_transaction'=>'الحركة المالية',
-    'expenses'=>'مصروفات',
-    'income'=>'وارد'
+    'settings' => 'الاعدادت',
+    'contact' => 'بيانات التواصل',
+    'phone' => 'رقم التليفون',
+    'adress' => 'العنوان',
+
 ];

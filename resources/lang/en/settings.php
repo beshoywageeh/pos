@@ -14,12 +14,10 @@ return [
     |
     */
 
-    'index' => 'الرئيسية',
-    'Category' => 'الاقسام',
-    'product' => 'المنتجات',
-    'setting' => 'الاعدادات',
-    'clients' => 'العملاء',
-    'money_transaction'=>'الحركة المالية',
-    'expenses'=>'مصروفات',
-    'income'=>'وارد'
+    'index' => 'main',
+    'settings' => 'settings',
+    'contact' => 'contact info',
+    'phone' => 'phone number',
+    'adress' => 'address',
+
 ];

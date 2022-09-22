@@ -24,6 +24,7 @@ return [
     'chcat' => '-- choose cateory from list --',
     'category' => 'category',
     'date'=>'invoice date',
-    'user'=>'user name'
+    'user'=>'user name',
+
 
 ];

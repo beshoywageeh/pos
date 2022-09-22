@@ -37,6 +37,7 @@
                     <span class="side-menu__label">{{trans('sidebar.Category')}}</span>
                 </a>
             </li>
+
             <li class="side-item side-item-category">{{trans('sidebar.product')}}</li>
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('product.index') }}">
@@ -68,6 +69,19 @@
                     <li><a class="slide-item"
                            href="{{ route('sales.index') }}">{{trans('invoice.rejctsupplyinvoice')}}</a></li>
                 </ul>
+            </li>
+            <li class="side-item side-item-category">{{trans('sidebar.money_transaction')}}</li>
+            <li class="slide">
+                <a class="side-menu__item" href="#">
+                    <span class="side-menu__icon"><i class="fa fa-dollar-sign" style="font-size: 23px;"></i></span>
+                    <span class="side-menu__label">{{trans('sidebar.income')}}</span>
+                </a>
+            </li>
+            <li class="slide">
+                <a class="side-menu__item" href="#">
+                    <span class="side-menu__icon"><i class="fa fa-dollar-sign" style="font-size: 23px;"></i></span>
+                    <span class="side-menu__label">{{trans('sidebar.expenses')}}</span>
+                </a>
             </li>
             <li class="side-item side-item-category">{{trans('sidebar.setting')}}</li>
             <li class="slide">

@@ -14,6 +14,8 @@ return [
     'welcome'=>'Hi, welcome back!',
     'lastten'=>'Last Ten Transaction on system',
     'sales'=>'sales graph',
-    'tsales'=>'total sales'
-
+    'tsales'=>'total sales',
+    'money_transaction'=>'Money Transaction',
+    'expenses'=>'Expenses',
+    'income'=>'Income'
 ];

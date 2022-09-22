@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientBalanceController;
 use App\Http\Controllers\clientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesinvController;
@@ -46,6 +47,7 @@ Route::group(
             Route::get('settings', [SettingController::class, 'index'])->name('index');
             Route::get('settings/add/{id}', [SettingController::class, 'edit'])->name('edit');
             Route::post('settings/save', [SettingController::class, 'update'])->name('update');
+            Route::get('income/index', [ClientBalanceController::class, 'index'])->name('treasray.index');
         });
 
     require __DIR__ . '/auth.php';

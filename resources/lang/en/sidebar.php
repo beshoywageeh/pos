@@ -18,5 +18,8 @@ return [
     'Category' => 'Category',
     'product' => 'Products',
     'clients' => 'Clients',
-'setting'=>'settings'
+'setting'=>'settings',
+    'money_transaction'=>'Money Transaction',
+    'expenses'=>'Expenses',
+    'income'=>'Income'
 ];
