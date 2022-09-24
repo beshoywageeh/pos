@@ -17,5 +17,6 @@ return [
     'tsales'=>'total sales',
     'money_transaction'=>'Money Transaction',
     'expenses'=>'Expenses',
-    'income'=>'Income'
+    'income'=>'Income',
+    'msg' =>'no data tp show'
 ];

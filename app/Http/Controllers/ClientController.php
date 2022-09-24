@@ -6,6 +6,7 @@ use App\Http\Traits\SettingTrait;
 use App\Models\client;
 use App\Models\country;
 use App\Models\salesinv;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,7 @@ class ClientController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(Request $request,ToastrFactory $flasher)
     {
         //dd($request);
         try {
@@ -33,8 +34,7 @@ class ClientController extends Controller
             $client->address = $request->address;
             $client->country_id = $request->country_id;
             $client->save();
-            // session()->flash('Add', trans('client.Add'));
-            toastr()->success('تم إضافة البيانات بنجاح');
+            $flasher->AddSuccess(trans('general.add_msg'));
 
             return redirect('client');
         } catch (\Exception $e) {
@@ -43,39 +43,17 @@ class ClientController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\client  $client
-     * @return \Illuminate\Http\Response
-     */
     public function show(client $client)
     {
 //        $clients = client::findorfail($client->id);
         $sales = salesinv::where('client_id',$client->id)->get();
         return view('backend.client.show',compact('sales','client'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\client  $client
-     * @return \Illuminate\Http\Response
-     */
     public function edit(client $client)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
+    public function update(Request $request,ToastrFactory $flasher)
     {//dd($request);
         try {
             $client = Client::findorfail($request->id);
@@ -85,8 +63,7 @@ class ClientController extends Controller
             $client->address = $request->address;
             $client->country_id = $request->country_id;
             $client->save();
-            toastr()->success('تم تعديل البيانات بنجاح');
-
+            $flasher->AddInfo(trans('general.edit_msg'));
             return redirect('client');
         } catch (\Exception $e) {
             return redirect()
@@ -94,20 +71,11 @@ class ClientController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
+    public function destroy(Request $request,ToastrFactory $flasher)
     {
         try {
             client::destroy($request->id);
-            //session()->flash('Delete', trans('category.Delete'));
-            toastr()->success('تم حذف البيانات بنجاح');
-
+            $flasher->AddSuccess(trans('general.delete_msg'));
             return redirect('client');
         } catch (\Exception $e) {
             return redirect()
@@ -126,7 +94,6 @@ class ClientController extends Controller
             $client = client::findorfail($id);
             $sales = salesinv::where('client_id',$id)->get();
             return view('backend.client.print_client_balance',compact('sales','client'), $this->GetData());
-            //return view('backend.Salesinv.print', compact('inv'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\category;
 use App\Models\product;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -20,14 +21,14 @@ class CategoryController extends Controller
     {
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request, ToastrFactory $flasher)
     {
         try {
             category::create([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'notes' => $request->notes,
             ]);
-            toastr()->success(trans('category.Add'));
+            $flasher->AddSuccess(trans('general.add_msg'));
 
             return redirect('category');
         } catch (\Exception $e) {
@@ -56,7 +57,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(StoreCategoryRequest $request)
+    public function update(StoreCategoryRequest $request, ToastrFactory $flasher)
     {
         $cat = category::findorfail($request->id);
         try {
@@ -64,7 +65,7 @@ class CategoryController extends Controller
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'notes' => $request->notes,
             ]);
-            toastr()->success(trans('category.edit'));
+            $flasher->Addinfo(trans('general.update_msg'));
 
             return redirect('category');
         } catch (\Exception $e) {
@@ -74,12 +75,11 @@ class CategoryController extends Controller
         }
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, ToastrFactory $flasher)
     {
         try {
             category::destroy($request->id);
-            toastr()->success(trans('category.Delete'));
-
+            $flasher->AddError(trans('general.delete_msg'));
             return redirect('category');
         } catch (\Exception $e) {
             return redirect()

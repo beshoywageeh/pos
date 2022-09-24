@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\SettingTrait;
 use App\Models\setting;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 
 
@@ -21,7 +22,7 @@ class SettingController extends Controller
         return view('backend.Settings.create', $this->GetData());
     }
 
-    public function update(Request $request, setting $setting)
+    public function update(Request $request, ToastrFactory $flasher)
     {
         try {
             $info = $request->except('_token', 'photo');
@@ -37,7 +38,8 @@ class SettingController extends Controller
             if (file_exists('assets/img/' . $oldPhoto)) {
                 unlink('assets/img/' . $oldPhoto);
             }
-            toastr()->success('تم اضافة المتجر بنجاح');
+
+            $flasher->AddInfo(trans('general.edit_msg'));
 
             return redirect('settings');
         } catch (\Exception $e) {

@@ -78,7 +78,7 @@ class ProductController extends Controller
                 'category_id' => $request->category_id,
                 'notes' => $request->notes,
             ]);
-            $flasher->AddSuccess(trans('general.edit_msg'));
+            $flasher->AddInfo(trans('general.edit_msg'));
 
             return redirect('product');
         } catch (\Exception $e) {
@@ -92,7 +92,7 @@ class ProductController extends Controller
     {
         try {
             product::destroy($request->id);
-            $flasher->AddSuccess(trans('general.delete_msg'));
+            $flasher->AddError(trans('general.delete_msg'));
 
             return redirect('product');
         } catch (\Exception $e) {
