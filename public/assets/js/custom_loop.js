@@ -56,17 +56,18 @@ function digitalClock() {
 digitalClock();
 //========end digital clock ===============//
 $(function () {
-    let csrf = document.querySelector('#csrf').value,
-        urlAdd = document.querySelector('#urladd').value;
-    $('#barcode').on('keyup', function () {
-        let barcode = document.querySelector('#barcode').value;
+    let csrf = document.querySelector("#csrf").value,
+        urlAdd = document.querySelector("#urladd").value;
+    $("#barcode").on("keyup change", function (e) {
+        e.preventDefault();
+        let barcode = document.querySelector("#barcode").value;
         $.ajax({
             method: "POST",
             url: urlAdd,
-            data: {barcode: barcode, '_token': csrf},
+            data: { barcode: barcode, _token: csrf },
             success: function (data, status) {
-                $('#barcode').val('');
-                flasher.success("product added");
+                $("#barcode").val("");
+                flasher.success(data.msg);
             },
         });
         getdata();
@@ -74,37 +75,38 @@ $(function () {
 });
 
 function getdata() {
-    let orderList = document.querySelector('#order_list'),
-        getData = document.querySelector('#getData').value;
+    let orderList = document.querySelector("#order_list"),
+        getData = document.querySelector("#getData").value;
     $.ajax({
         method: "GET",
         url: getData,
-        datatype: 'html',
+        datatype: "html",
         cache: false,
         success: function (data) {
-            $("#order_list").html(data);    calTotal();
-
-        }
+            $("#order_list").html(data);
+            calTotal();
+        },
     });
 }
 
 function deleteproduct(id) {
-    let csrf_delete = document.querySelector('#csrf_delete').value,
-        urlDelete = document.querySelector('#url_delete').value;
+    let csrf_delete = document.querySelector("#csrf_delete").value,
+        urlDelete = document.querySelector("#url_delete").value;
     $.ajax({
         method: "POST",
         url: urlDelete,
         cache: false,
-        data: {id: id, '_token': csrf_delete},
-        success: function () {
-            flasher.error("product deleted");
-
-        }
+        data: { id: id, _token: csrf_delete },
+        success: function (data) {
+            if (data.status == true) {
+                flasher.error(data.msg);
+            }
+        },
     });
-$('body').on('click','.delete_product',function(){
-    $(this).closest('tr').remove();
-    calTotal();
-})
+    $("body").on("click", ".delete_product", function () {
+        $(this).closest("tr").remove();
+        calTotal();
+    });
 }
 
 function showPreview(event) {

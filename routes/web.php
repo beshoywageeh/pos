@@ -31,19 +31,21 @@ Route::group(
     Route::group(['middleware' => ['auth']],
         function () {
             Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+
+
             Route::resource('category', CategoryController::class);
-            Route::post('product_search', [ProductController::class, 'product_search'])->name('product_search');
+
             Route::resource('product', ProductController::class);
             Route::resource('client', ClientController::class);
+            Route::get('client_balance/{id}', [ClientController::class, 'print'])->name('print_client_balance');
+
             Route::resource('sales', SalesinvController::class);
             Route::get('saleinv/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
             Route::get('sales_invoice/{id}', [SalesinvController::class, 'print'])->name('print');
             Route::post('salesproduct', [SalesinvController::class, 'salesproduct'])->name('salesproduct');
             Route::get('getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('getinvoicedata');
             Route::post('deleteproduct', [SalesinvController::class, 'deleteproduct'])->name('deleteproduct');
-            Route::get('client_balance/{id}', [ClientController::class, 'print'])->name('print_client_balance');
 
-            //Route::get('client/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
             Route::get('settings', [SettingController::class, 'index'])->name('index');
             Route::get('settings/add/{id}', [SettingController::class, 'edit'])->name('edit');
             Route::post('settings/save', [SettingController::class, 'update'])->name('update');

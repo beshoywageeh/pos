@@ -8,6 +8,7 @@ use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
 use Flasher\Toastr\Prime\ToastrFactory;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -34,7 +35,7 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request, ToastrFactory $flasher)
     {
-      //  return($request);
+        //return($request);
         try {
 
             product::create([
@@ -47,6 +48,8 @@ class ProductController extends Controller
                 'notes' => $request->notes,
             ]);
             $flasher->addSuccess(trans('general.add_msg'));
+            Log::info(\Auth::user()->first_name .' creates products ' . $request->name);
+
             return redirect('product');
         } catch (\Exception $e) {
             return redirect()
@@ -79,6 +82,7 @@ class ProductController extends Controller
                 'notes' => $request->notes,
             ]);
             $flasher->AddInfo(trans('general.edit_msg'));
+            Log::info(\Auth::user()->first_name .' updated product ' . $request->name);
 
             return redirect('product');
         } catch (\Exception $e) {
@@ -91,6 +95,8 @@ class ProductController extends Controller
     public function destroy(Request $request, ToastrFactory $flasher)
     {
         try {
+            Log::info(\Auth::user()->first_name .' delelte products ' . $request->name);
+
             product::destroy($request->id);
             $flasher->AddError(trans('general.delete_msg'));
 
@@ -102,12 +108,4 @@ class ProductController extends Controller
         }
     }
 
-    public function product_search(Request $request)
-    {
-        if ($request->ajax()) {
-            $products = product::where('barcode', 'LIKE', '%' . $request->search . '%')->get();
-            return view('backend.products.search', compact('products'));
-        }
-
-    }
 }

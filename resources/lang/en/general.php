@@ -18,5 +18,8 @@ return [
     'money_transaction'=>'Money Transaction',
     'expenses'=>'Expenses',
     'income'=>'Income',
-    'msg' =>'no data tp show'
+    'msg' =>'no data tp show',
+    'email_msg'=>'Wrong Email',
+    'password_msg'=>'Incorrect Password',
+    'status_msg'=>'please active your account to login',
 ];

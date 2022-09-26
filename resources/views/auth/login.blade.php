@@ -21,7 +21,10 @@
 						<div class="container p-0">
 							<div class="row">
 								<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
-									<div class="card-sigin">
+                                    @error('status')
+                                    <div class="alert alert-danger">{{trans('general.status_msg')}}</div>
+                                    @enderror
+                                    <div class="card-sigin">
 										<div class="mb-5 d-flex"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">{{env('APP_NAME')}}</h1></div>
 										<div class="card-sigin">
 											<div class="main-signup-header">
@@ -33,14 +36,14 @@
 														<label>{{trans('auth.email')}}</label>
                                                         <input id='email' class="form-control verifed @error('email') is-invalid @enderror" placeholder="{{trans('auth.placemail')}}" type="text" name="email" id="email" required>
 														@error('email')
-														<div class="alert alert-danger">{{$message}}</div>
+														<div class="alert alert-danger">{{trans('general.email_msg')}}</div>
 														@enderror
 													</div>
 													<div class="form-group">
 														<label>{{trans('auth.pass')}}</label>
                                                         <input id='password' class="form-control verifed @error('password') is-invalid @enderror" placeholder="{{trans('auth.placpass')}}" type="password" id="password" name="password" required>
 														@error('password')
-														<div class="alert alert-danger">{{$message}}</div>
+														<div class="alert alert-danger">{{trans('general.password_msg')}}</div>
 														@enderror
 													</div><button id="submit" class="btn btn-main-primary btn-block text-bold" disabled>{{trans('auth.log')}}</button>
 												</form>

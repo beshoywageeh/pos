@@ -7,6 +7,7 @@ use App\Models\category;
 use App\Models\product;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -29,7 +30,7 @@ class CategoryController extends Controller
                 'notes' => $request->notes,
             ]);
             $flasher->AddSuccess(trans('general.add_msg'));
-
+            Log::info(\Auth::user()->first_name .' creates ' . $request->name);
             return redirect('category');
         } catch (\Exception $e) {
             return redirect()
@@ -78,6 +79,7 @@ class CategoryController extends Controller
     public function destroy(Request $request, ToastrFactory $flasher)
     {
         try {
+            Log::info(\Auth::user()->first_name .' Delete category ' . $request->name);
             category::destroy($request->id);
             $flasher->AddError(trans('general.delete_msg'));
             return redirect('category');

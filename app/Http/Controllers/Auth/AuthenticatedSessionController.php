@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class AuthenticatedSessionController extends Controller
@@ -30,7 +31,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
+        Log::info( \Auth::user()->first_name . ' loged in at ' . now());
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
@@ -44,6 +45,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        Log::info( \Auth::user()->first_name . ' loged out at ' . now());
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

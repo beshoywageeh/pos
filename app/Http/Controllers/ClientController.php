@@ -9,6 +9,7 @@ use App\Models\salesinv;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -35,6 +36,7 @@ class ClientController extends Controller
             $client->country_id = $request->country_id;
             $client->save();
             $flasher->AddSuccess(trans('general.add_msg'));
+            Log::info(\Auth::user()->first_name .' creates client ' . $request->name);
 
             return redirect('client');
         } catch (\Exception $e) {
@@ -64,6 +66,8 @@ class ClientController extends Controller
             $client->country_id = $request->country_id;
             $client->save();
             $flasher->AddInfo(trans('general.edit_msg'));
+            Log::info(\Auth::user()->first_name .' edit Clients ' . $request->name);
+
             return redirect('client');
         } catch (\Exception $e) {
             return redirect()
@@ -74,6 +78,8 @@ class ClientController extends Controller
     public function destroy(Request $request,ToastrFactory $flasher)
     {
         try {
+            Log::info(\Auth::user()->first_name .' deletes ' . $request->name);
+
             client::destroy($request->id);
             $flasher->AddSuccess(trans('general.delete_msg'));
             return redirect('client');

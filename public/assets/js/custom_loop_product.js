@@ -58,4 +58,6 @@ function make_search() {
 }
 
 //========end ajax search ===============//
-
+$(document).on('click','.delete',function (e){
+   alert('del');
+});

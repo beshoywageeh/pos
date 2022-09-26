@@ -1,6 +1,6 @@
 
 @foreach($products as $product )
-    <tr>
+    <tr class ='product{{ $product->id }}'>
         <td><input name="product_id[]" class="form-control form-control-sm" type='text' value='{{$product->id}}' hidden>{{$loop->iteration}}</td>
         <td>{{$product->name}}</td>
         <td><input value="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" name="product_qty[]" onkeyup="Total_product()" data-price='{{$product->sales_price}}' class="form-control form-control-sm qty"></td>

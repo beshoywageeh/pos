@@ -3,7 +3,8 @@
     <div class="container-fluid main-container">
         <div class="main-header-left ">
             <div class="responsive-logo">
-                <a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo.png')}}" class="logo-1" alt="logo"></a>
+                <a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo.png')}}"
+                                                              class="logo-1" alt="logo"></a>
             </div>
             <div class="app-sidebar__toggle" data-toggle="sidebar">
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
@@ -15,16 +16,28 @@
             <ul class="nav">
                 <li class="">
                     <div class="dropdown">
-                        <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-sm btn-primary"
+                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm btn-default"
                                 data-toggle="dropdown" id="dropdownMenuButton"
-                                type="button">{{trans('main-header.Lang')}} <i class="fas fa-caret-down mx-1"></i>
+                                type="button">
+
+                            @if(Lang::locale() == 'en')
+                                <img class="img-responsive w-50" src="{{URL::asset('assets/img/flags/us_flag.jpg')}}" alt="English">
+                            @else
+                                <img class="img-responsive w-50" src="{{URL::asset('assets/img/flags/eg_flag.jpg')}}" alt="العربية">
+                            @endif<i class="fas fa-caret-down mx-1"></i>
                         </button>
                         <div class="dropdown-menu">
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                <a rel="alternate" hreflang="{{ $localeCode }}"
+                                <a class="d-inline-flex text-center justify-content-center m-1" rel="alternate" hreflang="{{ $localeCode }}"
                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
                                    class="dropdown-item">
-                                    {{ $properties['native'] }}
+                                    @if($properties['native'] == 'English')
+                                        <img class="img-responsive w-75" src="{{URL::asset('assets/img/flags/us_flag.jpg')}}"
+                                             alt="English">
+                                    @else
+                                        <img class="img-responsive w-75" src="{{URL::asset('assets/img/flags/eg_flag.jpg')}}"
+                                             alt="العربية">
+                                    @endif
                                 </a>
                             @endforeach
 
@@ -48,7 +61,8 @@
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
-                                <div class="main-img-user"><img alt="" src="{{URL::asset('assets/img/user.png')}}" class=""></div>
+                                <div class="main-img-user"><img alt="" src="{{URL::asset('assets/img/user.png')}}"
+                                                                class=""></div>
                                 <div class=" my-auto">
                                     <h6>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h6>
                                     <h6>{{Auth::user()->email}}</h6>

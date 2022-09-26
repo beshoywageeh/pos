@@ -34,7 +34,6 @@
                                 <h4 class="text-white mb-0">{{$data['clients']}}</h4>
                             </div>
                         </div>
-                        <hr>
                     </div>
                 </div>
             </div>
