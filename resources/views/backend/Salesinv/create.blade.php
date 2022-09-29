@@ -71,8 +71,8 @@
                     </div>
                     <div class='row my-4'>
                         <div class='col-lg-12'>
-                            <from method="POST" onkeypress="e.preventDefault()">
-                                <input type="text" placeholder="{{trans('invoice.add_product')}}" class="form-control"
+                            <from method="POST" onkeypress="e.preventDefault()" autocomplete='off'>
+                                <input type="text" onkeypress="e.preventDefault()" placeholder="{{trans('invoice.add_product')}}" class="form-control"
                                        id="barcode">
                                 <input type="hidden" id="csrf" value="{{csrf_token()}}">
                                 <input type="hidden" id="urladd" value="{{route('salesproduct')}}">

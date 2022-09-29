@@ -51,7 +51,7 @@
                         <div class="col-8">
                             <div class="mt-0 text-center">
                                 <span class="text-white">{{trans('general.tsales')}}</span>
-                                <h4 class="text-white mb-0">{{$data['total_sales']}} {{env('MAIN_CURRENCY')}}</h4>
+                                <h4 class="text-white mb-0">{{$data['total_sales'] . ' '.env('MAIN_CURRENCY')}}</h4>
                             </div>
                         </div>
                     </div>
@@ -102,24 +102,67 @@
 
 
     <div class="row row-sm">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card mg-b-20">
-                <div class="card-body">
+                <div class="card-header">
                     <div class="main-content-label mg-b-5">
                         {{ trans('general.sales') }}
                     </div>
+                </div>
+                <div class="card-body">
+
                     <div class="morris-wrapper-demo" id="salesgraph"></div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mg-b-20">
+                <div class="card-header">
+                    <div class="main-content-label mg-b-5">
+                        {{ trans('general.salesmonthbased') }}
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if($data['sales']->count() > 0)
+                        <div class="table">
+                            <table
+                                class="table report-table text-md-nowrap table-bordered text-center">
+                                <thead class='alert-success'>
+                                <tr>
+                                    <th>{{ trans('general.date') }}</th>
+                                    <th>{{ trans('general.total') }}</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($data['sales'] as $sales)
+                                    <tr>
+                                        <td>{{ $sales->year }}-{{ $sales->month }}</td>
+                                        <td>{{ number_format($sales->Total) . ' '.env('MAIN_CURRENCY')}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="alert alert-solid-danger text-center">
+                            <h5 class="text-white d-block">{{trans('general.msg')}}</h5>
+                        </div>
+                    @endif
+                </div>
+
             </div>
         </div>
     </div>
     <div class="row row-sm">
         <div class="col-md-6">
             <div class="card mg-b-20" id="tabs-style2">
-                <div class="card-body">
+                <div class="card-header">
                     <div class="main-content-label mg-b-5">
                         {{ trans('general.lastten') }}
                     </div>
+                </div>
+                <div class="card-body">
                     <div class="text-wrap">
                         <div class="example">
                             <div class="panel panel-primary tabs-style-2">
@@ -238,44 +281,46 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- col-6 -->
-            <!-- row closed -->
+            </div>
+            <!-- col-6 -->
+        </div>
+    </div>
+    <!-- row closed -->
 
+@endsection
+@section('js')
+    <!--Internal  Morris js -->
+    <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+    <!-- Internal Select2 js-->
+    <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+    <!--Internal  Morris js -->
+    <script src="{{URL::asset('assets/plugins/raphael/raphael.min.js')}}"></script>
+    <script src="{{URL::asset('assets/plugins/morris.js/morris.min.js')}}"></script>
+    <!--Internal Chart Morris js -->
 
-            @endsection
-            @section('js')
-                <!--Internal  Morris js -->
-                <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-                <!-- Internal Select2 js-->
-                <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-                <!--Internal  Morris js -->
-                <script src="{{URL::asset('assets/plugins/raphael/raphael.min.js')}}"></script>
-                <script src="{{URL::asset('assets/plugins/morris.js/morris.min.js')}}"></script>
-                <!--Internal Chart Morris js -->
+    <script>
+        var line = new Morris.Line({
+            element: 'salesgraph',
+            resize: 'true',
+            data: [
+                    @foreach ($data['sales'] as $sale )
+                {
+                    ym: "{{ $sale->year }}-{{ $sale->month }}",
+                    sum: "{{ $sale->Total }} {{env('MAIN_CURRENCY')}}"
+                },
 
-                <script>
-                    var line = new Morris.Line({
-                        element: 'salesgraph',
-                        resize: 'true',
-                        data: [
-                                @foreach ($data['sales'] as $sale )
-                            {
-                                ym: "{{ $sale->year }}-{{ $sale->month }}",
-                                sum: "{{ $sale->Total }} {{env('MAIN_CURRENCY')}}"
-                            },
+                @endforeach
+            ],
+            xkey: 'ym',
+            ykeys: ['sum'],
+            labels: ['{{trans('general.tsales')}}'],
+            lineColors: ['#285cf7'],
+            lineWidth: 1,
+            ymax: 'auto 100',
+            gridTextSize: 11,
+            hideHover: 'auto',
+            resize: true
+        });
 
-                            @endforeach
-                        ],
-                        xkey: 'ym',
-                        ykeys: ['sum'],
-                        labels: ['{{trans('general.tsales')}}'],
-                        lineColors: ['#285cf7'],
-                        lineWidth: 1,
-                        ymax: 'auto 100',
-                        gridTextSize: 11,
-                        hideHover: 'auto',
-                        resize: true
-                    });
-
-                </script>
+    </script>
 @endsection

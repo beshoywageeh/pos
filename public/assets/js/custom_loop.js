@@ -1,32 +1,32 @@
+
 //========start get and set inv number===========//
 
-let inv_num = document.querySelector('#inv_num'),
-    last_pos = document.querySelector('#last').value,
+let inv_num = document.querySelector("#inv_num"),
+    last_pos = document.querySelector("#last").value,
     parse = parseInt(last_pos) + 1,
-    slogan = document.querySelector('#slogan').value;
-if (slogan == '') {
+    slogan = document.querySelector("#slogan").value;
+if (slogan == "") {
     inv_num.value = `pos-${parse}`;
-
 } else {
     inv_num.value = `${slogan}-${parse}`;
-
 }
-let date = $('.fc-datepicker').datepicker({
-    dateFormat: 'yy-mm-dd'
-}).val();
+let date = $(".fc-datepicker")
+    .datepicker({
+        dateFormat: "yy-mm-dd",
+    })
+    .val();
 //========end get and set inv number===========//
-
 
 //========end get and set invoice data===========//
 function calTotal() {
     let total = 0,
-        prices = document.querySelectorAll('#order_list .product_price'),
-        discount = document.querySelector('#discount'),
-        tax_value = document.querySelector('#tax_value').value,
-        total_price = document.querySelector('#total_inv');
+        prices = document.querySelectorAll("#order_list .product_price"),
+        discount = document.querySelector("#discount"),
+        tax_value = document.querySelector("#tax_value").value,
+        total_price = document.querySelector("#total_inv");
     for (let i = 0; i < prices.length; i++) {
         total += parseFloat(prices[i].innerHTML);
-        total_price.value=total-discount.value
+        total_price.value = total - discount.value;
     }
 }
 
@@ -40,17 +40,17 @@ function digitalClock() {
         hour = data.getHours(),
         mintes = data.getMinutes(),
         secounds = data.getSeconds(),
-        am_pm = 'ص';
+        am_pm = "ص";
     if (hour > 12) {
         hour -= 12;
-        am_pm = 'م';
+        am_pm = "م";
     }
     hour = hour < 10 ? "0" + hour : hour;
     mintes = mintes < 10 ? "0" + mintes : mintes;
     secounds = secounds < 10 ? "0" + secounds : secounds;
 
     let final = `${hour}:${mintes}:${secounds} ${am_pm}`;
-    document.querySelector('#time').value = final;
+    document.querySelector("#time").value = final;
 }
 
 digitalClock();
@@ -58,7 +58,7 @@ digitalClock();
 $(function () {
     let csrf = document.querySelector("#csrf").value,
         urlAdd = document.querySelector("#urladd").value;
-    $("#barcode").on("keyup change", function (e) {
+    $(document).on("change", "#barcode",function (e) {
         e.preventDefault();
         let barcode = document.querySelector("#barcode").value;
         $.ajax({
@@ -117,13 +117,14 @@ function showPreview(event) {
     }
 }
 
-
-
 function Total_product() {
-    $('body').on('keyup', '.qty', function () {
+    $("body").on("keyup", ".qty", function () {
         let qty = parseFloat($(this).val()),
-            prices = parseFloat($(this).data('price'));
-        $(this).closest('tr').find('.product_price').html(qty * prices);
-        calTotal()
+            prices = parseFloat($(this).data("price"));
+        $(this)
+            .closest("tr")
+            .find(".product_price")
+            .html(qty * prices);
+        calTotal();
     });
 }

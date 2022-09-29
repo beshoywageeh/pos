@@ -13,18 +13,10 @@ $(function(e) {
 	table.buttons().container()
 	.appendTo( '#example_wrapper .col-md-6:eq(0)' );
 
-	$('#example1').DataTable({
-        lengthChange: true,
-		language: {
-			searchPlaceholder: 'Search...',
-			sSearch: '',
-			lengthMenu: [ 10, 25, 50, -1 ],
-		}
-	});
+
 	$('#example2').DataTable({
         lengthChange: true,
         lengthMenu: [ 10, 20, 30, 40 ],
-
         responsive: true,
 		language: {
 			searchPlaceholder: 'Search...',
@@ -32,23 +24,6 @@ $(function(e) {
 			lengthMenu: '_MENU_',
 		}
 	});
-	var table = $('#example-delete').DataTable({
-		responsive: true,
-		language: {
-			searchPlaceholder: 'Search...',
-			sSearch: '',
-			lengthMenu: '_MENU_',
-		}
-	});
-    $('#example-delete tbody').on( 'click', 'tr', function () {
-        if ( $(this).hasClass('selected') ) {
-            $(this).removeClass('selected');
-        }
-        else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
-    } );
 
     $('#button').click( function () {
         table.row('.selected').remove().draw( false );

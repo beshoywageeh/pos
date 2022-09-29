@@ -51,7 +51,7 @@ class SalesinvController extends Controller
 
     public function store(salesinvrequest $request, ToastrFactory $flasher)
     {
- //       return $request;
+        //       return $request;
         try {
             $total_inv = explode(' ', $request->total_inv);
 
@@ -62,7 +62,7 @@ class SalesinvController extends Controller
             }
             $code = Carbon::now()->format('YmdHms');
             //return $code;
-
+            DB::beginTransaction();
             $salesinvs = new salesinv();
             //$salesinvs->id = $code;
             $salesinvs->inv_num = $request->inv_num;
@@ -79,12 +79,14 @@ class SalesinvController extends Controller
             $invdata->salesinv_id = $id->id;
             $salesinvs->products()
                 ->attach($details);
-DB::table('transinvs')->truncate();
+            DB::table('transinvs')->truncate();
+            DB::commit();
             $flasher->AddSuccess(trans('general.add_msg'));
-            Log::info(\Auth::user()->first_name .' create sales ' . $request->inv_num . ' - ' . $request->total_inv);
+            Log::info(\Auth::user()->first_name . ' create sales ' . $request->inv_num . ' - ' . $request->total_inv);
 
             return redirect('sales');
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
@@ -121,7 +123,7 @@ DB::table('transinvs')->truncate();
     {
         try {
             $id = $request->id;
-            Log::info(\Auth::user()->first_name .' deletes ' . $request->id );
+            Log::info(\Auth::user()->first_name . ' deletes ' . $request->id);
 
             salesinv::findorfail($id)->delete();
             $flasher->AddError(trans('general.delete_msg'));
@@ -143,34 +145,39 @@ DB::table('transinvs')->truncate();
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function salesproduct(Request $request){
+
+    public function salesproduct(Request $request)
+    {
         if ($request->ajax()) {
-                transinv::create([
-                    'barcode' => $request->barcode,
-                ]);
-                return response()->json([
-                    'status' =>true,
-                    'msg'=> trans('general.add_msg'),
-                    
-                ]);
+            transinv::create([
+                'barcode' => $request->barcode,
+            ]);
+            return response()->json([
+                'status' => true,
+                'msg' => trans('general.add_msg'),
+
+            ]);
         }
-    }
-    public function getinvoicedata(){
-        $ids = transinv::all('barcode');
-        $products= product::whereIn('barcode',$ids)->get();
-        //var_dump($products);
-        return view('backend.salesinv.data',compact('products'));
     }
 
-    public function deleteproduct(Request $request, ToastrFactory $flasher){
+    public function getinvoicedata()
+    {
+        $ids = transinv::all('barcode');
+        $products = product::whereIn('barcode', $ids)->get();
+        //var_dump($products);
+        return view('backend.salesinv.data', compact('products'));
+    }
+
+    public function deleteproduct(Request $request, ToastrFactory $flasher)
+    {
         $id = $request->id;
-        if ($request->ajax()){
-            transinv::where('barcode',$id)->delete();
+        if ($request->ajax()) {
+            transinv::where('barcode', $id)->delete();
         }
         return response()->json([
-            'status' =>true,
-            'msg'=> trans('general.delete_msg'),
-            'id'=>$id
+            'status' => true,
+            'msg' => trans('general.delete_msg'),
+            'id' => $id
         ]);
     }
 }
