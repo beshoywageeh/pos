@@ -34,5 +34,7 @@ return [
     'newinv'=>'فاتورة جديدة',
     'total_product'=>'اجمالي المنتج',
     'tax'=>'الضريبة',
-    'discount'=>'الخصم'
+    'discount'=>'الخصم',
+    'invoice_display'=>'معاينه الفاتورة',
+    'sales_inv'=>'فاتورة مبيعات'
 ];

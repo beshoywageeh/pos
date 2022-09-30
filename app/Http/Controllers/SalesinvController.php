@@ -135,16 +135,6 @@ class SalesinvController extends Controller
         }
     }
 
-    public function print($id)
-    {
-        try {
-            $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
-            return view('backend.Salesinv.print', compact('inv'), $this->GetData());
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withErrors(['error' => $e->getMessage()]);
-        }
-    }
 
     public function salesproduct(Request $request)
     {

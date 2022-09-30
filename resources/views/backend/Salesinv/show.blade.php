@@ -1,5 +1,5 @@
 @extends('layouts.master') @section('title')
-    {{ trans('sales.title') }}
+    {{ trans('invoice.invoice_display') }}
 @endsection
 @section('css')
 
@@ -10,15 +10,15 @@
     <div class="breadcrumb-header justify-content-between no" id="head">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Invoice</span>
+                <h4 class="content-title mb-0 my-auto">{{ trans('invoice.sales_inv') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    {{ trans('invoice.invoice_display') }}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <a class="btn btn-danger float-left mt-3 mr-2 print" target="_blank" href="{{route('print',['id'=>$inv->id])}}">
+                <button class="btn btn-danger float-left mt-3 mr-2 print" onclick="print_invoice()">
                     <i class="mdi mdi-printer ml-1"></i>{{ trans('general.print') }}
-                </a>
+                </button>
             </div>
         </div>
     </div>
@@ -29,11 +29,11 @@
 
     <div class="row row-sm" id='invoice'>
         <div class="col-md-12 col-xl-12">
-            <div class=" main-content-body-invoice">
+            <div class=" main-content-body-invoice" id="print">
                 <div class="card card-invoice">
                     <div class="card-body">
                         <div class="invoice-header">
-                            <h1 class="invoice-title">Invoice</h1>
+                            <h1 class="invoice-title">{{ $data['name']}} | {{$inv->client->name}}</h1>
                             <div class="billed-from">
                                 <h6>{{ $data['name']}}</h6>
                                 <p>{{ $data['address'] }}<br>
@@ -124,4 +124,15 @@
         </div><!-- COL-END -->
     </div>
 @endsection @section('js')
+    <script>
+        function print_invoice() {
+            let invoice = document.querySelector("#print").innerHTML,
+                original = document.body.innerHTML;
+            document.body.innerHTML = invoice;
+            window.print();
+            document.body.innerHTML = original;
+            location.reload();
+
+        }
+    </script>
 @endsection

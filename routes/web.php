@@ -41,7 +41,6 @@ Route::group(
 
             Route::resource('sales', SalesinvController::class);
             Route::get('saleinv/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
-            Route::get('sales_invoice/{id}', [SalesinvController::class, 'print'])->name('print');
             Route::post('salesproduct', [SalesinvController::class, 'salesproduct'])->name('salesproduct');
             Route::get('getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('getinvoicedata');
             Route::post('deleteproduct', [SalesinvController::class, 'deleteproduct'])->name('deleteproduct');
