@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CategoriesDataTable;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\category;
 use App\Models\product;
@@ -11,8 +12,9 @@ use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(CategoriesDataTable $dataTable)
     {
+      //return $dataTable->render('backend.Categories.index2');
         $categories = category::all();
 
         return view('backend.Categories.index', compact('categories'));
