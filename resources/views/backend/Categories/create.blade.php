@@ -1,5 +1,5 @@
 
-<div class="modal" id="AddCategory">
+<div class="modal modal-fade" id="AddCategory">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">

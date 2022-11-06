@@ -1,5 +1,5 @@
 
-<div class="modal" id="DeleteCategory{{$cat->id}}">
+<div class="modal" id="DeleteCategory">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
@@ -10,7 +10,7 @@
                     @csrf
                     <div class="modal-body">
 
-                    <input name="id" value="{{$cat->id}}" type="hidden"/>
+                    <input name="id" value="" type="hidden"/>
                    <div class="row ">
                        <div class="col-sm m-auto">
                            <h3 class="text-danger">{{trans('category.delconfirm')}}</h3>
@@ -18,7 +18,7 @@
                    </div>
                     <div class="row my-2">
                         <div class="col-sm m-auto">
-                            <input class="form-control" type="text" readonly value="{{$cat->name}}">
+                            <input class="form-control" type="text" readonly value="">
                         </div>
                     </div>
                     </div>

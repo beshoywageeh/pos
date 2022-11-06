@@ -15,7 +15,7 @@
 <link href="{{URL::asset('assets/css/edit.css')}}" rel="stylesheet">
 
 
-@yield('css')
+@stack('css')
 
 @if(App::getLocale()=='en')
     <!--- Style css -->

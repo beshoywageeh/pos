@@ -14,10 +14,7 @@ class CategoryController extends Controller
 {
     public function index(CategoriesDataTable $dataTable)
     {
-      //return $dataTable->render('backend.Categories.index2');
-        $categories = category::all();
-
-        return view('backend.Categories.index', compact('categories'));
+      return $dataTable->render('backend.Categories.index');
     }
 
     public function create()

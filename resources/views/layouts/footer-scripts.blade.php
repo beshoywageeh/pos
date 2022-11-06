@@ -55,4 +55,4 @@
 @endif
 <script src="{{URL::asset('assets/js/index.js')}}"></script>
 
-@yield('js')
+@stack('js')
