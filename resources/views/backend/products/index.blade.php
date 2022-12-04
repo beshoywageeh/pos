@@ -1,6 +1,6 @@
 @extends('layouts.master') @section('title')
     {{ trans('product.title') }}
-@endsection @section('css')
+@endsection @push('css')
     <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"/>
     <link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet"/>
@@ -8,7 +8,7 @@
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 
-@endsection
+@endpush
 <!-- Content Header (Page header) -->
 @section('page-header')
     <!-- breadcrumb -->
@@ -110,7 +110,7 @@
 
     </div>
 @endsection
-@section('js')
+@push('js')
     <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
@@ -131,4 +131,4 @@
     <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 
     <script src="{{URL::asset('assets/js/custom_loop_product.js')}}"></script>
-@endsection
+@endpush

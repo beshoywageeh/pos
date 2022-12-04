@@ -1,4 +1,4 @@
-
+//alert("1");
 //========start get and set inv number===========//
 
 let inv_num = document.querySelector("#inv_num"),
@@ -55,25 +55,27 @@ function digitalClock() {
 
 digitalClock();
 //========end digital clock ===============//
-$(function () {
-    let csrf = document.querySelector("#csrf").value,
-        urlAdd = document.querySelector("#urladd").value;
-    $(document).on("change", "#barcode",function (e) {
-        e.preventDefault();
-        let barcode = document.querySelector("#barcode").value;
-        $.ajax({
-            method: "POST",
-            url: urlAdd,
-            data: { barcode: barcode, _token: csrf },
-            success: function (data, status) {
-                $("#barcode").val("");
-                flasher.success(data.msg);
-            },
-        });
+$(document).keypress(function (e) {
+    if (e.keyCode == 13) {
+        product_submit();
         getdata();
-    });
+    }
 });
 
+function product_submit() {
+    let csrf = document.querySelector("#csrf").value,
+        urlAdd = document.querySelector("#urladd").value;
+    let barcode = document.querySelector("#barcode").value;
+    $.ajax({
+        method: "POST",
+        url: urlAdd,
+        data: { barcode: barcode, _token: csrf },
+        success: function (data, status) {
+            $("#barcode").val("");
+            flasher.success(data.msg);
+        },
+    });
+}
 function getdata() {
     let orderList = document.querySelector("#order_list"),
         getData = document.querySelector("#getData").value;
@@ -88,10 +90,10 @@ function getdata() {
         },
     });
 }
-
-function deleteproduct(id) {
+function deleteproduct() {
     let csrf_delete = document.querySelector("#csrf_delete").value,
-        urlDelete = document.querySelector("#url_delete").value;
+        urlDelete = document.querySelector("#url_delete").value,
+        id = $(this).data("id");
     $.ajax({
         method: "POST",
         url: urlDelete,
@@ -105,8 +107,8 @@ function deleteproduct(id) {
     });
     $("body").on("click", ".delete_product", function () {
         $(this).closest("tr").remove();
-        calTotal();
     });
+    calTotal();
 }
 
 function showPreview(event) {

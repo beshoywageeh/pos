@@ -3,7 +3,6 @@
 @endsection
 @section('css')
 @endsection
-<!-- Content Header (Page header) -->
 @section('content')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
@@ -30,7 +29,7 @@
             <hr>
 
 
-            <form action="{{ route('sales.store') }}" method="post" onkeypress="e.preventDefault()">
+            <form action="{{ route('sales.store') }}" method="post" id="invoice" >
                 @method ('post')@csrf
                 <div class="card-body" id="print_area">
                     <input type="hidden" id='last' value="{{ $ex[1] }}">
@@ -71,13 +70,14 @@
                     </div>
                     <div class='row my-4'>
                         <div class='col-lg-12'>
-                            <from method="POST" onkeypress="e.preventDefault()" autocomplete='off'>
-                                <input type="text" onkeypress="e.preventDefault()" placeholder="{{trans('invoice.add_product')}}" class="form-control"
+                            <form method="POST" autocomplete='off'>
+                                <input type="text" placeholder="{{trans('invoice.add_product')}}" class="form-control"
                                        id="barcode">
                                 <input type="hidden" id="csrf" value="{{csrf_token()}}">
                                 <input type="hidden" id="urladd" value="{{route('salesproduct')}}">
                                 <span class="alert-error" id="text"></span>
-                            </from>
+                            </form>
+
                             <input type="hidden" value="{{route('getinvoicedata')}}" id="getData">
                             <div class="table-responsive my-4">
                                 <table class="table table-bordered">
@@ -150,16 +150,16 @@
                     </div>
                 </div>
                 <div class=card-footer>
-                    <button onkeypress="e.preventDefault()" class="btn btn-success tx-15 tx-bold" type="submit">{{trans('general.save')}}<i
-                            class="mx-2 fa fa-save"></i>
-                    </button>
+                    <button onclick="document.querySelector('#invoice').submit()" keypress="e.preventDefault()" class="btn btn-success btn-block tx-15 tx-bold" type="submit">{{trans('general.save')}}<i
+                        class="mx-2 fa fa-save"></i>
+                </button>                    
                 </div>
             </form>
 
         </div>
     </div>
 @endsection
-@section('js')
-    <script src="{{URL::asset('assets/js/custom_loop.js')}}"></script>
-
-@endsection
+@push('js')
+<script src="{{URL::asset('assets/js/custom_loop.js')}}"></script>
+    
+@endpush

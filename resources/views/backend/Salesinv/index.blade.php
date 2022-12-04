@@ -44,9 +44,9 @@
                     </div>
                 </div>
 
-                <div class="table-responsive hoverable-table mt-4 text-center">
+                <div class="table table-bordered hoverable-table mt-4 text-center">
                     @if($salesinv->count() > 0)
-                        <table id="example2" class="table text-md-nowrap report-table" style="padding: 0; width:98%">
+                        <table id="example2" class="w-100 text-md-nowrap report-table">
                             <thead class='alert-success'>
                             <tr>
 
@@ -89,10 +89,7 @@
                                                    aria-controls="example" type="button">
                                                     <i class="fas fa-pen fa-1x text-warning mx-2"></i> {{trans('general.edit')}}
                                                 </a>
-                                                <a class="dropdown-item" target="_blank"
-                                                   type="button" href="{{route('print',['id'=>$sales->id])}}">
-                                                    <i class="fas fa-print  text-primary mx-2 fa-1x"></i> {{trans('general.print')}}
-                                                </a>
+
                                             </div>
                                         </div>
                                     </td>

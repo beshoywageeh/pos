@@ -19,6 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('phone');
             $table->string('address');
             $table->bigInteger('country_id')->unsigned();
+     $table->integer('opening_balance')->nullable();
             $table->timestamps();
         });
     }

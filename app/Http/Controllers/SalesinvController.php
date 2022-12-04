@@ -51,10 +51,9 @@ class SalesinvController extends Controller
 
     public function store(salesinvrequest $request, ToastrFactory $flasher)
     {
-        //       return $request;
         try {
+//            DB::beginTransaction();
             $total_inv = explode(' ', $request->total_inv);
-
             $details = [];
             for ($i = 0; $i < count($request->product_id); $i++) {
                 $details[$i]['product_id'] = $request->product_id[$i];
@@ -62,7 +61,7 @@ class SalesinvController extends Controller
             }
             $code = Carbon::now()->format('YmdHms');
             //return $code;
-            DB::beginTransaction();
+
             $salesinvs = new salesinv();
             //$salesinvs->id = $code;
             $salesinvs->inv_num = $request->inv_num;
@@ -80,13 +79,14 @@ class SalesinvController extends Controller
             $salesinvs->products()
                 ->attach($details);
             DB::table('transinvs')->truncate();
-            DB::commit();
-            $flasher->AddSuccess(trans('general.add_msg'));
-            Log::info(\Auth::user()->first_name . ' create sales ' . $request->inv_num . ' - ' . $request->total_inv);
 
+  //          DB::commit();
+            $flasher->AddSuccess(trans('general.add_msg'));
+//            Log::info(\Auth::user()->first_name . ' create sales ' . $request->inv_num . ' - ' . $request->total_inv);
             return redirect('sales');
+
         } catch (\Exception $e) {
-            DB::rollBack();
+    //        DB::rollBack();
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }

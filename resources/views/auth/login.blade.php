@@ -45,7 +45,7 @@
 														@error('password')
 														<div class="alert alert-danger">{{trans('general.password_msg')}}</div>
 														@enderror
-													</div><button id="submit" class="btn btn-main-primary btn-block text-bold" disabled>{{trans('auth.log')}}</button>
+													</div><button class="btn btn-main-primary btn-block text-bold">{{trans('auth.log')}}</button>
 												</form>
 											</div>
 										</div>
@@ -61,7 +61,7 @@
 @section('js')
 <script>
 
-    let verify = document.querySelectorAll('.verifed'),
+/*    let verify = document.querySelectorAll('.verifed'),
         email = document.querySelector('#email'),
         password = document.querySelector('#password'),
         submit = document.querySelector('#submit');
@@ -73,6 +73,6 @@ window.addEventListener('keyup',handelButton);
         } else {
             submit.disabled = false;
         }
-    }
+    }*/
 </script>
 @endsection
