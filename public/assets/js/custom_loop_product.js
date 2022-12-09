@@ -43,21 +43,35 @@ function make_search() {
 
     jQuery.ajax({
         url: ajax_search_url,
-        type: 'post',
-        dataType: 'html',
+        type: "post",
+        dataType: "html",
         cache: false,
-        data: {search: search, "_token": token_search},
+        data: { search: search, _token: token_search },
         success: function (products) {
-
             $("#list").html(products);
         },
-        error: function () {
-
-        }
+        error: function () {},
     });
 }
 
 //========end ajax search ===============//
-$(document).on('click','.delete',function (e){
-   alert('del');
+$(document).on("click", ".delete", function (e) {
+    alert("del");
+});
+let sale = document.querySelector("#sales_price");
+
+sale.addEventListener("change", function () {
+    //alert("test");
+    let salePrice = document.querySelector("#sales_price").value,
+        purcahsePrice = document.querySelector("#purchase_price").value;
+    if (salePrice == purcahsePrice) {
+        alert("لا يمكن ان يساوي سعر الشراء سعر البيع");
+        salePrice.focus();
+        return false;
+    }
+    if (salePrice < purcahsePrice) {
+        alert("لا يمكن ان يكون سعر البيع اقل من  سعر الشراء");
+        salePrice.focus();
+        return false;
+    }
 });

@@ -15,8 +15,10 @@ class ProductController extends Controller
     use SettingTrait;
 
     public function index()
+
     {
         $products = product::all();
+      //  return $products;
         return view('backend.products.index', compact('products'));
     }
 

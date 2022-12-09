@@ -1,6 +1,8 @@
-@extends('layouts.master') @section('title')
+@extends('layouts.master')
+@section('title')
     {{ trans('product.title') }}
-@endsection @push('css')
+@endsection
+@push('css')
     <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"/>
     <link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet"/>
@@ -22,9 +24,7 @@
     </div>
 @endsection
 @section('content')
-
     @include('backend.msg')
-
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header d-flex">
@@ -33,25 +33,21 @@
                 </div>
                 <div class=" col-sm-12 col-md-2">
                     <a href="{{route('product.create')}}"
-                       class="btn btn-success btn-block tx-15"><i
+                       class="btn btn-success btn-block"><i
                             class="fa fa-plus mx-2"></i><span>{{ trans('general.add') }}</span></a>
                 </div>
             </div>
             <div class="card-body py-0">
-                <div class="table-responsive hoverable-table my-2">
-
-                    <table id="example2" class="table text-md-nowrap report-table" style="padding: 0; width:98%">
-
-                        <thead class="alert-success">
+                <div class="table-responsive text-center ">
+                    <table id="example2" class="table table-striped table-hover table-bordered'" style="padding: 0; width:98%">
+                        <thead class="alert-success text-black">
                         <tr>
                             <th class="wd-2" style="padding: 0;wdith:4px;">#</th>
-
+                            <th>{{ trans('product.barcode') }}</th>
                             <th>{{ trans('product.name') }}</th>
                             <th>{{ trans('product.category') }}</th>
                             <th>{{ trans('product.purchase_price') }}</th>
-
                             <th>{{ trans('product.sales_price') }}</th>
-                            <th>{{ trans('product.note') }}</th>
                             <th style="width: 1rem;">{{ trans('product.actions') }}</th>
                         </tr>
                         </thead>
@@ -59,12 +55,11 @@
                         @forelse($products as $product)
                             <tr role="row">
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $product->barcode }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->category->name }}</td>
                                 <td>{{ $product->purchase_price }}</td>
-
                                 <td>{{ $product->sales_price }}</td>
-                                <td>{{ $product->notes }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button aria-expanded="false" aria-haspopup="true"
