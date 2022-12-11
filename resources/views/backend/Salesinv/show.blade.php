@@ -1,9 +1,10 @@
-@extends('layouts.master') @section('title')
+@extends('layouts.master')
+@section('title')
     {{ trans('invoice.invoice_display') }}
 @endsection
-@section('css')
+@push('css')
 
-@endsection
+@endpush
 <!-- Content Header (Page header) -->
 @section('page-header')
     <!-- breadcrumb -->
@@ -79,10 +80,11 @@
                                             voluptatem accusantium doloremque laudantium, totam rem aperiam...
                                         </td>
                                         <td class="tx-center">
-                                            {{ \App\Models\product_salesinv::get()->where('salesinv_id', $inv->id)->where('product_id', $item->id)->first()->quantity }}
+                                            {{ \App\Models\product_salesinv::where('salesinv_id', $inv->id)->where('product_id', $item->id)->pluck('quantity')->first() }}
                                         </td>
                                         <td class="tx-right">{{ $item->sales_price }} {{ env('MAIN_CURRENCY') }}</td>
-                                        <td class="tx-right">{{ number_format($item->sales_price * \App\Models\product_salesinv::get()->where('salesinv_id', $inv->id)->where('product_id', $item->id)->first()->quantity)}} {{ env('MAIN_CURRENCY') }}</td>
+
+                                        <td class="tx-right">{{ number_format($item->sales_price * \App\Models\product_salesinv::where('salesinv_id', $inv->id)->where('product_id', $item->id)->pluck('quantity')->first())}} {{ env('MAIN_CURRENCY') }}</td>
                                     </tr>
                                 @endforeach
                                 <tr>
@@ -123,7 +125,7 @@
             </div>
         </div><!-- COL-END -->
     </div>
-@endsection @section('js')
+@endsection @push('js')
     <script>
         function print_invoice() {
             let invoice = document.querySelector("#print").innerHTML,
@@ -135,4 +137,4 @@
 
         }
     </script>
-@endsection
+@endpush

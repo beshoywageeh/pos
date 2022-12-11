@@ -11,7 +11,7 @@ class client extends Model
     use HasTranslations;
 
     protected $fillable = ['name', 'phone', 'address', 'country_id'];
-
+    protected $hidden = ['id', 'created_at', 'updated_at', 'opening_balance'];
     public $translatable = ['name'];
 
     public function country()
