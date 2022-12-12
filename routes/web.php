@@ -44,7 +44,7 @@ Route::group(
             Route::post('salesproduct', [SalesinvController::class, 'salesproduct'])->name('salesproduct');
             Route::get('getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('getinvoicedata');
             Route::post('deleteproduct', [SalesinvController::class, 'deleteproduct'])->name('deleteproduct');
-
+                Route::get('print/{id}', [SalesinvController::class, 'print'])->name('printinvoice');
             Route::get('settings', [SettingController::class, 'index'])->name('index');
             Route::get('settings/add/{id}', [SettingController::class, 'edit'])->name('edit');
             Route::post('settings/save', [SettingController::class, 'update'])->name('update');

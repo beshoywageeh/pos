@@ -17,9 +17,9 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <button class="btn btn-danger float-left mt-3 mr-2 print" onclick="print_invoice()">
+                <a class="btn btn-primary float-left mt-3 mr-2 print" href="{{route('printinvoice',['id'=>$inv->id])}}"target='_blank'>
                     <i class="mdi mdi-printer ml-1"></i>{{ trans('general.print') }}
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -126,15 +126,4 @@
         </div><!-- COL-END -->
     </div>
 @endsection @push('js')
-    <script>
-        function print_invoice() {
-            let invoice = document.querySelector("#print").innerHTML,
-                original = document.body.innerHTML;
-            document.body.innerHTML = invoice;
-            window.print();
-            document.body.innerHTML = original;
-            location.reload();
-
-        }
-    </script>
 @endpush
