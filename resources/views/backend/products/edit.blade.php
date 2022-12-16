@@ -5,7 +5,7 @@
                 <h6 class="modal-title">{{trans('general.edit')}}</h6>
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-                <form action="{{route('product.update','test')}}" method="POST" autocomplete="off">
+                <form action="{{route('product_update','test')}}" method="POST" autocomplete="off">
                     @method('PUT')
                     @csrf
                     <input type="hidden" name="id" value="{{$product->id}}" >

@@ -18,7 +18,6 @@ class ProductController extends Controller
 
     {
         $products = product::all();
-      //  return $products;
         return view('backend.products.index', compact('products'));
     }
 
@@ -31,33 +30,28 @@ class ProductController extends Controller
             return redirect()
                 ->back()
                 ->withErrors(['error' => $e->getMessage()]);
-
         }
     }
 
     public function store(StoreProductRequest $request, ToastrFactory $flasher)
     {
-        //return($request);
         try {
 
             product::create([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
-                'opening_balance'=>$request->opening_balance,
-                'purchase_price'=>$request->purchase_price,
-                'sales_price'=>$request->sales_price,
+                'opening_balance' => $request->opening_balance,
+                'purchase_price' => $request->purchase_price,
+                'sales_price' => $request->sales_price,
                 'notes' => $request->notes,
             ]);
             $flasher->addSuccess(trans('general.add_msg'));
-            Log::info(\Auth::user()->first_name .' creates products ' . $request->name);
-
-            return redirect('product');
+            return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
                 ->back()
                 ->withErrors(['error' => $e->getMessage()]);
-
         }
     }
 
@@ -84,9 +78,7 @@ class ProductController extends Controller
                 'notes' => $request->notes,
             ]);
             $flasher->AddInfo(trans('general.edit_msg'));
-            Log::info(\Auth::user()->first_name .' updated product ' . $request->name);
-
-            return redirect('product');
+            return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
                 ->back()
@@ -97,17 +89,13 @@ class ProductController extends Controller
     public function destroy(Request $request, ToastrFactory $flasher)
     {
         try {
-            Log::info(\Auth::user()->first_name .' delelte products ' . $request->name);
-
             product::destroy($request->id);
             $flasher->AddError(trans('general.delete_msg'));
-
-            return redirect('product');
+            return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
                 ->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
 }

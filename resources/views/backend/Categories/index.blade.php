@@ -35,19 +35,22 @@
                 <div class="table-responsive text-center ">
                     {!! $dataTable->table(
                         [
-                            'class' => 'dataTable table table-striped table-hover table-bordered',
+                            'class' => 'dataTable table table-striped table-bordered',
                             'style' => 'width:99%',
                             'id' => 'print',
                         ],
                         true,
                     ) !!}
-                    @include('backend.Categories.delete')
                 </div>
+
             </div>
         </div>
         @include('backend.Categories.create')
+        @include('backend.Categories.delete')
+@include('backend.Categories.edit')
     </div>
-    @endsection @push('js')
+    @endsection
+    @push('js')
     {!! $dataTable->scripts() !!}
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
@@ -66,4 +69,8 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::asset('') }}vendor/datatables/buttons.server-side.js"></script>
-@endpush
+
+
+    /*****Edit button*******/
+
+    @endpush

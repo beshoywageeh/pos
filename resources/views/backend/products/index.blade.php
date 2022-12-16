@@ -32,7 +32,7 @@
                     <h4 class="card-title mg-b-0">{{ trans('product.title') }}</h4>
                 </div>
                 <div class=" col-sm-12 col-md-2">
-                    <a href="{{route('product.create')}}"
+                    <a href="{{route('product_create')}}"
                        class="btn btn-success btn-block"><i
                             class="fa fa-plus mx-2"></i><span>{{ trans('general.add') }}</span></a>
                 </div>

@@ -31,7 +31,7 @@ Route::group(
     Route::group(['middleware' => ['auth']],
         function () {
             Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-                /****Category****/
+                /****Category Routes****/
                 Route::group(['prefix' => 'Category'], function () {
                     Route::get('/index', [CategoryController::class, 'index'])->name('category_index');
                     Route::post('/save', [CategoryController::class, 'store'])->name('category_store');
@@ -39,7 +39,15 @@ Route::group(
                     Route::post('/edit/{category}', [CategoryController::class, 'edit'])->name('category_edit');
                     Route::post('/delete/{category}', [CategoryController::class, 'destroy'])->name('category_destroy');
                 });
-            Route::resource('product', ProductController::class);
+                /****Product Routes****/
+                Route::group(['prefix' => 'Product'], function () {
+                    Route::get('/index', [ProductController::class, 'index'])->name('product_index');
+                    Route::get('/create', [ProductController::class, 'create'])->name('product_create');
+                    Route::post('/save', [ProductController::class, 'store'])->name('product_store');
+                    Route::post('/update', [ProductController::class, 'update'])->name('product_update');
+                    Route::get('/edit/{category}', [ProductController::class, 'edit'])->name('product_edit');
+                    Route::post('/delete/{product}', [ProductController::class, 'destroy'])->name('product_destroy');
+                });
             Route::resource('client', ClientController::class);
             Route::get('client_balance/{id}', [ClientController::class, 'print'])->name('print_client_balance');
 

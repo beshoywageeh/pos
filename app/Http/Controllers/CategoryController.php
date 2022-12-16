@@ -28,8 +28,8 @@ class CategoryController extends Controller
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'notes' => $request->notes,
             ]);
+          //  $flasher->titel('تم بنجاح')->success(trans('general.add_msg'))->timeOut(3000)->flash();
             $flasher->AddSuccess(trans('general.add_msg'));
-            Log::info(\Auth::user()->first_name .' creates ' . $request->name);
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
@@ -78,7 +78,6 @@ class CategoryController extends Controller
     public function destroy(Request $request, ToastrFactory $flasher)
     {
         try {
-            Log::info(\Auth::user()->first_name .' Delete category ' . $request->name);
             category::destroy($request->id);
             $flasher->AddError(trans('general.delete_msg'));
             return redirect('category');

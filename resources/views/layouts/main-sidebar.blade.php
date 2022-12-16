@@ -40,7 +40,7 @@
 
             <li class="side-item side-item-category">{{trans('sidebar.product')}}</li>
             <li class="slide">
-                <a class="side-menu__item" href="{{ route('product.index') }}">
+                <a class="side-menu__item" href="{{ route('product_index') }}">
                     <span class="side-menu__icon"><i class="fas fa-store"></i></span>
                     <span class="side-menu__label">{{trans('sidebar.product')}}</span>
                 </a>

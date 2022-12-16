@@ -4,7 +4,7 @@
             id="dropdownMenuButton" type="button">{{trans('category.actions')}} <i
             class="fas fa-caret-down my-1"></i></button>
     <div class="dropdown-menu">
-        <button class="dropdown-item" data-target="#DeleteCategory{{$id}}"
+        <button class="dropdown-item edit" data-id="{{$id}}" data-target="#DeleteCategory"
                 data-toggle="modal" aria-controls="example" type="button">
             <i class="fa fa-trash mx-2 text-danger"></i>{{trans('category.delete')}}
         </button>
@@ -14,3 +14,5 @@
         </button>
     </div>
 </div>
+
+
