@@ -48,7 +48,7 @@ Route::group(
                     Route::get('/edit/{category}', [ProductController::class, 'edit'])->name('product_edit');
                     Route::post('/delete/{product}', [ProductController::class, 'destroy'])->name('product_destroy');
                 });
-                /*=====> Product Routes <=====*/
+                /*=====> Client Routes <=====*/
                 Route::group(['prefix' => 'Client'], function () {
                     Route::get('/index', [ClientController::class, 'index'])->name('client_index');
                     Route::post('/create', [ClientController::class, 'store'])->name('client_create');
@@ -57,14 +57,18 @@ Route::group(
                     Route::post('/delete/{product}', [ClientController::class, 'destroy'])->name('client_destroy');
                     Route::get('/balance/{id}', [ClientController::class, 'print'])->name('client_balance');
                 });
-
-
-            Route::resource('sales', SalesinvController::class);
-            Route::get('saleinv/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
-            Route::post('salesproduct', [SalesinvController::class, 'salesproduct'])->name('salesproduct');
-            Route::get('getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('getinvoicedata');
-            Route::post('deleteproduct', [SalesinvController::class, 'deleteproduct'])->name('deleteproduct');
-                Route::get('print/{id}', [SalesinvController::class, 'print'])->name('printinvoice');
+                /*=====> Sales Invoices Routes <=====*/
+                Route::group(['prefix' => 'sales_invoice'], function () {
+                    Route::get('/index', [SalesinvController::class, 'index'])->name('salesinvoice_index');
+                    Route::get('/create', [SalesinvController::class, 'create'])->name('salesinvoice_create');
+                    Route::post('/store', [SalesinvController::class, 'store'])->name('salesinvoice_store');
+                    Route::get('/show/{sale}', [SalesinvController::class, 'show'])->name('salesinvoice_show');
+                    Route::post('/delete/{sale}', [SalesinvController::class, 'destroy'])->name('salesinvoice_delete');
+                    Route::get('/getproduct', [SalesinvController::class, 'getProduct'])->name('salesinvoice_getproduct');
+                    Route::get('/getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('salesinvoice_getinvoicedata');
+                    Route::get('/deleteproduct', [SalesinvController::class, 'deleteproduct'])->name('salesinvoice_deleteproduct');
+                    Route::get('/{id}', [SalesinvController::class, 'print'])->name('salesinvoice_print');
+                });
                 /*=====> Setting Routes <=====*/
                 Route::group(['prefix' => 'settings'], function () {
                     Route::get('/settings', [SettingController::class, 'index'])->name('index');

@@ -19,13 +19,11 @@ use Illuminate\Support\Facades\Log;
 class SalesinvController extends Controller
 {
     use SettingTrait;
-
     public function index()
     {
         $salesinv = salesinv::with('client')->get();
         return view('backend.Salesinv.index', compact('salesinv'));
     }
-
     public function create()
     {
         try {
@@ -48,11 +46,9 @@ class SalesinvController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
     public function store(salesinvrequest $request, ToastrFactory $flasher)
     {
         try {
-//            DB::beginTransaction();
             $total_inv = explode(' ', $request->total_inv);
             $details = [];
             for ($i = 0; $i < count($request->product_id); $i++) {
@@ -80,51 +76,35 @@ class SalesinvController extends Controller
                 ->attach($details);
             DB::table('transinvs')->truncate();
 
-  //          DB::commit();
             $flasher->AddSuccess(trans('general.add_msg'));
-//            Log::info(\Auth::user()->first_name . ' create sales ' . $request->inv_num . ' - ' . $request->total_inv);
             return redirect('sales');
-
         } catch (\Exception $e) {
-    //        DB::rollBack();
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
     public function show(salesinv $salesinv)
     {
-    }
-
-    public function saleinv($id)
-    {
-        //return $inv->products;
         try {
-            $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
+            $inv = salesinv::with('products', 'products_salesinvs')->where('id', $salesinv)->first();
             return view('backend.Salesinv.show', compact('inv'), $this->GetData());
-//return $inv->client;
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
     public function edit(salesinv $salesinv)
     {
         //
     }
-
     public function update(Request $request, salesinv $salesinv)
     {
         //
     }
-
     public function destroy(Request $request, ToastrFactory $flasher)
     {
         try {
             $id = $request->id;
-            Log::info(\Auth::user()->first_name . ' deletes ' . $request->id);
-
             salesinv::findorfail($id)->delete();
             $flasher->AddError(trans('general.delete_msg'));
             return redirect()->back();
@@ -134,9 +114,7 @@ class SalesinvController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-
-    public function salesproduct(Request $request)
+    public function getProduct(Request $request)
     {
         if ($request->ajax()) {
             transinv::create([
@@ -149,7 +127,6 @@ class SalesinvController extends Controller
             ]);
         }
     }
-
     public function getinvoicedata()
     {
         $ids = transinv::all('barcode');
@@ -157,7 +134,6 @@ class SalesinvController extends Controller
         //var_dump($products);
         return view('backend.salesinv.data', compact('products'));
     }
-
     public function deleteproduct(Request $request, ToastrFactory $flasher)
     {
         $id = $request->id;

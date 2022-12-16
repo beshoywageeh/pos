@@ -36,8 +36,6 @@ class ClientController extends Controller
             $client->country_id = $request->country_id;
             $client->save();
             $flasher->AddSuccess(trans('general.add_msg'));
-            Log::info(\Auth::user()->first_name .' creates client ' . $request->name);
-
             return redirect('client');
         } catch (\Exception $e) {
             return redirect()
