@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h6 class="modal-title">{{trans('category.delete')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-                <form action="{{route('category.destroy','test')}}" method="POST" autocomplete="off">
+                <form action="{{route('category_destroy','test')}}" method="POST" autocomplete="off">
                     @method('DELETE')
                     @csrf
                     <div class="modal-body">

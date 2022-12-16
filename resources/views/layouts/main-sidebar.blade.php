@@ -32,7 +32,7 @@
             </li>
             <li class="side-item side-item-category">{{trans('sidebar.Category')}}</li>
             <li class="slide">
-                <a class="side-menu__item" href="{{route('category.index')}}">
+                <a class="side-menu__item" href="{{route('category_index')}}">
                     <span class="side-menu__icon"><i class="fas fa-tags" style="font-size: 23px;"></i></span>
                     <span class="side-menu__label">{{trans('sidebar.Category')}}</span>
                 </a>

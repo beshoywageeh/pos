@@ -31,10 +31,14 @@ Route::group(
     Route::group(['middleware' => ['auth']],
         function () {
             Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-
-
-            Route::resource('category', CategoryController::class);
-
+                /****Category****/
+                Route::group(['prefix' => 'Category'], function () {
+                    Route::get('/index', [CategoryController::class, 'index'])->name('category_index');
+                    Route::post('/save', [CategoryController::class, 'store'])->name('category_store');
+                    Route::post('/show/{category}', [CategoryController::class, 'show'])->name('category_show');
+                    Route::post('/edit/{category}', [CategoryController::class, 'edit'])->name('category_edit');
+                    Route::post('/delete/{category}', [CategoryController::class, 'destroy'])->name('category_destroy');
+                });
             Route::resource('product', ProductController::class);
             Route::resource('client', ClientController::class);
             Route::get('client_balance/{id}', [ClientController::class, 'print'])->name('print_client_balance');
@@ -45,10 +49,13 @@ Route::group(
             Route::get('getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('getinvoicedata');
             Route::post('deleteproduct', [SalesinvController::class, 'deleteproduct'])->name('deleteproduct');
                 Route::get('print/{id}', [SalesinvController::class, 'print'])->name('printinvoice');
-            Route::get('settings', [SettingController::class, 'index'])->name('index');
-            Route::get('settings/add/{id}', [SettingController::class, 'edit'])->name('edit');
-            Route::post('settings/save', [SettingController::class, 'update'])->name('update');
-            Route::get('income/index', [ClientBalanceController::class, 'index'])->name('treasray.index');
+                //Route::get('income/index', [ClientBalanceController::class, 'index'])->name('treasray.index');
+                /****Settings****/
+                Route::group(['prefix' => 'settings'], function () {
+                    Route::get('/settings', [SettingController::class, 'index'])->name('index');
+                    Route::get('/add/{id}', [SettingController::class, 'edit'])->name('edit');
+                    Route::post('/save', [SettingController::class, 'update'])->name('update');
+                });
         });
 
     require __DIR__ . '/auth.php';

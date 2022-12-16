@@ -30,7 +30,7 @@ class CategoryController extends Controller
             ]);
             $flasher->AddSuccess(trans('general.add_msg'));
             Log::info(\Auth::user()->first_name .' creates ' . $request->name);
-            return redirect('category');
+            return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
                 ->back()

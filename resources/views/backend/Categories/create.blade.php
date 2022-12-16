@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h6 class="modal-title">{{trans('category.add')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-                <form action="{{route('category.store')}}" method="POST" autocomplete="off">
+                <form action="{{route('category_store')}}" method="POST" autocomplete="off">
                     @csrf
                     <div class="modal-body">
 

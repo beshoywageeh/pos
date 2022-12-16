@@ -5,7 +5,7 @@
                 <h6 class="modal-title">{{trans('category.edit')}}</h6>
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-                <form action="{{route('category.update','test')}}" method="POST" autocomplete="off">
+                <form action="{{route('category_update','test')}}" method="POST" autocomplete="off">
                     @csrf @method('PUT')
                     <div class="modal-body">
 
