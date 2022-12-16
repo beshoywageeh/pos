@@ -17,7 +17,7 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <a class="btn btn-primary float-left mt-3 mr-2 print" href="{{route('printinvoice',['id'=>$inv->id])}}"target='_blank'>
+                <a class="btn btn-primary float-left mt-3 mr-2 print" href="{{route('salesinvoice_print',['id'=>$inv->id])}}"target='_blank'>
                     <i class="mdi mdi-printer ml-1"></i>{{ trans('general.print') }}
                 </a>
             </div>

@@ -38,7 +38,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-12 col-md-6">
                         <a class="btn btn-success buttons-add btn-with-icon buttons-html5 tx-15 tx-bold" tabindex="0"
-                           aria-controls="example" type="button" href="{{route('sales.create')}}">
+                           aria-controls="example" type="button" href="{{route('salesinvoice_create')}}">
                             <i class="typcn typcn-document-add"></i><span>{{trans('sales.add')}}</span>
                         </a>
                     </div>
@@ -63,11 +63,11 @@
                             @foreach($salesinv as $sales)
                                 <tr role="row">
                                     <td>{{$loop->iteration}}</td>
-                                    <td><a href='{{route('saleinv',['id'=>$sales->id])}}'>{{$sales->inv_num}}</a>
+                                    <td><a href='{{route('salesinvoice_show',['id'=>$sales->id])}}'>{{$sales->inv_num}}</a>
                                     </td>
 
                                     <td>
-                                        <a href="{{route('client.show',['client'=>$sales->client_id])}}">{{$sales->client->name}}</a>
+                                        <a href="{{route('client_show',['client'=>$sales->client_id])}}">{{$sales->client->name}}</a>
                                     </td>
                                     <td>{{$sales->inv_date}}</td>
                                     <td>{{number_format($sales->total).' '. env('MAIN_CURRENCY')}}</td>

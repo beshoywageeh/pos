@@ -2,11 +2,10 @@
 @section('title')
     {{trans('client.title')}}
 @endsection
-@section('css')
+@push('css')
     <style type="text/css">
         .select2 {
             width: 100% !important;
-        }
         }
     </style>
     <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"/>
@@ -18,7 +17,7 @@
     <link href="{{URL::asset('assets/plugins/prism/prism.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/custom-scroll/jquery.mCustomScrollbar.css')}}" rel="stylesheet">
 
-@endsection
+@endpush
 <!-- Content Header (Page header) -->
 @section('content')
     <!-- breadcrumb -->
@@ -31,7 +30,6 @@
         </div>
     </div>
     @include('backend.msg')
-
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
@@ -39,8 +37,6 @@
                     <h4 class="card-title mg-b-0">{{trans('client.title')}}</h4>
                 </div>
             </div>
-
-
             <div class="card-body">
                 <div class="row mb-2">
                     <div class="col-sm-12 col-md-6">
@@ -60,7 +56,6 @@
                         <thead class='alert-success'>
                         <tr>
                             <th class="wd-2" style="padding: 0;wdith:4px;">{{trans('client.code')}}</th>
-
                             <th>{{trans('client.name')}}</th>
                             <th>{{trans('client.phone')}}</th>
                             <th>{{trans('client.address')}}</th>
@@ -90,7 +85,7 @@
                                                 <i class="fas fa-pen mx-2 text-warning"></i> {{trans('client.edit')}}
                                             </button>
                                             <a class="dropdown-item"
-                                               href="{{route('client.show',['client'=>$client->id])}}">
+                                               href="{{route('client_show',['client'=>$client->id])}}">
                                                 <i class="fas fa-info  text-info mx-2 fa-1x"></i> {{trans('client.details')}}
                                             </a>
                                         </div>
@@ -113,10 +108,9 @@
         @include('backend.client.create')
     </div>
 
-@endsection @section('js')
-    @livewireScripts
+@endsection
+@push('js')
     <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-
     <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
@@ -141,7 +135,7 @@
                 {
                     lengthChange: true,
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                    dom: 'Bfrtip',
+                    dom: 'Bflrtip',
                     responsive: true,
                     buttons: [
                         {
@@ -150,6 +144,7 @@
                                 $(win.document.body)
                                     .css('direction', 'rtl').css('text-align', 'center');
                                 $(win.document.body).find('table .hidden_print').css('display', 'none')
+                                window.print();
                             },
                             'className': 'btn btn-primary',
                             'text': `<i class="fas fa-print mx-2"></i> {{trans('general.print')}}`,
@@ -184,4 +179,4 @@
 
 
     </script>
-@endsection
+@endpush

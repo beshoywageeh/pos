@@ -83,10 +83,11 @@ class SalesinvController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function show(salesinv $salesinv)
+    public function show($id)
     {
         try {
-            $inv = salesinv::with('products', 'products_salesinvs')->where('id', $salesinv)->first();
+            $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
+            //return $inv;
             return view('backend.Salesinv.show', compact('inv'), $this->GetData());
         } catch (\Exception $e) {
             return redirect()->back()

@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h6 class="modal-title">{{trans('client.add')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-                <form action="{{route('client.store')}}" method="POST" autocomplete="off">
+                <form action="{{route('client_create')}}" method="POST" autocomplete="off">
                     @csrf
                     <div class="modal-body">
 
@@ -40,7 +40,7 @@
                                     </option>
                                     @foreach($countries as $country)
                                     <option value="{{$country->id}}">
-                                        {{$country->id}} - 
+                                        {{$country->id}} -
                                         {{$country->name}}
                                     </option>
                                     @endforeach

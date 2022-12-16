@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ClientBalanceController;
 use App\Http\Controllers\clientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesinvController;
@@ -62,7 +60,7 @@ Route::group(
                     Route::get('/index', [SalesinvController::class, 'index'])->name('salesinvoice_index');
                     Route::get('/create', [SalesinvController::class, 'create'])->name('salesinvoice_create');
                     Route::post('/store', [SalesinvController::class, 'store'])->name('salesinvoice_store');
-                    Route::get('/show/{sale}', [SalesinvController::class, 'show'])->name('salesinvoice_show');
+                    Route::get('/show/{id}', [SalesinvController::class, 'show'])->name('salesinvoice_show');
                     Route::post('/delete/{sale}', [SalesinvController::class, 'destroy'])->name('salesinvoice_delete');
                     Route::get('/getproduct', [SalesinvController::class, 'getProduct'])->name('salesinvoice_getproduct');
                     Route::get('/getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('salesinvoice_getinvoicedata');

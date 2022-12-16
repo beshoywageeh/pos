@@ -22,7 +22,7 @@
                 </div>
             </div>
             <hr>
-            <form action="{{ route('product.store') }}" method="POST" autocomplete="off" id="product_data">
+            <form action="{{ route('product_store') }}" method="POST" autocomplete="off" id="product_data">
                 @csrf
                 <div class="card-body">
                     <div class="row mb-2"

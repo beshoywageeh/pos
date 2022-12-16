@@ -47,7 +47,7 @@
             </li>
             <li class="side-item side-item-category">{{trans('sidebar.clients')}}</li>
             <li class="slide">
-                <a class="side-menu__item" href="{{ route('client.index') }}">
+                <a class="side-menu__item" href="{{ route('client_index') }}">
                     <span class="side-menu__icon"><i class="fa fa-users"></i></span>
                     <span class="side-menu__label">{{trans('sidebar.clients')}}</span>
                 </a>
@@ -60,14 +60,14 @@
                         class="angle fe fe-chevron-down"></i>
                 </a>
                 <ul class="slide-menu">
-                    <li><a class="slide-item" href="{{ route('sales.index') }}">{{trans('invoice.salesinvoce')}}</a>
+                    <li><a class="slide-item" href="{{ route('salesinvoice_index') }}">{{trans('invoice.salesinvoce')}}</a>
                     </li>
                     <li><a class="slide-item"
-                           href="{{ route('sales.index') }}">{{trans('invoice.rejctsalesinvoice')}}</a></li>
-                    <li><a class="slide-item" href="{{ route('sales.index') }}">{{trans('invoice.supplyinvoce')}}</a>
+                           href="{{ route('salesinvoice_index') }}">{{trans('invoice.rejctsalesinvoice')}}</a></li>
+                    <li><a class="slide-item" href="{{ route('salesinvoice_index') }}">{{trans('invoice.supplyinvoce')}}</a>
                     </li>
                     <li><a class="slide-item"
-                           href="{{ route('sales.index') }}">{{trans('invoice.rejctsupplyinvoice')}}</a></li>
+                           href="{{ route('salesinvoice_index') }}">{{trans('invoice.rejctsupplyinvoice')}}</a></li>
                 </ul>
             </li>
             <li class="side-item side-item-category">{{trans('sidebar.money_transaction')}}</li>

@@ -5,7 +5,7 @@
                 <h6 class="modal-title">{{trans('client.edit')}}</h6>
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-                <form action="{{route('client.update','test')}}" method="POST" autocomplete="off">
+                <form action="{{route('client_update','test')}}" method="POST" autocomplete="off">
                     @csrf @method('PUT')
                     <div class="modal-body">
 
@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="country">{{trans('client.country')}}</label>
-        
+
                             <select class="form-control @error('country_id') is-invalid @enderror" name="country_id">
                             <option value="" disabled selected>{{trans('client.country')}}</option>
                             <option value="{{$client->country_id}}" selected>{{$client->country->city_name_ar}}</option>
