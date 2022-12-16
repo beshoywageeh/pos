@@ -31,7 +31,7 @@ Route::group(
     Route::group(['middleware' => ['auth']],
         function () {
             Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-                /****Category Routes****/
+                /*=====> Category Routes <=====*/
                 Route::group(['prefix' => 'Category'], function () {
                     Route::get('/index', [CategoryController::class, 'index'])->name('category_index');
                     Route::post('/save', [CategoryController::class, 'store'])->name('category_store');
@@ -39,7 +39,7 @@ Route::group(
                     Route::post('/edit/{category}', [CategoryController::class, 'edit'])->name('category_edit');
                     Route::post('/delete/{category}', [CategoryController::class, 'destroy'])->name('category_destroy');
                 });
-                /****Product Routes****/
+                /*=====> Product Routes <=====*/
                 Route::group(['prefix' => 'Product'], function () {
                     Route::get('/index', [ProductController::class, 'index'])->name('product_index');
                     Route::get('/create', [ProductController::class, 'create'])->name('product_create');
@@ -48,8 +48,16 @@ Route::group(
                     Route::get('/edit/{category}', [ProductController::class, 'edit'])->name('product_edit');
                     Route::post('/delete/{product}', [ProductController::class, 'destroy'])->name('product_destroy');
                 });
-            Route::resource('client', ClientController::class);
-            Route::get('client_balance/{id}', [ClientController::class, 'print'])->name('print_client_balance');
+                /*=====> Product Routes <=====*/
+                Route::group(['prefix' => 'Client'], function () {
+                    Route::get('/index', [ClientController::class, 'index'])->name('client_index');
+                    Route::post('/create', [ClientController::class, 'store'])->name('client_create');
+                    Route::get('/show/{client}', [ClientController::class, 'show'])->name('client_show');
+                    Route::post('/update', [ClientController::class, 'update'])->name('client_update');
+                    Route::post('/delete/{product}', [ClientController::class, 'destroy'])->name('client_destroy');
+                    Route::get('/balance/{id}', [ClientController::class, 'print'])->name('client_balance');
+                });
+
 
             Route::resource('sales', SalesinvController::class);
             Route::get('saleinv/{id}', [SalesinvController::class, 'saleinv'])->name('saleinv');
@@ -57,8 +65,7 @@ Route::group(
             Route::get('getinvoicedata', [SalesinvController::class, 'getinvoicedata'])->name('getinvoicedata');
             Route::post('deleteproduct', [SalesinvController::class, 'deleteproduct'])->name('deleteproduct');
                 Route::get('print/{id}', [SalesinvController::class, 'print'])->name('printinvoice');
-                //Route::get('income/index', [ClientBalanceController::class, 'index'])->name('treasray.index');
-                /****Settings****/
+                /*=====> Setting Routes <=====*/
                 Route::group(['prefix' => 'settings'], function () {
                     Route::get('/settings', [SettingController::class, 'index'])->name('index');
                     Route::get('/add/{id}', [SettingController::class, 'edit'])->name('edit');
@@ -66,6 +73,5 @@ Route::group(
                 });
         });
 
-    require __DIR__ . '/auth.php';
-    Route::get('/{page}', [AdminController::class, 'index']);
+        require __DIR__ . '/auth.php';
 });

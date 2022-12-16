@@ -47,7 +47,6 @@ class ClientController extends Controller
     }
     public function show(client $client)
     {
-//        $clients = client::findorfail($client->id);
         $sales = salesinv::where('client_id',$client->id)->get();
         return view('backend.client.show',compact('sales','client'));
     }
@@ -56,7 +55,7 @@ class ClientController extends Controller
         //
     }
     public function update(Request $request,ToastrFactory $flasher)
-    {//dd($request);
+    {
         try {
             $client = Client::findorfail($request->id);
             // $client = new client();
@@ -66,8 +65,6 @@ class ClientController extends Controller
             $client->country_id = $request->country_id;
             $client->save();
             $flasher->AddInfo(trans('general.edit_msg'));
-            Log::info(\Auth::user()->first_name .' edit Clients ' . $request->name);
-
             return redirect('client');
         } catch (\Exception $e) {
             return redirect()
@@ -78,8 +75,6 @@ class ClientController extends Controller
     public function destroy(Request $request,ToastrFactory $flasher)
     {
         try {
-            Log::info(\Auth::user()->first_name .' deletes ' . $request->name);
-
             client::destroy($request->id);
             $flasher->AddSuccess(trans('general.delete_msg'));
             return redirect('client');
@@ -88,11 +83,6 @@ class ClientController extends Controller
                 ->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
-    }
-    public function getclient($id)
-    {
-        $client = DB::table('clients')->where('id', $id)->first();
-        return json_encode($client);
     }
     public function print($id)
     {
