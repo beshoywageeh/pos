@@ -40,7 +40,7 @@
                         <thead class="alert-secondary">
                             <tr>
                                 <th colspan="4">
-                                    <h5 class="py-1">بيانات العميل</h5>
+                                    <h5 class="py-1 fw-bold">بيانات العميل</h5>
                                 </th>
                             </tr>
                         </thead>
@@ -75,7 +75,7 @@
                                             <thead class="alert-secondary">
                                                 <tr>
                                                     <td colspan="5">
-                                                        <h5 class="py-1">
+                                                        <h5 class="py-1 fw-bold R">
                                                             {{ trans('client.balance') }}</h5>
                                                     </td>
                                                 </tr>

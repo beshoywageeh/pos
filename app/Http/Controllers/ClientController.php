@@ -20,11 +20,11 @@ class ClientController extends Controller
         $clients = client::all();
 
         return view('backend.client.index', compact('clients', 'countries'));
+
     }public function create()
     {
         //
     }
-
     public function store(Request $request,ToastrFactory $flasher)
     {
         //dd($request);

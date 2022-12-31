@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="icon1 mt-2 text-center">
-                                <a href="{{route('client.index')}}" class="text-white"><i class="fe fe-users tx-40"></i></a>
+                                <a href="{{route('client_index')}}" class="text-white"><i class="fe fe-users tx-40"></i></a>
                             </div>
                         </div>
                         <div class="col-8">
@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="icon1 mt-2 text-center">
-                                <a href="{{route('sales.index')}}" class="text-white"><i
+                                <a href="{{route('salesinvoice_index')}}" class="text-white"><i
                                         class="fe fe-shopping-cart tx-40"></i></a>
                             </div>
                         </div>
