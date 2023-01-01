@@ -32,4 +32,8 @@ class client extends Model
     {
         return $this->belongsTo(user::class);
     }
+    public function money_transaction()
+    {
+        return $this->hasMany(MoneyTreasary::class, 'client_id', 'id');
+    }
 }

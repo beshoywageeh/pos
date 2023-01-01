@@ -27,6 +27,10 @@ return new class extends Migration
             $table->foreign('salesinv_id')->references('id')->on('salesinvs')->onDelete('Cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('Cascade');
         });
+        Schema::table('money_treasaries', function (Blueprint $table) {
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('Cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('Cascade');
+        });
     }
 
     /**

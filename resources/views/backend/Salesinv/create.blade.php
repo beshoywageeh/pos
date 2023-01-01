@@ -29,7 +29,7 @@
             <hr>
 
 
-            <form action="{{ route('sales.store') }}" method="post" id="invoice" >
+            <form action="{{ route('salesinvoice_store') }}" method="post" id="invoice" >
                 @method ('post')@csrf
                 <div class="card-body" id="print_area">
                     <input type="hidden" id='last' value="{{ $ex[1] }}">
@@ -152,7 +152,7 @@
                 <div class=card-footer>
                     <button onclick="document.querySelector('#invoice').submit()" keypress="e.preventDefault()" class="btn btn-success btn-block tx-15 tx-bold" type="submit">{{trans('general.save')}}<i
                         class="mx-2 fa fa-save"></i>
-                </button>                    
+                </button>
                 </div>
             </form>
 
@@ -161,5 +161,5 @@
 @endsection
 @push('js')
 <script src="{{URL::asset('assets/js/custom_loop.js')}}"></script>
-    
+
 @endpush

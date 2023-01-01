@@ -71,15 +71,10 @@
                 </ul>
             </li>
             <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
+                <a class="side-menu__item" href="{{ route('money_treasary_index') }}">
                     <span class="side-menu__icon"><i class="fe fe-pie-chart"></i></span>
-                    <span class="side-menu__label">{{ trans('sidebar.money_transaction') }}</span><i
-                        class="angle fe fe-chevron-down"></i>
+                    <span class="side-menu__label">{{ trans('sidebar.money_transaction') }}</span>
                 </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item" href="#">{{ trans('sidebar.income') }}</a></li>
-                    <li><a class="slide-item" href="#">{{ trans('sidebar.expenses') }}</a></li>
-                </ul>
             </li>
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('index') }}">

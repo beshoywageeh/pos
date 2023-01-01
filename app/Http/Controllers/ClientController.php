@@ -45,7 +45,10 @@ class ClientController extends Controller
     }
     public function show(client $client)
     {
+
+        $data['client'] = client::with('money_transaction', 'salesinvs')->orderBY('created_at', 'desc')->get();
         $sales = salesinv::where('client_id',$client->id)->get();
+        return $data;
         return view('backend.client.show',compact('sales','client'));
     }
     public function edit(client $client)

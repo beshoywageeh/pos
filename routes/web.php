@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesinvController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MoenyTreasaryController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -73,6 +74,20 @@ Route::group(
                         Route::get('/getinvoicedata', 'getinvoicedata')->name('salesinvoice_getinvoicedata');
                         Route::get('/deleteproduct', 'deleteproduct')->name('salesinvoice_deleteproduct');
                         Route::get('/{id}', 'print')->name('salesinvoice_print');
+                    });
+                });
+                /*=====> Money Treasary Routes <=====*/
+                Route::controller(MoenyTreasaryController::class)->group(function () {
+                    Route::group(['prefix' => 'money_treasary'], function () {
+                        Route::get('/index', 'index')->name('money_treasary_index');
+                        Route::get('/create', 'create')->name('money_treasary_create');
+                        Route::post('/store', 'store')->name('money_treasary_store');
+                        Route::get('/show/{id}', 'show')->name('money_treasary_show');
+                        Route::post('/delete/{sale}', 'destroy')->name('money_treasary_delete');
+                        Route::get('/getproduct', 'getProduct')->name('money_treasary_getproduct');
+                        Route::get('/getinvoicedata', 'getinvoicedata')->name('money_treasary_getinvoicedata');
+                        Route::get('/deleteproduct', 'deleteproduct')->name('money_treasary_deleteproduct');
+                        Route::get('/{id}', 'print')->name('money_treasary_print');
                     });
                 });
 
