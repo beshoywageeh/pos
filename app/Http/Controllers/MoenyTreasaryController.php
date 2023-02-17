@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MoneyTreasary;
 use App\Models\client;
+use App\Models\MoneyTreasary;
 use Illuminate\Http\Request;
 
 class MoenyTreasaryController extends Controller
@@ -16,6 +16,7 @@ class MoenyTreasaryController extends Controller
         //return $data['Client'];
         return view('backend.Money_Treasary.index', ['data' => $data]);
     }
+
     public function store(Request $request)
     {
     }

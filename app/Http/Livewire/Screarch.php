@@ -13,7 +13,6 @@ class Screarch extends Component
 
     public function render()
     {
-
         // return view('livewire.screarch');
         if (! empty($this->queryString)) {
             return view('livewire.screarch', [

@@ -26,8 +26,8 @@ return [
     'price' => 'price',
     'chcat' => '-- choose category from list --',
     'category' => ' category',
-'report_msg'=>'no invoices to show',
-'balance'=>'client balance',
-'chooseclient'=>'choose client',
-'code'=>'code'
+    'report_msg' => 'no invoices to show',
+    'balance' => 'client balance',
+    'chooseclient' => 'choose client',
+    'code' => 'code',
 ];

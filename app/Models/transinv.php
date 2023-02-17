@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class transinv extends Model
 {
     use HasFactory;
-    protected $fillable=['barcode'];
+
+    protected $fillable = ['barcode'];
 }

@@ -23,8 +23,7 @@ return [
     'total' => 'total invoice',
     'chcat' => '-- choose cateory from list --',
     'category' => 'category',
-    'date'=>'invoice date',
-    'user'=>'user name',
-
+    'date' => 'invoice date',
+    'user' => 'user name',
 
 ];

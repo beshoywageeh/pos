@@ -27,9 +27,11 @@ class salesinvrequest extends FormRequest
             'client' => 'required',
         ];
     }
-    public function messages(){
+
+    public function messages()
+    {
         return[
-            'client.required' =>'اسم العميل مطلوب',
+            'client.required' => 'اسم العميل مطلوب',
         ];
     }
 }

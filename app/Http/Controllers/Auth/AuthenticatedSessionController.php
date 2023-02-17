@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-        Log::info( \Auth::user()->first_name . ' loged in at ' . now());
+        Log::info(\Auth::user()->first_name.' loged in at '.now());
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
@@ -45,7 +45,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Log::info( \Auth::user()->first_name . ' loged out at ' . now());
+        Log::info(\Auth::user()->first_name.' loged out at '.now());
 
         Auth::guard('web')->logout();
 

@@ -23,7 +23,7 @@ class MoneyTreasaryFactory extends Factory
             'type' => fake()->numberBetween('1', '2'),
             'payed_at' => fake()->date('Y-m-d'),
             'debit' => fake()->numberBetween('1000', '9999'),
-            'created_at' => \Carbon\Carbon::now()
+            'created_at' => \Carbon\Carbon::now(),
         ];
     }
 }

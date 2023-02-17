@@ -6,18 +6,17 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Traits\SettingTrait;
 use App\Models\category;
 use App\Models\product;
-use Illuminate\Http\Request;
 use Flasher\Toastr\Prime\ToastrFactory;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     use SettingTrait;
 
     public function index()
-
     {
         $products = product::all();
+
         return view('backend.products.index', compact('products'));
     }
 
@@ -25,6 +24,7 @@ class ProductController extends Controller
     {
         try {
             $cats = category::get();
+
             return view('backend.products.create', compact('cats'), $this->GetData());
         } catch (\Exception $e) {
             return redirect()
@@ -36,7 +36,6 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request, ToastrFactory $flasher)
     {
         try {
-
             product::create([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'barcode' => $request->barcode,
@@ -47,6 +46,7 @@ class ProductController extends Controller
                 'notes' => $request->notes,
             ]);
             $flasher->addSuccess(trans('general.add_msg'));
+
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
@@ -69,7 +69,6 @@ class ProductController extends Controller
     {
         $product = product::findorfail($request->id);
         try {
-
             $product->update([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'price' => $request->price,
@@ -78,6 +77,7 @@ class ProductController extends Controller
                 'notes' => $request->notes,
             ]);
             $flasher->AddInfo(trans('general.edit_msg'));
+
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
@@ -91,6 +91,7 @@ class ProductController extends Controller
         try {
             product::destroy($request->id);
             $flasher->AddError(trans('general.delete_msg'));
+
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()

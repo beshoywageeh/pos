@@ -8,13 +8,12 @@ use App\Models\category;
 use App\Models\product;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
     public function index(CategoriesDataTable $dataTable)
     {
-      return $dataTable->render('backend.Categories.index');
+        return $dataTable->render('backend.Categories.index');
     }
 
     public function create()
@@ -28,8 +27,9 @@ class CategoryController extends Controller
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'notes' => $request->notes,
             ]);
-          //  $flasher->titel('تم بنجاح')->success(trans('general.add_msg'))->timeOut(3000)->flash();
+            //  $flasher->titel('تم بنجاح')->success(trans('general.add_msg'))->timeOut(3000)->flash();
             $flasher->AddSuccess(trans('general.add_msg'));
+
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()
@@ -80,6 +80,7 @@ class CategoryController extends Controller
         try {
             category::destroy($request->id);
             $flasher->AddError(trans('general.delete_msg'));
+
             return redirect('category');
         } catch (\Exception $e) {
             return redirect()

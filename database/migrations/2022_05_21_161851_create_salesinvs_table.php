@@ -22,7 +22,7 @@ class CreateSalesinvsTable extends Migration
             $table->decimal('discount', '8', '2')->nullable();
             $table->string('tax_rate')->nullable();
             $table->decimal('tax_value', '8', '2')->nullable();
-            $table->decimal('total','50','2')->nullable();
+            $table->decimal('total', '50', '2')->nullable();
             $table->timestamps();
         });
     }

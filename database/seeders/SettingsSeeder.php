@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
 
 class SettingsSeeder extends Seeder
 {
@@ -18,11 +16,11 @@ class SettingsSeeder extends Seeder
     {
         DB::table('settings')->delete();
         $data = [
-            ['key'=>'name','value'=>'Loop Labs'],
-            ['key'=>'phone','value'=>'01201026745'],
-            ['key'=>'photo','value'=>'default.png'],
-            ['key'=>'address','value'=>'11'],
-            ['key'=>'slogan','value'=>'LL'],
+            ['key' => 'name', 'value' => 'Loop Labs'],
+            ['key' => 'phone', 'value' => '01201026745'],
+            ['key' => 'photo', 'value' => 'default.png'],
+            ['key' => 'address', 'value' => '11'],
+            ['key' => 'slogan', 'value' => 'LL'],
         ];
         DB::table('settings')->insert($data);
     }

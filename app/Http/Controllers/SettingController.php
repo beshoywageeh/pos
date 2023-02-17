@@ -7,7 +7,6 @@ use App\Models\setting;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 
-
 class SettingController extends Controller
 {
     use SettingTrait;
@@ -35,8 +34,8 @@ class SettingController extends Controller
                 setting::where('key', 'photo')->update(['value' => $photofile]);
             }
             $oldPhoto = setting::where('key', 'photo')->get('value')->first();
-            if (file_exists('assets/img/' . $oldPhoto)) {
-                unlink('assets/img/' . $oldPhoto);
+            if (file_exists('assets/img/'.$oldPhoto)) {
+                unlink('assets/img/'.$oldPhoto);
             }
 
             $flasher->AddInfo(trans('general.edit_msg'));

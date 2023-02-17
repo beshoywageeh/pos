@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\client;
 use App\Models\salesinv;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -26,11 +24,11 @@ class HomeController extends Controller
             $data['clientlast'] = client::latest()->take(10)->get();
             $data['saleslast'] = salesinv::latest()->take(5)->get();
             $data['name'] = \Auth::user()->first_name;
+
             return view('backend/dashboard', ['data' => $data]);
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
-
     }
 }

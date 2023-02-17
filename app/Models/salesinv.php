@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+
 class salesinv extends Model
 {
     use HasFactory;
@@ -26,18 +27,21 @@ class salesinv extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\product','product_salesinvs');
+        return $this->belongsToMany('App\Models\product', 'product_salesinvs');
     }
 
     public function products_salesinvs()
     {
         return $this->hasMany(product_salesinv::class);
     }
+
     public function formatdate()
     {
         return $this->created_at->format('Y-m-d');
-    }  public function formatcurrncy()
-    {
-        return number_format($this->total,'2');
     }
+
+  public function formatcurrncy()
+  {
+      return number_format($this->total, '2');
+  }
 }

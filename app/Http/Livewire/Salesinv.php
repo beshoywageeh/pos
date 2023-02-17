@@ -8,14 +8,13 @@ use Livewire\Component;
 class Salesinv extends Component
 {
     public $getproduct;
+
     protected $queryString = ['getproduct'];
 
     public function render()
     {
+        $products = product::where('barcode', 'LIKE', '%'.$this->getproduct.'%')->get();
 
-         $products = product::where('barcode','LIKE','%'.$this->getproduct.'%')->get();
-         return view('livewire.salesinv',compact('products'));
-
+        return view('livewire.salesinv', compact('products'));
     }
-
 }

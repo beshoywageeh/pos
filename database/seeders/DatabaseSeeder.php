@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             ClientFactorySeeder::class,
             SalesFactorySeeder::class,
             ProductsSalesSeederFactory::class,
-            MoneyTreasaryFactorySeeder::class
+            MoneyTreasaryFactorySeeder::class,
             /*
             5- product in sales
             */

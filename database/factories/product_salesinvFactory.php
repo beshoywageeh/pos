@@ -22,7 +22,7 @@ class product_salesinvFactory extends Factory
         return [
             'salesinv_id' => fake()->numberBetween('1', '300'),
             'product_id' => fake()->numberBetween('1', '100'),
-            'quantity' => fake()->numberBetween('1', '50')
+            'quantity' => fake()->numberBetween('1', '50'),
         ];
     }
 }

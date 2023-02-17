@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,7 +24,7 @@ class ProductFactory extends Factory
             'sales_price' => fake()->numberBetween('1000', '2000'),
             'sales_unit' => fake()->name(),
             'purchase_unit' => fake()->name(),
-            'category_id' => fake()->numberBetween('1', '10')
+            'category_id' => fake()->numberBetween('1', '10'),
         ];
     }
 }

@@ -9,7 +9,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\SearchPane;
 use Yajra\DataTables\Services\DataTable;
 
 class CategoriesDataTable extends DataTable
@@ -44,10 +43,10 @@ class CategoriesDataTable extends DataTable
                 Button::raw('<button data-target="#AddCategory" data-toggle="modal"
                                 class="btn  btn-primary btn-sm buttons-create"
                                 tabindex="0" aria-controls="example" type="button">
-                            <i class="fa fa-plus"></i><span>' . trans('general.add') . '</span>
+                            <i class="fa fa-plus"></i><span>'.trans('general.add').'</span>
                         </button>'),
-            Button::make(['extend' => 'print', 'text' => '<i class="fa fa-print"></i>']),
-            Button::make(['extend' => 'export', 'text' => '<i class="fa fa-download"></i>']),
+                Button::make(['extend' => 'print', 'text' => '<i class="fa fa-print"></i>']),
+                Button::make(['extend' => 'export', 'text' => '<i class="fa fa-download"></i>']),
                 Button::make('reset'),
                 Button::make(['extend' => 'reload', 'text' => '<i class="fa fa-sync"></i>']),
 
@@ -55,7 +54,7 @@ class CategoriesDataTable extends DataTable
             ->parameters([
                 'language' => [
 
-                    'url' => (App::getLocale() == 'en') ? '' : url('https://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json')
+                    'url' => (App::getLocale() == 'en') ? '' : url('https://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json'),
 
                 ],
                 'initComplete' => " function () {
@@ -67,7 +66,7 @@ class CategoriesDataTable extends DataTable
 		                    column.search($(this).val(), false, false, true).draw();
 		                });
 		            });
-		        }"
+		        }",
 
             ]);
     }
@@ -91,13 +90,13 @@ class CategoriesDataTable extends DataTable
                 ->exportable(false)
                 ->orderable(false)
                 ->printable(false)
-                ->width('20px')
+                ->width('20px'),
 
         ];
     }
 
     protected function filename(): string
     {
-        return 'categories_' . date('YmdHis');
+        return 'categories_'.date('YmdHis');
     }
 }
