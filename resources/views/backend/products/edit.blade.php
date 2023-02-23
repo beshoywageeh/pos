@@ -36,7 +36,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-sm-6">
-                                <?php {{$categories = \App\Models\category::all() }}?>
+                                <?php {{$categories = \App\Models\category::all(); }}?>
                                 <label for="category">{{trans('product.category')}}</label>
                                 <select class="form-control @error('category_id') is-invalid @enderror" name="category_id">
                                     <option value="" disabled selected>{{trans('product.chcat')}}</option>

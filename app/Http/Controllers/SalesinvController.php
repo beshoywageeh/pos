@@ -30,7 +30,8 @@ class SalesinvController extends Controller
     {
         try {
             if (salesinv::latest()
-                    ->first() == null) {
+                ->first() == null
+            ) {
                 $id = 'pos-0000';
                 $ex = explode('-', $id);
             } else {

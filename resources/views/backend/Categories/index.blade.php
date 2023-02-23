@@ -28,8 +28,9 @@
                 <div class="table-responsive text-center ">
                     {!! $dataTable->table(
                         [
-                            'class' => 'dataTable table table-striped table-bordered',
-                            'style' => 'width:99%',
+                            'class' => 'table table-bordered table-hover',
+                            'style' => 'text-align:center',
+                            'data-page-length'=>'50',
                             'id' => 'print',
                         ],
                         true,
@@ -44,6 +45,6 @@
     </div>
 @endsection
 @push('js')
-    {!! $dataTable->scripts() !!}
-    <script src="{{ URL::asset('') }}vendor/datatables/buttons.server-side.js"></script>
+<script src="{{ URL::asset('') }}vendor/datatables/buttons.server-side.js"></script>
+{!! $dataTable->scripts() !!}
 @endpush

@@ -71,7 +71,6 @@ Route::group(
                 /*=====> Money Treasary Routes <=====*/
                 Route::group(['prefix' => 'money_treasary', 'controller' => MoenyTreasaryController::class], function () {
                     Route::get('/index', 'index')->name('money_treasary_index');
-                    Route::get('/create', 'create')->name('money_treasary_create');
                     Route::post('/store', 'store')->name('money_treasary_store');
                     Route::get('/show/{id}', 'show')->name('money_treasary_show');
                     Route::post('/delete/{sale}', 'destroy')->name('money_treasary_delete');

@@ -3,7 +3,7 @@
     {{ trans('money_treasary.money_transaction') }}
 @endsection
 @push('css')
-   
+
 @endpush
 <!-- Content Header (Page header) -->
 @section('page-header')
@@ -78,8 +78,7 @@
                     <div class="row mt-2">
                         <div class="col-lg-4">
                             <label class="mg-b-10">{{ trans('money_treasary.amount') }}</label>
-                            <input type="text" name="amount" class="form-control" id=""
-                                oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                            <input type="text" name="amount" class="form-control">
                         </div>
                         <div class="col-lg-4">
                             <label class="mg-b-10">{{ trans('general.notes') }}</label>
