@@ -35,13 +35,13 @@ class salesinv extends Model
         return $this->hasMany(product_salesinv::class);
     }
 
-    public function formatdate()
+    public function formatdate($date)
     {
         return $this->created_at->format('Y-m-d');
     }
 
-  public function formatcurrncy()
+    public function formatcurrncy($money)
   {
-      return number_format($this->total, '2');
+        return number_format($money, '2') . ' ' . env('MAIN_CURRENCY');
   }
 }

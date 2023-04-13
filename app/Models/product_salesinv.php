@@ -18,6 +18,6 @@ class product_salesinv extends Model
 
     public function products()
     {
-        return $this->belongsToMany(product::class, 'id');
+        return $this->belongsTo(product::class, 'product_id', 'id');
     }
 }

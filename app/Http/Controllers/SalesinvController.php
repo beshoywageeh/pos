@@ -92,7 +92,7 @@ class SalesinvController extends Controller
     public function show($id)
     {
         try {
-            $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
+            $inv = salesinv::with('products_salesinvs', 'client')->where('id', $id)->first();
             //return $inv;
             return view('backend.Salesinv.show', compact('inv'), $this->GetData());
         } catch (\Exception $e) {
@@ -163,16 +163,5 @@ class SalesinvController extends Controller
         ]);
     }
 
-    public function print($id)
-    {
-        try {
-            $inv = salesinv::with('products', 'products_salesinvs')->where('id', $id)->first();
 
-            return view('backend.Salesinv.print', compact('inv'), $this->GetData());
-            //return $inv->client;
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withErrors(['error' => $e->getMessage()]);
-        }
-    }
 }

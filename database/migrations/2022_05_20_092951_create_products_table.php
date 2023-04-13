@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('opening_balance');
             $table->decimal('purchase_price', 8, 2);
             $table->decimal('sales_price', 8, 2);
-            $table->decimal('sales_unit', 8, 2);
-            $table->decimal('purchase_unit', 8, 2);
+            $table->text('sales_unit' );
+            $table->text('purchase_unit');
             $table->biginteger('category_id')->unsigned();
             $table->text('notes')->nullable();
             $table->text('img')->nullable();

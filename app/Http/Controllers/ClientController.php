@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\SettingTrait;
 use App\Models\client;
+use App\Models\Client_MoneyTreasary_Salesinvs;
 use App\Models\country;
 use App\Models\salesinv;
 use Flasher\Toastr\Prime\ToastrFactory;
@@ -16,15 +17,15 @@ class ClientController extends Controller
     public function index()
     {
         $countries = country::all();
-        $clients = client::all();
+        $clients = client::with('country')->get();
 
         return view('backend.client.index', compact('clients', 'countries'));
     }
 
-public function create()
-{
+    public function create()
+    {
         //
-}
+    }
 
     public function store(Request $request, ToastrFactory $flasher)
     {
@@ -46,14 +47,13 @@ public function create()
         }
     }
 
-    public function show(client $client)
+    public function show($client)
     {
-        $data['client'] = client::with('money_transaction', 'salesinvs')->orderBY('created_at', 'desc')->get();
-        $sales = salesinv::where('client_id', $client->id)->get();
-
-        return $data;
-
-        return view('backend.client.show', compact('sales', 'client'));
+        $data = Client_MoneyTreasary_Salesinvs::where('client_id', $client)->with('client', 'money_transaction', 'salesinvs')->get();
+        //        $data['sales'] = salesinv::where('client_id', $client->id)->get();
+        //return $data[0]->money_transaction[0];
+        //return $data['client'];
+        return view('backend.client.show', compact('data'));
     }
 
     public function edit(client $client)

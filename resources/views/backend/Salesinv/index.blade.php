@@ -36,10 +36,9 @@
                         </a>
                     </div>
                 </div>
-
-                <div class="table table-bordered hoverable-table mt-4 text-center">
+                <div class="table-responsive text-center ">
                     @if ($salesinv->count() > 0)
-                        <table id="example2" class="w-100 text-md-nowrap report-table">
+                        <table id="example2" class="table table-striped table-hover table-bordered">
                             <thead class='alert-success'>
                                 <tr>
 
@@ -84,7 +83,11 @@
                                                         <i class="fas fa-pen fa-1x text-warning mx-2"></i>
                                                         {{ trans('general.edit') }}
                                                     </a>
-
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('pdf.salesinv', ['id' => $sales->id]) }}" target="_blank">
+                                                        <i class="fas fa-print fa-1x text-info mx-2"></i>
+                                                        {{ trans('general.print') }}
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>

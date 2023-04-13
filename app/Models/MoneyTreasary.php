@@ -18,4 +18,13 @@ class MoneyTreasary extends Model
     {
         return $this->belongsTo(user::class);
     }
+    public function formatcurrncy($money)
+    {
+        return number_format($money, '2') . ' ' . env('MAIN_CURRENCY');
+    }
+    public function formatdate()
+    {
+        return $this->created_at->format('Y-m-d');
+    }
+
 }

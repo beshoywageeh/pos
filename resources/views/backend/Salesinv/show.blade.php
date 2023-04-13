@@ -17,7 +17,7 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <a class="btn btn-primary float-left mt-3 mr-2 print" href="{{route('salesinvoice_print',['id'=>$inv->id])}}"target='_blank'>
+                <a class="btn btn-primary float-left mt-3 mr-2 print" href="{{route('pdf.salesinv',['id'=>$inv->id])}}"target='_blank'>
                     <i class="mdi mdi-printer ml-1"></i>{{ trans('general.print') }}
                 </a>
             </div>
@@ -73,19 +73,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($inv->products as $item)
-                                    <tr>
-                                        <td>{{ $item->name }}</td>
-                                        <td class="tx-left">Sed ut perspiciatis unde omnis iste natus error sit
-                                            voluptatem accusantium doloremque laudantium, totam rem aperiam...
-                                        </td>
-                                        <td class="tx-center">
-                                            {{ \App\Models\product_salesinv::where('salesinv_id', $inv->id)->where('product_id', $item->id)->pluck('quantity')->first() }}
-                                        </td>
-                                        <td class="tx-right">{{ $item->sales_price }} {{ env('MAIN_CURRENCY') }}</td>
+                                @foreach ($inv->products_salesinvs as $item)
+                                <tr>
+                                    <td>{{ $item->products->name }}</td>
+                                    <td>Sed ut perspiciatis unde omnis iste natus error sit
+                                        voluptatem accusantium doloremque laudantium, totam rem aperiam...
+                                    </td>
+                                    <td>
+                                        {{ $item->quantity }}
+                                    </td>
+                                    <td>{{ $item->products->sales_price }} {{ env('MAIN_CURRENCY') }}</td>
 
-                                        <td class="tx-right">{{ number_format($item->sales_price * \App\Models\product_salesinv::where('salesinv_id', $inv->id)->where('product_id', $item->id)->pluck('quantity')->first())}} {{ env('MAIN_CURRENCY') }}</td>
-                                    </tr>
+                                    <td>{{ number_format($item->products->sales_price * $item->quantity) }} {{ env('MAIN_CURRENCY') }}
+                                    </td>
+                                </tr>
                                 @endforeach
                                 <tr>
                                     <td class="valign-middle" colspan="2" rowspan="4">

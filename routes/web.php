@@ -7,6 +7,7 @@ use App\Http\Controllers\MoenyTreasaryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesinvController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\pdfController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -84,6 +85,10 @@ Route::group(
                     Route::get('/settings', 'index')->name('index');
                     Route::get('/add/{id}', 'edit')->name('edit');
                     Route::post('/save', 'update')->name('update');
+                });
+                /*=====> pdf Routes <=====*/
+                Route::name('pdf.')->prefix('pdf')->controller(pdfController::class)->group(function () {
+                    Route::get('salesinvoice/{id}', 'sales_Invoice')->name('salesinv');
                 });
             });
 

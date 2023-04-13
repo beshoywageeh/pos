@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('num')->required()->unique();
             $table->tinyInteger('type')->required();
             $table->date('payed_at')->required();
-            $table->decimal('debit', 6, 2)->required();
-            $table->decimal('credit', 6, 2)->required();
+            $table->decimal('debit', 6, 2)->nullable();
+            $table->decimal('credit', 6, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -24,12 +24,12 @@ class client extends Model
 
     public function salesinvs()
     {
-        return $this->hasMany(salesinv::class, 'client_id', 'id');
+        return $this->hasMany(Client_MoneyTreasary_Salesinvs::class, 'salesinv_id', 'id');
     }
 
     public function totalBalance()
     {
-        $sales = number_format(salesinv::where('client_id', $this->id)->sum('total'), '2');
+        $sales = number_format(salesinv::where('client_id', $this->id)->sum('total'), '2') . ' ' . env('MAIN_CURRENCY');
 
         return $sales;
     }
@@ -41,6 +41,10 @@ class client extends Model
 
     public function money_transaction()
     {
-        return $this->hasMany(MoneyTreasary::class, 'client_id', 'id');
+        return $this->hasMany(Client_MoneyTreasary_Salesinvs::class, 'money_treasary', 'id');
+    }
+    public function formatcurrncy($money)
+    {
+        return number_format($money, '2') . ' ' . env('MAIN_CURRENCY');
     }
 }
