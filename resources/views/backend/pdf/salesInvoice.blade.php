@@ -8,36 +8,64 @@
     <title>Document</title>
 </head>
 <style>
-*{text-align: center;margin:auto}
-  tr,
+    * {
+        text-align: center;
+        margin: auto
+    }
+
+    tr,
     td {
         border: 1px solid black;
     }
-    th{
+
+    th {
         color: white;
         background-color: black;
-        margin:2px
+        margin: 2px;
     }
 </style>
 
 <body>
     <table class="inv_data" style="width: 100%">
         <tr>
-            <td>{{ $data->client->name }}</td>
-        </tr>
-        <tr>
-            <td>{{ $data->client->address }}</td>
-            <td>{{ $data->inv_num }}</td>
+            <table>
+                <tr>
+                    <td>{{$data[0]->name}}</td>
+                    <td>{{$data[0]->address}}</td>
+                    <td>{{$data[0]->phone}}</td>
 
+                </tr>
+            </table>
         </tr>
         <tr>
-            <td>{{ $data->client->phone }}</td>
-            <td>{{ $data->inv_date }}</td>
+            <td>
+                <table>
+                    <tr>
+                        <td>الاسم : {{ $data['salesinv']->client->name }}</td>
+                    </tr>
+                    <tr>
+                        <td>رقم التليفون : {{ $data['salesinv']->client->phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>العنوان : {{ $data['salesinv']->client->address }}</td>
 
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+
+                        <td>رقم الفاتورة : {{ $data['salesinv']->inv_num }}</td>
+                    </tr>
+                    <tr>
+                        <td>تاريخ الفاتورة : {{ $data['salesinv']->inv_date }}</td>
+
+                    </tr>
+                </table>
+            </td>
         </tr>
-        <tr>
-            <td>{{ $data->client->country->name }}</td>
-        </tr>
+
     </table>
     <table class="inv_data">
         <thead>
@@ -50,7 +78,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data->products_salesinvs as $item)
+            @foreach ($data['salesinv']->products_salesinvs as $item)
                 <tr>
                     <td>{{ $item->products->name }}</td>
                     <td>Sed ut perspiciatis unde omnis iste natus error sit
@@ -73,18 +101,18 @@
                     </div><!-- invoice-notes -->
                 </td>
                 <td>Sub-Total</td>
-                <td colspan="2">{{ number_format($data->total) }}
+                <td colspan="2">{{ number_format($data['salesinv']->total) }}
                     {{ env('MAIN_CURRENCY') }}</td>
             </tr>
             <tr>
                 <td>Tax</td>
-                <td colspan="1">{{ $data->tax_rate }} % </td>
-                <td colspan="1">{{ number_format($data->tax_value) }}
+                <td colspan="1">{{ $data['salesinv']->tax_rate }} % </td>
+                <td colspan="1">{{ number_format($data['salesinv']->tax_value) }}
                     {{ env('MAIN_CURRENCY') }}</td>
             </tr>
             <tr>
                 <td>Discount</td>
-                <td colspan="2">-{{ $data->discount }}
+                <td colspan="2">-{{ $data['salesinv']->discount }}
                     {{ env('MAIN_CURRENCY') }}</td>
             </tr>
             <tr>

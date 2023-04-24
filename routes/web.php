@@ -64,7 +64,7 @@ Route::group(
                     Route::post('/store', 'store')->name('salesinvoice_store');
                     Route::get('/show/{id}', 'show')->name('salesinvoice_show');
                     Route::post('/delete/{sale}', 'destroy')->name('salesinvoice_delete');
-                    Route::get('/getproduct', 'getProduct')->name('salesinvoice_getproduct');
+                    Route::post('/getproduct', 'getProduct')->name('salesinvoice_getproduct');
                     Route::get('/getinvoicedata', 'getinvoicedata')->name('salesinvoice_getinvoicedata');
                     Route::get('/deleteproduct', 'deleteproduct')->name('salesinvoice_deleteproduct');
                     Route::get('/{id}', 'print')->name('salesinvoice_print');

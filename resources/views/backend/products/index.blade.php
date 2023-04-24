@@ -31,9 +31,9 @@
             </div>
             <div class="card-body py-0">
                 <div class="table-responsive text-center ">
-                    <table id="example2" class="table table-striped table-hover table-bordered'"
+                    <table id="example2" class="table table-striped table-bordered"
                         style="padding: 0; width:98%">
-                        <thead class="alert-success text-black">
+                        <thead class="thead-light">
                             <tr>
                                 <th class="wd-2" style="padding: 0;wdith:4px;">#</th>
                                 <th>{{ trans('product.barcode') }}</th>
@@ -88,7 +88,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
 
         </div>
@@ -96,5 +95,4 @@
     </div>
 @endsection
 @push('js')
-    <script src="{{ URL::asset('assets/js/custom_loop_product.js') }}"></script>
 @endpush

@@ -29,9 +29,11 @@ class client extends Model
 
     public function totalBalance()
     {
-        $sales = number_format(salesinv::where('client_id', $this->id)->sum('total'), '2') . ' ' . env('MAIN_CURRENCY');
-
-        return $sales;
+        $client = $this->id;
+        $debit = MoneyTreasary::where('client_id', $client)->sum('debit');
+        $credit = MoneyTreasary::where('client_id', $client)->sum('credit');
+        $final_balance = number_format($debit - $credit, '2') . ' ' . env('MAIN_CURRENCY');
+        return $final_balance;
     }
 
     public function user()

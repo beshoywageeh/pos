@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\SettingTrait;
 use App\Models\client;
-use App\Models\Client_MoneyTreasary_Salesinvs;
+use App\Models\MoneyTreasary;
 use App\Models\country;
 use App\Models\salesinv;
 use Flasher\Toastr\Prime\ToastrFactory;
@@ -49,9 +49,9 @@ class ClientController extends Controller
 
     public function show($client)
     {
-        $data = Client_MoneyTreasary_Salesinvs::where('client_id', $client)->with('client', 'money_transaction', 'salesinvs')->get();
+        $data = MoneyTreasary::where('client_id', $client)->with('client')->orderby('payed_at', 'asc')->get();
         //        $data['sales'] = salesinv::where('client_id', $client->id)->get();
-        //return $data[0]->money_transaction[0];
+       // return $data;
         //return $data['client'];
         return view('backend.client.show', compact('data'));
     }

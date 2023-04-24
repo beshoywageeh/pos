@@ -10,6 +10,7 @@ class product_salesinv extends Model
     use HasFactory;
 
     public $timestamps = false;
+    protected $fillable = ['product_id', 'salesinvs_id', 'quantity'];
 
     public function salesinv()
     {

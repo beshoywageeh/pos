@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\salesinvrequest;
 use App\Http\Traits\SettingTrait;
 use App\Models\client;
+use App\Models\MoneyTreasary;
 use App\Models\product;
 use App\Models\product_salesinv;
 use App\Models\salesinv;
@@ -32,7 +33,7 @@ class SalesinvController extends Controller
             if (salesinv::latest()
                 ->first() == null
             ) {
-                $id = 'pos-0000';
+                $id = 'LL-0000';
                 $ex = explode('-', $id);
             } else {
                 $id = salesinv::latest()->first()->id;
@@ -42,7 +43,6 @@ class SalesinvController extends Controller
             }
             $clients = client::all();
             $products = product::all();
-
             return view('backend.Salesinv.create', compact('ex', 'clients', 'products'), $this->GetData());
         } catch (\Exception $e) {
             return redirect()->back()
@@ -55,15 +55,12 @@ class SalesinvController extends Controller
         try {
             $total_inv = explode(' ', $request->total_inv);
             $details = [];
-            for ($i = 0; $i < count($request->product_id); $i++) {
+            /*            for ($i = 0; $i < count($request->product_id); $i++) {
                 $details[$i]['product_id'] = $request->product_id[$i];
                 $details[$i]['quantity'] = $request->product_qty[$i];
             }
-            $date = Carbon::now()->format('YmdHms');
-            //return $code;
-
+*/
             $salesinvs = new salesinv();
-            //$salesinvs->id = $code;
             $salesinvs->inv_num = $request->inv_num;
             $salesinvs->inv_date = $request->date;
             $salesinvs->client_id = $request->client;
@@ -79,7 +76,12 @@ class SalesinvController extends Controller
             $salesinvs->products()
                 ->attach($details);
             DB::table('transinvs')->truncate();
+            MoneyTreasary::create([
+                'num' => $request->inv_num,
+                'payed_at' => $request->date,
+                'debit' => $total_inv[0]
 
+            ]);
             $flasher->AddSuccess(trans('general.add_msg'));
 
             return redirect('sales');
@@ -129,8 +131,10 @@ class SalesinvController extends Controller
     public function getProduct(Request $request)
     {
         if ($request->ajax()) {
-            transinv::create([
-                'barcode' => $request->barcode,
+            product_salesinv::create([
+                'salesinv_id' => 301,
+                'product_id' => $request->barcode,
+                'quanntiy' => 1,
             ]);
 
             return response()->json([

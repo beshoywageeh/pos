@@ -72,7 +72,8 @@
                         <div class="col-8">
                             <div class="mt-0 text-center">
                                 <span class="text-white">{{ trans('general.income') }}</span>
-                                <h4 class="text-white mb-0">{{ number_format($data['income']) . ' ' . env('MAIN_CURRENCY') }}
+                                <h4 class="text-white mb-0">
+                                    {{ number_format($data['income']) . ' ' . env('MAIN_CURRENCY') }}
                                 </h4>
                             </div>
                         </div>
@@ -106,7 +107,7 @@
 
 
     <div class="row row-sm">
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div class="card mg-b-20">
                 <div class="card-header">
                     <div class="main-content-label mg-b-5">
@@ -114,186 +115,147 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class='m-auto '> {!! $data['chart']->render() !!}</div>
+                    <div class='m-auto ' style="width:70
+                    "> {!! $data['chart']->render() !!}</div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mg-b-20" id="tabs-style2">
-                        <div class="card-header">
-                            <div class="main-content-label mg-b-5">
-                                {{ trans('general.lastten') }}
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-wrap">
-                                <div class="example">
-                                    <div class="panel panel-primary tabs-style-2">
-                                        <div class=" tab-menu-heading">
-                                            <div class="tabs-menu1">
-                                                <!-- Tabs -->
-                                                <ul class="nav panel-tabs main-nav-line">
-                                                    <li><a href="#client" class="nav-link active" data-toggle="tab">
-                                                            {{ trans('client.title') }}</a></li>
-                                                    <li><a href="#sale_invoice" class="nav-link"
-                                                            data-toggle="tab">{{ trans('invoice.invoice') }}</a></li>
-                                                    <li><a href="#money_transaction" class="nav-link"
-                                                            data-toggle="tab">{{ trans('general.money_transaction') }}</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mg-b-20" id="tabs-style2">
+                <div class="card-header">
+                    <div class="main-content-label mg-b-5">
+                        {{ trans('general.lastten') }}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="text-wrap">
+                        <div class="example">
+                            <div class="panel panel-primary tabs-style-2">
+                                <div class=" tab-menu-heading">
+                                    <div class="tabs-menu1">
+                                        <!-- Tabs -->
+                                        <ul class="nav panel-tabs main-nav-line">
+                                            <li><a href="#client" class="nav-link active" data-toggle="tab">
+                                                    {{ trans('client.title') }}</a></li>
+                                            <li><a href="#sale_invoice" class="nav-link"
+                                                    data-toggle="tab">{{ trans('invoice.invoice') }}</a></li>
+                                            <li><a href="#money_transaction" class="nav-link"
+                                                    data-toggle="tab">{{ trans('general.money_transaction') }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body tabs-menu-body main-content-body-right border">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="client">
+                                            @if ($data['clientlast']->count() > 0)
+                                                <div class="table table-responsive">
+                                                    <table
+                                                        class="table report-table text-md-nowrap table-bordered text-center">
+                                                        <thead class='alert-success'>
+                                                            <tr>
+                                                                <th>{{ trans('client.code') }}</th>
+                                                                <th>{{ trans('client.name') }}</th>
+                                                                <th>{{ trans('client.phone') }}</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($data['clientlast'] as $client)
+                                                                <tr>
+                                                                    <td>{{ $client->id }}</td>
+                                                                    <td>{{ $client->name }}</td>
+                                                                    <td>{{ $client->phone }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @else
+                                                <div class="alert alert-solid-danger text-center">
+                                                    <h5 class="text-white d-block">{{ trans('general.msg') }}</h5>
+                                                </div>
+                                            @endif
                                         </div>
-                                        <div class="panel-body tabs-menu-body main-content-body-right border">
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="client">
-                                                    @if ($data['clientlast']->count() > 0)
-                                                        <div class="table">
-                                                            <table
-                                                                class="table report-table text-md-nowrap table-bordered text-center">
-                                                                <thead class='alert-success'>
-                                                                    <tr>
-                                                                        <th>{{ trans('client.code') }}</th>
-                                                                        <th>{{ trans('client.name') }}</th>
-                                                                        <th>{{ trans('client.phone') }}</th>
+                                        <div class="tab-pane" id="sale_invoice">
+                                            @if ($data['saleslast']->count() > 0)
+                                                <div class="table table-reponsive">
+                                                    <table
+                                                        class="table report-table text-md-nowrap table-bordered text-center">
+                                                        <thead class='alert-success'>
+                                                            <tr>
+                                                                <th>{{ trans('sales.inv_num') }}</th>
+                                                                <th>{{ trans('client.name') }}</th>
+                                                                <th>{{ trans('sales.date') }}</th>
+                                                                <th>{{ trans('sales.total') }}</th>
 
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach ($data['clientlast'] as $client)
-                                                                        <tr>
-                                                                            <td>{{ $client->id }}</td>
-                                                                            <td>{{ $client->name }}</td>
-                                                                            <td>{{ $client->phone }}</td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    @else
-                                                        <div class="alert alert-solid-danger text-center">
-                                                            <h5 class="text-white d-block">{{ trans('general.msg') }}</h5>
-                                                        </div>
-                                                    @endif
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($data['saleslast'] as $sale)
+                                                                <tr>
+                                                                    <td>{{ $sale->inv_num }}</td>
+                                                                    <td>{{ $sale->client->name }}</td>
+                                                                    <td>{{ $sale->inv_date }}</td>
+                                                                    <td>{{ number_format($sale->total) . ' ' . env('MAIN_CURRENCY') }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                                <div class="tab-pane" id="sale_invoice">
-                                                    @if ($data['saleslast']->count() > 0)
-                                                        <div class="table">
-                                                            <table
-                                                                class="table-reponsive report-table text-md-nowrap table-bordered text-center">
-                                                                <thead class='alert-success'>
-                                                                    <tr>
-                                                                        <th>{{ trans('sales.inv_num') }}</th>
-                                                                        <th>{{ trans('client.name') }}</th>
-                                                                        <th>{{ trans('sales.date') }}</th>
-                                                                        <th>{{ trans('sales.total') }}</th>
+                                            @else
+                                                <div class="alert alert-solid-danger text-center">
+                                                    <h5 class="text-white d-block">{{ trans('general.msg') }}</h5>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="tab-pane" id="money_transaction">
+                                            @if ($data['money_treasary']->count() > 0)
+                                                <div class="table table-reponsive">
+                                                    <table class=" report-table text-md-nowrap table-bordered text-center">
+                                                        <thead class='alert-success'>
+                                                            <tr>
+                                                                <th>{{ trans('sales.inv_num') }}</th>
+                                                                <th>{{ trans('client.name') }}</th>
+                                                                <th>{{ trans('sales.date') }}</th>
+                                                                <th>{{ trans('sales.debit') }}</th>
+                                                                <th>{{ trans('sales.credit') }}</th>
 
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach ($data['saleslast'] as $sale)
-                                                                        <tr>
-                                                                            <td>{{ $sale->inv_num }}</td>
-                                                                            <td>{{ $sale->client->name }}</td>
-                                                                            <td>{{ $sale->inv_date }}</td>
-                                                                            <td>{{ $sale->total }}</td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    @else
-                                                        <div class="alert alert-solid-danger text-center">
-                                                            <h5 class="text-white d-block">{{ trans('general.msg') }}</h5>
-                                                        </div>
-                                                    @endif
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($data['money_treasary'] as $transaction)
+                                                                <tr>
+                                                                    <td>{{ $transaction->num }}</td>
+                                                                    <td>{{ $transaction->client->name }}</td>
+                                                                    <td>{{ $transaction->payed_at }}</td>
+                                                                    <td>{{ number_format($transaction->debit) . ' ' . env('MAIN_CURRENCY') }}
+                                                                    </td>
+                                                                    <td>{{ number_format($transaction->credit) . ' ' . env('MAIN_CURRENCY') }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                                <div class="tab-pane" id="money_transaction">
-                                                    @if ($data['saleslast']->count() > 0)
-                                                        <div class="table">
-                                                            <table
-                                                                class="table-reponsive report-table text-md-nowrap table-bordered text-center">
-                                                                <thead class='alert-success'>
-                                                                    <tr>
-                                                                        <th>{{ trans('sales.inv_num') }}</th>
-                                                                        <th>{{ trans('client.name') }}</th>
-                                                                        <th>{{ trans('sales.date') }}</th>
-                                                                        <th>{{ trans('sales.total') }}</th>
-
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach ($data['saleslast'] as $sale)
-                                                                        <tr>
-                                                                            <td>{{ $sale->inv_num }}</td>
-                                                                            <td>{{ $sale->client->name }}</td>
-                                                                            <td>{{ $sale->inv_date }}</td>
-                                                                            <td>{{ $sale->total }}</td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    @else
-                                                        <div class="alert alert-solid-danger text-center">
-                                                            <h5 class="text-white d-block">{{ trans('general.msg') }}</h5>
-                                                        </div>
-                                                    @endif
+                                            @else
+                                                <div class="alert alert-solid-danger text-center">
+                                                    <h5 class="text-white d-block">{{ trans('general.msg') }}</h5>
                                                 </div>
-                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- col-6 -->
                 </div>
             </div>
+            <!-- col-6 -->
         </div>
-
-        @isset($data['sales'])
-            <div class="col-md-4">
-                <div class="card mg-b-20">
-                    <div class="card-header">
-                        <div class="main-content-label mg-b-5">
-                            {{ trans('general.salesmonthbased') }}
-                        </div>
-                    </div>
-                    <div class="card-body m-auto">
-                        @if ($data['sales']->count() > 0)
-                            <div class="table table-reponsive">
-                                <table class=" report-table text-md-nowrap table-bordered text-center">
-                                    <thead class='alert-success'>
-                                        <tr>
-                                            <th>{{ trans('general.date') }}</th>
-                                            <th>{{ trans('general.total') }}</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($data['sales'] as $sales)
-                                            <tr>
-                                                <td>{{ $sales->year }}-{{ $sales->month }}</td>
-                                                <td>{{ number_format($sales->Total) . ' ' . env('MAIN_CURRENCY') }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        @else
-                            <div class="alert alert-solid-danger text-center">
-                                <h5 class="text-white d-block">{{ trans('general.msg') }}</h5>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        @endisset
-
-
     </div>
-
-    <!-- row closed -->
+    </div>
 
 @endsection
 
@@ -302,6 +264,4 @@
     <script src="{{ URL::asset('assets/plugins/raphael/raphael.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/morris.js/morris.min.js') }}"></script>
     <!--Internal Chart Morris js -->
-
-
 @endpush

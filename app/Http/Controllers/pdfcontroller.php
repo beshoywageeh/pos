@@ -4,29 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\salesinv;
+use App\Http\Traits\SettingTrait;
 use PDF;
-
 
 class pdfcontroller extends Controller
 {
+    use SettingTrait;
 
     public function sales_Invoice($id)
     {
-
+      
         try {
-            $data = salesinv::with('products_salesinvs', 'client')->where('id', $id)->first();
-            //return $data->products_salesinvs[1]->products;
-            $pdf = PDF::loadView('backend.pdf.salesInvoice', ['data' => $data], [], [
-                'format' => 'A4',
-                'margin_left' => 4,
-                'margin_right' => 4,
-                'margin_top' => 4,
-                'margin_bottom' => 4,
-                'margin_header' => 0,
-                'margin_footer' => 0,
-                'orientation' => 'P',
-            ]);
-            return $pdf->stream('salesinv.pdf');
+            $data['salesinv'] = salesinv::with('products_salesinvs', 'client')->where('id', $id)->first();
+            $data['company_data'] = $this->GetData();
+            return $this->GetData();
+            return view('backend.pdf.salesInvoice', ['data' => $data], $this->GetData());
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);

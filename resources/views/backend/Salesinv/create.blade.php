@@ -32,7 +32,7 @@
             <form action="{{ route('salesinvoice_store') }}" method="post" id="invoice" >
                 @method ('post')@csrf
                 <div class="card-body" id="print_area">
-                    <input type="hidden" id='last' value="{{ $ex[1] }}">
+                    <input type="hidden" id='last' value="{{ $ex[0] }}">
                     <input type="hidden" id='slogan' value="{{ $data['slogan'] }}">
                     <div class="row">
                         <div class="col-lg-2" id='inv_data'>
@@ -74,11 +74,11 @@
                                 <input type="text" placeholder="{{trans('invoice.add_product')}}" class="form-control"
                                        id="barcode">
                                 <input type="hidden" id="csrf" value="{{csrf_token()}}">
-                                <input type="hidden" id="urladd" value="{{route('salesproduct')}}">
+                                <input type="hidden" id="urladd" value="{{route('salesinvoice_getproduct')}}">
                                 <span class="alert-error" id="text"></span>
                             </form>
 
-                            <input type="hidden" value="{{route('getinvoicedata')}}" id="getData">
+                            <input type="hidden" value="{{route('salesinvoice_getinvoicedata')}}" id="getData">
                             <div class="table-responsive my-4">
                                 <table class="table table-bordered">
                                     <thead>
