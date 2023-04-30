@@ -21,7 +21,6 @@ class ClientController extends Controller
 
         return view('backend.client.index', compact('clients', 'countries'));
     }
-
     public function create()
     {
         //
