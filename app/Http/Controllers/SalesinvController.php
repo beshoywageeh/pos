@@ -11,6 +11,7 @@ use App\Models\product_salesinv;
 use App\Models\salesinv;
 use App\Models\transinv;
 use Carbon\Carbon;
+use Flasher\Noty\Prime\NotyFactory;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class SalesinvController extends Controller
     public function index()
     {
         $salesinv = salesinv::with('client')->get();
-
+       // return $salesinv;
         return view('backend.Salesinv.index', compact('salesinv'));
     }
 
@@ -91,15 +92,16 @@ class SalesinvController extends Controller
         }
     }
 
-    public function show($id)
+    public function show($id, NotyFactory $flasher)
     {
         try {
             $inv = salesinv::with('products_salesinvs', 'client')->where('id', $id)->first();
             //return $inv;
             return view('backend.Salesinv.show', compact('inv'), $this->GetData());
         } catch (\Exception $e) {
-            return redirect()->back()
-                ->withErrors(['error' => $e->getMessage()]);
+            $flasher->addError($e->getMessage());
+            return redirect()->back();
+                //->withErrors(['error' => $e->getMessage()]);
         }
     }
 

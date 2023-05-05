@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
@@ -10,9 +11,9 @@ class salesinv extends Model
 {
     use HasFactory;
     use HasTranslations;
-
+    use HasUuids;
     protected $garded = [];
-
+    public $incrementing = false;
     public $translatable = ['name'];
 
     public function client()

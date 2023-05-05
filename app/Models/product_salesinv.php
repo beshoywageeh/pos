@@ -10,11 +10,13 @@ class product_salesinv extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+//    public $incrementing = false;
     protected $fillable = ['product_id', 'salesinvs_id', 'quantity'];
 
     public function salesinv()
     {
-        return $this->hasOne(salesinv::class);
+        return $this->hasOne(salesinv::class, 'salesinv_id', 'id');
     }
 
     public function products()

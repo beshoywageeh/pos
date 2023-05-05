@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\salesinv;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,13 +17,13 @@ class product_salesinvFactory extends Factory
      */
     public function definition()
     {
-        /*            $table->bigInteger('salesinv_id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
-            $table->integer('quantity')->default(1); */
-        return [
-            'salesinv_id' => fake()->numberBetween('1', '300'),
-            'product_id' => fake()->numberBetween('1', '100'),
-            'quantity' => fake()->numberBetween('1', '50'),
-        ];
+        $sales_inv = salesinv::all(['id']);
+        foreach ($sales_inv as $code) {
+            return [
+                'salesinv_id' => $code,
+                'product_id' => fake()->numberBetween('1', '100'),
+                'quantity' => fake()->numberBetween('1', '50'),
+            ];
+        }
     }
 }

@@ -8,68 +8,66 @@
     <title>Document</title>
 </head>
 <style>
-    * {
-        text-align: center;
-        margin: auto
+    @media print{
+        @page{
+        size: A4;
+    margin:0.5rem;
+    header:none;
     }
+    }
+    table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: center;
+margin-bottom: 0.5rem;
+            }
+            
+            table tr th, table tr td {
+                padding: 0.2rem;
+            }
+            .inv_data tr th, .inv_data tr td {
+                padding: 0.2rem;
+                border: 1px #4e4e4e solid !important;
+            }
+            .tfoot tr th, .tfoot tr td {
+                font-size: 20px;
+            }
 
-    tr,
-    td {
-        border: 1px solid black;
-    }
-
-    th {
-        color: white;
-        background-color: black;
-        margin: 2px;
-    }
+            .tfoot tr th {
+                text-align: right;
+            }
 </style>
 
 <body>
-    <table class="inv_data" style="width: 100%">
+    <table class="company_data">
         <tr>
-            <table>
-                <tr>
-                    <td>{{$data[0]->name}}</td>
-                    <td>{{$data[0]->address}}</td>
-                    <td>{{$data[0]->phone}}</td>
+            <td>loop labs</td>
+            <td>loop labs</td>
+            <td>loop labs</td>
 
-                </tr>
-            </table>
+        </tr>
+    </table>
+    <table class="client_data">
+        <tr>
+            <td>{{ $data['salesinv']->client->name }} : الاسم</td>
+            <td>{{ $data['salesinv']->client->phone }} : رقم التليفون</td>
         </tr>
         <tr>
-            <td>
-                <table>
-                    <tr>
-                        <td>الاسم : {{ $data['salesinv']->client->name }}</td>
-                    </tr>
-                    <tr>
-                        <td>رقم التليفون : {{ $data['salesinv']->client->phone }}</td>
-                    </tr>
-                    <tr>
-                        <td>العنوان : {{ $data['salesinv']->client->address }}</td>
-
-                    </tr>
-                </table>
-            </td>
-            <td>
-                <table>
-                    <tr>
-
-                        <td>رقم الفاتورة : {{ $data['salesinv']->inv_num }}</td>
-                    </tr>
-                    <tr>
-                        <td>تاريخ الفاتورة : {{ $data['salesinv']->inv_date }}</td>
-
-                    </tr>
-                </table>
-            </td>
+            <td colspan='2'>{{ $data['salesinv']->client->address }} : العنوان</td>
         </tr>
+    </table>
+    <table class="invoice_data">
+        <tr>
+            <td><bdi>رقم الفاتورة :</bdi> {{ $data['salesinv']->id }}</td>
+            <td><bdi>رقم الفاتورة :</bdi> {{ $data['salesinv']->inv_num }}</td>
+            <td><bdi>تاريخ الفاتورة :</bdi> {{ $data['salesinv']->inv_date }}</td>
 
+        </tr>
     </table>
     <table class="inv_data">
         <thead>
             <tr>
+               <th>#</th>
                 <th class="wd-20p">Type</th>
                 <th class="wd-40p">Description</th>
                 <th class="tx-center">QNTY</th>
@@ -80,6 +78,7 @@
         <tbody>
             @foreach ($data['salesinv']->products_salesinvs as $item)
                 <tr>
+                    <td>{{$loop->iteration}}</td>
                     <td>{{ $item->products->name }}</td>
                     <td>Sed ut perspiciatis unde omnis iste natus error sit
                         voluptatem accusantium doloremque laudantium, totam rem aperiam...
@@ -93,36 +92,40 @@
                     </td>
                 </tr>
             @endforeach
-            <tr>
-                <td colspan="2" rowspan="4">
+            <tr class='tfoot'>
+                <th colspan="3" rowspan="4">
                     <div>
                         <label></label>
                         <p></p>
                     </div><!-- invoice-notes -->
-                </td>
-                <td>Sub-Total</td>
-                <td colspan="2">{{ number_format($data['salesinv']->total) }}
-                    {{ env('MAIN_CURRENCY') }}</td>
+                </th>
+                <th>Sub-Total</th>
+                <th colspan="2">{{ number_format($data['salesinv']->total) }}
+                    {{ env('MAIN_CURRENCY') }}</th>
             </tr>
             <tr>
-                <td>Tax</td>
-                <td colspan="1">{{ $data['salesinv']->tax_rate }} % </td>
-                <td colspan="1">{{ number_format($data['salesinv']->tax_value) }}
-                    {{ env('MAIN_CURRENCY') }}</td>
+                <th>Tax</th>
+                <th colspan="1">{{ $data['salesinv']->tax_rate }} % </th>
+                <th colspan="1">{{ number_format($data['salesinv']->tax_value) }}
+                    {{ env('MAIN_CURRENCY') }}</th>
             </tr>
             <tr>
-                <td>Discount</td>
-                <td colspan="2">-{{ $data['salesinv']->discount }}
-                    {{ env('MAIN_CURRENCY') }}</td>
+                <th>Discount</th>
+                <th colspan="2">-{{ $data['salesinv']->discount }}
+                    {{ env('MAIN_CURRENCY') }}</th>
             </tr>
             <tr>
-                <td>Total Due</td>
-                <td colspan="2">
+                <th>Total Due</th>
+                <th colspan="2">
                     <h4>{{ env('MAIN_CURRENCY') }}</h4>
-                </td>
+                </th>
             </tr>
         </tbody>
+
     </table>
+    <script>
+        window.print();
+    </script>
 </body>
 
 </html>

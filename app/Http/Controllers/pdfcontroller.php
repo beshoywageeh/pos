@@ -17,8 +17,9 @@ class pdfcontroller extends Controller
         try {
             $data['salesinv'] = salesinv::with('products_salesinvs', 'client')->where('id', $id)->first();
             $data['company_data'] = $this->GetData();
-            return $this->GetData();
+
             return view('backend.pdf.salesInvoice', ['data' => $data], $this->GetData());
+         
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
