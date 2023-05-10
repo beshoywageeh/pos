@@ -64,8 +64,8 @@ $(document).keypress(function (e) {
 
 function product_submit() {
     let csrf = document.querySelector("#csrf").value,
-        urlAdd = document.querySelector("#urladd").value;
-    let barcode = document.querySelector("#barcode").value;
+        urlAdd = document.querySelector("#urladd").value,
+        barcode = document.querySelector("#barcode").value;
     $.ajax({
         method: "POST",
         url: urlAdd,

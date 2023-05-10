@@ -3,6 +3,7 @@
     {{ trans('product.title') }}
 @endsection
 @push('css')
+
 @endpush
 <!-- Content Header (Page header) -->
 @section('page-header')
@@ -30,10 +31,10 @@
                 </div>
             </div>
             <div class="card-body py-0">
-                <div class="table-responsive text-center ">
-                    <table id="example2" class="table table-striped table-bordered"
+                <div class="table-responsive text-center">
+                    <table id="products" class="table table-striped table-bordered"
                         style="padding: 0; width:98%">
-                        <thead class="thead-light">
+                        <thead class="">
                             <tr>
                                 <th class="wd-2" style="padding: 0;wdith:4px;">#</th>
                                 <th>{{ trans('product.barcode') }}</th>
@@ -95,4 +96,12 @@
     </div>
 @endsection
 @push('js')
+<script>
+    let table = new DataTable('#products', {
+    responsive: true,
+    language: {
+        url:'https://cdn.datatables.net/plug-ins/1.13.4/i18n/ar.json'
+    }
+});
+</script>
 @endpush

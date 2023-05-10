@@ -53,22 +53,9 @@
     <script src="{{URL::asset('assets/plugins/sidebar/sidebar-custom.js')}}"></script>
 @endif
 <script src="{{URL::asset('assets/js/index.js')}}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
 

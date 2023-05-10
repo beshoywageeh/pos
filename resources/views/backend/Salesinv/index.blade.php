@@ -19,23 +19,25 @@
 @section('content')
 
     @include('backend.msg')
-
-    <div class="col-xl-12">
+    
+  
+    <div class="col-xl-12 text-center">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
-                <div class="d-flex justify-content-between col-sm-12 col-md-4">
-                    <h4 class="card-title mg-b-0">{{ trans('sales.title') }}</h4>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row mb-2">
+                <div class="row">
                     <div class="col-sm-12 col-md-6">
-                        <a class="btn btn-success buttons-add btn-with-icon buttons-html5 tx-15 tx-bold" tabindex="0"
-                            aria-controls="example" type="button" href="{{ route('salesinvoice_create') }}">
-                            <i class="typcn typcn-document-add"></i><span>{{ trans('sales.add') }}</span>
+                        <h4 class="card-title mg-b-0">{{ trans('sales.title') }}</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{route('intial_sales')}}"
+                            class="btn btn-success btn-block"
+                        >
+                            <i class="fa fa-plus"></i><span>{{ trans('sales.add') }}</span>
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="card-body">
                 <div class="table-responsive text-center ">
                     @if ($salesinv->count() > 0)
                         <table id="example2" class="table table-striped table-hover table-bordered">
@@ -84,7 +86,8 @@
                                                         {{ trans('general.edit') }}
                                                     </a>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('pdf.salesinv', ['id' => $sales->id]) }}" target="_blank">
+                                                        href="{{ route('pdf.salesinv', ['id' => $sales->id]) }}"
+                                                        target="_blank">
                                                         <i class="fas fa-print fa-1x text-info mx-2"></i>
                                                         {{ trans('general.print') }}
                                                     </a>
@@ -107,8 +110,9 @@
                 </div>
             </div>
         </div>
-    </div>
+
     </div>
 
-    @endsection @section('js')
-@endsection
+    @endsection @push('js')
+    <script src="{{URL::asset('assets/js/custom_loop.js')}}"></script>
+@endpush

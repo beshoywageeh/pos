@@ -37,4 +37,7 @@ return [
     'discount' => 'الخصم',
     'invoice_display' => 'معاينه الفاتورة',
     'sales_inv' => 'فاتورة مبيعات',
+    'discount_rate' => 'نسبة',
+    'discount_value' => 'قيمة',
+    'client_balance' => 'رصيد العميل',
 ];

@@ -23,28 +23,17 @@ class SalesinvController extends Controller
 
     public function index()
     {
+    
         $salesinv = salesinv::with('client')->get();
-       // return $salesinv;
+
         return view('backend.Salesinv.index', compact('salesinv'));
     }
 
     public function create()
     {
         try {
-            if (salesinv::latest()
-                ->first() == null
-            ) {
-                $id = 'LL-0000';
-                $ex = explode('-', $id);
-            } else {
-                $id = salesinv::latest()->first()->id;
-                $data = salesinv::find($id);
-
-                $ex = explode('-', $data->inv_num);
-            }
-            $clients = client::all();
             $products = product::all();
-            return view('backend.Salesinv.create', compact('ex', 'clients', 'products'), $this->GetData());
+            return view('backend.Salesinv.create', compact('products'), $this->GetData());
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
@@ -130,11 +119,33 @@ class SalesinvController extends Controller
         }
     }
 
+
+    public function  intial_sales()
+    {
+
+        if (
+            salesinv::latest()
+            ->first() == null
+
+        ) {
+            $data['id'] = 'LL-0000';
+            $data['ex'] = explode('-', $data['id']);
+        } else {
+            $data['id'] = salesinv::latest()->first()->id;
+            $data['sales_inv'] = salesinv::find($data['id']);
+
+            $data['ex'] = explode('-', $data['sales_inv']->inv_num);
+        }
+        $data['clients'] = client::all('id', 'name');
+        $data['company'] = $this->GetData();
+   
+        return view('backend.Salesinv.initsale', ['data' => $data]);
+    }
     public function getProduct(Request $request)
     {
         if ($request->ajax()) {
             product_salesinv::create([
-                'salesinv_id' => 301,
+                'salesinv_id' => $request->salesinv_id,
                 'product_id' => $request->barcode,
                 'quanntiy' => 1,
             ]);

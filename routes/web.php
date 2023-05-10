@@ -56,6 +56,7 @@ Route::group(
                     Route::post('/update', 'update')->name('client_update');
                     Route::post('/delete/{product}', 'destroy')->name('client_destroy');
                     Route::get('/balance/{id}', 'print')->name('client_balance');
+                    Route::get('/balance_invoice/{id?}', 'client_balance_invoice')->name('client_balance_invoice');
                 });
                 /*=====> Sales Invoices Routes <=====*/
                 Route::group(['prefix' => 'sales_invoice', 'controller' => SalesinvController::class], function () {
@@ -67,7 +68,9 @@ Route::group(
                     Route::post('/getproduct', 'getProduct')->name('salesinvoice_getproduct');
                     Route::get('/getinvoicedata', 'getinvoicedata')->name('salesinvoice_getinvoicedata');
                     Route::get('/deleteproduct', 'deleteproduct')->name('salesinvoice_deleteproduct');
-                    Route::get('/{id}', 'print')->name('salesinvoice_print');
+                    //  Route::get('/{id}', 'print')->name('salesinvoice_print');
+                    Route::get('/intial_sales', 'intial_sales')->name('intial_sales');
+                   
                 });
                 /*=====> Money Treasary Routes <=====*/
                 Route::group(['prefix' => 'money_treasary', 'controller' => MoenyTreasaryController::class], function () {
@@ -94,3 +97,8 @@ Route::group(
 
         require __DIR__.'/auth.php';
     });
+
+Route::get('/migration', function () {
+    Artisan::call('migrate:fresh --seed');
+    return 'done';
+});

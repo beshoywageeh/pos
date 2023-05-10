@@ -50,7 +50,7 @@ class ClientController extends Controller
     {
         $data = MoneyTreasary::where('client_id', $client)->with('client')->orderby('payed_at', 'asc')->get();
         //        $data['sales'] = salesinv::where('client_id', $client->id)->get();
-       // return $data;
+        // return $data;
         //return $data['client'];
         return view('backend.client.show', compact('data'));
     }
@@ -105,5 +105,13 @@ class ClientController extends Controller
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
         }
+    }
+    public function client_balance_invoice($id)
+    {
+
+        $debit = MoneyTreasary::where('client_id', $id)->sum('debit');
+        $credit = MoneyTreasary::where('client_id', $id)->sum('credit');
+        $total = number_format($debit - $credit);
+        return $total;
     }
 }

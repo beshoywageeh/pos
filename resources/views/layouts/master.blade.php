@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
@@ -7,7 +8,8 @@
     @include('layouts.head')
 
 </head>
-<style>* {
+<style>
+    * {
         font-family: 'Cairo', sans-serif;
         text-transform: capitalize;
     }
@@ -15,9 +17,8 @@
     .table thead th {
         font-size: 1rem;
     }
-
 </style>
-@if(App::getLocale()=='en')
+@if (App::getLocale() == 'en')
     <style>
         .main-header {
             left: 0 !important;
@@ -42,29 +43,31 @@
         }
     </style>
 @endif
+
 <body class="main-body app sidebar-mini">
-<!-- Loader -->
-<div id="global-loader">
-    <img src="{{URL::asset('assets/img/loader.svg')}}" class="loader-img" alt="Loader">
-</div>
-<div class="page">
-    <!-- /Loader -->
-    @include('layouts.main-header')
-    @include('layouts.main-sidebar')
-    <!-- main-content -->
-    <div class="main-content app-content">
-        <!-- container -->
-        <div class="main-container container-fluid">
-            @yield('page-header')
-            @yield('content')
-        </div>
-
+    <!-- Loader -->
+    <div id="global-loader">
+        <img src="{{ URL::asset('assets/img/loader.svg') }}" class="loader-img" alt="Loader">
     </div>
-    @include('layouts.footer')
-    
-</div>
-<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
+    <div class="page">
+        <!-- /Loader -->
+        @include('layouts.main-header')
+        @include('layouts.main-sidebar')
+        <!-- main-content -->
+        <div class="main-content app-content">
+            <!-- container -->
+            <div class="main-container container-fluid">
+                @yield('page-header')
+                @yield('content')
+            </div>
 
-@include('layouts.footer-scripts')
+            @include('layouts.footer')
+        </div>
+        
+    </div>
+    <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
+    @include('layouts.footer-scripts')
+
 </body>
+
 </html>
