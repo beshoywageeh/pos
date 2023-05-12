@@ -1,60 +1,3 @@
-//alert("1");
-//========start get and set inv number===========//
-
-let inv_num = document.querySelector("#inv_num"),
-    last_pos = document.querySelector("#last").value,
-    parse = parseInt(last_pos) + 1,
-    slogan = document.querySelector("#slogan").value;
-if (slogan == "") {
-    inv_num.value = `pos-${parse}`;
-} else {
-    inv_num.value = `${slogan}-${parse}`;
-}
-let date = $(".fc-datepicker")
-    .datepicker({
-        dateFormat: "yy-mm-dd",
-    })
-    .val();
-//========end get and set inv number===========//
-
-//========end get and set invoice data===========//
-function calTotal() {
-    let total = 0,
-        prices = document.querySelectorAll("#order_list .product_price"),
-        discount = document.querySelector("#discount"),
-        tax_value = document.querySelector("#tax_value").value,
-        total_price = document.querySelector("#total_inv");
-    for (let i = 0; i < prices.length; i++) {
-        total += parseFloat(prices[i].innerHTML);
-        total_price.value = total - discount.value;
-    }
-}
-
-//========end calculate total ===============//
-
-//========start digital clock ===============//
-setInterval(digitalClock, 1000);
-
-function digitalClock() {
-    let data = new Date(),
-        hour = data.getHours(),
-        mintes = data.getMinutes(),
-        secounds = data.getSeconds(),
-        am_pm = "ص";
-    if (hour > 12) {
-        hour -= 12;
-        am_pm = "م";
-    }
-    hour = hour < 10 ? "0" + hour : hour;
-    mintes = mintes < 10 ? "0" + mintes : mintes;
-    secounds = secounds < 10 ? "0" + secounds : secounds;
-
-    let final = `${hour}:${mintes}:${secounds} ${am_pm}`;
-    document.querySelector("#time").value = final;
-}
-
-digitalClock();
-//========end digital clock ===============//
 $(document).keypress(function (e) {
     if (e.keyCode == 13) {
         product_submit();
@@ -65,11 +8,12 @@ $(document).keypress(function (e) {
 function product_submit() {
     let csrf = document.querySelector("#csrf").value,
         urlAdd = document.querySelector("#urladd").value,
-        barcode = document.querySelector("#barcode").value;
+        barcode = document.querySelector("#barcode").value,
+        inv_id = document.querySelector("#inv_id").value;
     $.ajax({
         method: "POST",
         url: urlAdd,
-        data: { barcode: barcode, _token: csrf },
+        data: { barcode: barcode, inv_id: inv_id, _token: csrf },
         success: function (data, status) {
             $("#barcode").val("");
             flasher.success(data.msg);
@@ -77,11 +21,14 @@ function product_submit() {
     });
 }
 function getdata() {
-    let orderList = document.querySelector("#order_list"),
-        getData = document.querySelector("#getData").value;
+    let token = document.querySelector("#csrf_get").value,
+        orderList = document.querySelector("#order_list"),
+        getData = document.querySelector("#getData").value,
+        invoice = document.querySelector("#inv_id").value;
     $.ajax({
-        method: "GET",
+        method: "POST",
         url: getData,
+        data: { inv_id: invoice, _token: token },
         datatype: "html",
         cache: false,
         success: function (data) {
@@ -95,7 +42,7 @@ function deleteproduct() {
         urlDelete = document.querySelector("#url_delete").value,
         id = $(this).data("id");
     $.ajax({
-        method: "POST",
+        method: "get",
         url: urlDelete,
         cache: false,
         data: { id: id, _token: csrf_delete },
@@ -129,4 +76,15 @@ function Total_product() {
             .html(qty * prices);
         calTotal();
     });
+}
+function calTotal() {
+    let total = 0,
+        prices = document.querySelectorAll("#order_list .product_price"),
+        discount = document.querySelector("#discount"),
+        tax_value = document.querySelector("#tax_value").value,
+        total_price = document.querySelector("#total_inv");
+    for (let i = 0; i < prices.length; i++) {
+        total += parseFloat(prices[i].innerHTML);
+        total_price.value = total - discount.value;
+    }
 }

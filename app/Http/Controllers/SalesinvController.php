@@ -23,20 +23,32 @@ class SalesinvController extends Controller
 
     public function index()
     {
-    
+
         $salesinv = salesinv::with('client')->get();
 
         return view('backend.Salesinv.index', compact('salesinv'));
     }
-
-    public function create()
+    public function create(Request $request, ToastrFactory $flasher)
     {
+//        return $request;
         try {
-            $products = product::all();
-            return view('backend.Salesinv.create', compact('products'), $this->GetData());
+            $serial = salesinv::latest()
+                ->first();
+            $salesinvs = new salesinv();
+            $salesinvs->inv_num = $request->inv_num;
+            $salesinvs->inv_date = $request->date;
+            $salesinvs->client_id = $request->client;
+            $salesinvs->user_id = Auth::user()->id;
+            $salesinvs->serial = ($serial == null) ? '1' : $serial->serial + 1;
+            $salesinvs->save();
+            $data['sales_invoice'] = salesinv::where('id', $serial->id)->with('client')->first();
+            $data['product'] = product::all();
+            $flasher->AddSuccess(trans('general.add_msg'));
+            //return $data;
+            return view('backend.Salesinv.create', ['data' => $data]);
         } catch (\Exception $e) {
-            return redirect()->back()
-                ->withErrors(['error' => $e->getMessage()]);
+            $flasher->addError($e->getMessage());
+            return redirect()->back();
         }
     }
 
@@ -138,17 +150,19 @@ class SalesinvController extends Controller
         }
         $data['clients'] = client::all('id', 'name');
         $data['company'] = $this->GetData();
-   
+
         return view('backend.Salesinv.initsale', ['data' => $data]);
     }
-    public function getProduct(Request $request)
+    public function addProduct(Request $request)
     {
+
         if ($request->ajax()) {
-            product_salesinv::create([
-                'salesinv_id' => $request->salesinv_id,
-                'product_id' => $request->barcode,
-                'quanntiy' => 1,
-            ]);
+            $salesinvs = new product_salesinv();
+            $salesinvs->salesinv_id = $request->inv_id;
+            $salesinvs->product_barcode = $request->barcode;
+            $salesinvs->quantity = 1;
+            $salesinvs->save();
+
 
             return response()->json([
                 'status' => true,
@@ -158,11 +172,12 @@ class SalesinvController extends Controller
         }
     }
 
-    public function getinvoicedata()
+    public function getinvoicedata(Request $request)
     {
-        $ids = transinv::all('barcode');
+        //return $request->inv_id;
+        $ids = product_salesinv::where('salesinv_id', $request->inv_id)->pluck('product_barcode');
         $products = product::whereIn('barcode', $ids)->get();
-        //var_dump($products);
+      //  return $products;
         return view('backend.salesinv.data', compact('products'));
     }
 
@@ -170,7 +185,7 @@ class SalesinvController extends Controller
     {
         $id = $request->id;
         if ($request->ajax()) {
-            transinv::where('barcode', $id)->delete();
+            product_salesinv::where('product_barcode', $id)->delete();
         }
 
         return response()->json([

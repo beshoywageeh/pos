@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_salesinvs', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('salesinv_id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
+            $table->uuid('id');
+            $table->uuid('salesinv_id')->nullable();
+            $table->string('product_barcode')->nullable();
             $table->integer('quantity')->default(1);
         });
     }

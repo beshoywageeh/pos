@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class product_salesinv extends Model
 {
     use HasFactory;
+    use HasUuids;
 
     public $timestamps = false;
 
-//    public $incrementing = false;
-    protected $fillable = ['product_id', 'salesinvs_id', 'quantity'];
+    //    public $incrementing = false;
+    protected $fillable = ['product_barcode', 'salesinvs_id', 'quantity'];
 
     public function salesinv()
     {
@@ -21,6 +24,6 @@ class product_salesinv extends Model
 
     public function products()
     {
-        return $this->belongsTo(product::class, 'product_id', 'id');
+        return $this->belongsTo(product::class, 'product_id', 'barcode');
     }
 }

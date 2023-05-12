@@ -24,23 +24,23 @@
                         <h3 class="card-title mg-b-0">{{ trans('invoice.newinv') }}</h3>
                     </div>
                     <div class="col-lg-6">
-   
+
                     </div>
                 </div>
             </div>
             <hr>
-                <form action="{{ route('salesinvoice_create') }}" method="get" autocomplete="off">
+                <form action="{{ route('salesinvoice_create') }}" method="post" autocomplete="off">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            
+
                             <div class="col-lg-6">
                                 <div class="input-group">
                                     <label for="date" class='input-group-text'>{{ trans('invoice.date') }}</label>
                                     <input type="date" class="form-control" name='date' value="{{ date('Y-m-d') }}">
                                 </div>
                             </div>
-                        
+
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <label for="time" class="input-group-text">{{ trans('invoice.time') }}</label>
@@ -68,7 +68,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-            
+
                                     <span class='input-group-text'>{{ trans('invoice.client_balance') }} : </span>
                                     <input type="text" id='client_balance' class="form-control" value="" readonly>
                                     <span class='input-group-text'>{{ env('Main_currency') }}</span>
@@ -79,9 +79,9 @@
                                     @enderror
                                 </div>
                             </div>
-            
+
                         </div>
-                        
+
                     </div>
                 <div class="modal-footer">
                     <button type="submit" class='btn btn-success btn-block'>{{ trans('general.save') }}</button>

@@ -61,16 +61,17 @@ Route::group(
                 /*=====> Sales Invoices Routes <=====*/
                 Route::group(['prefix' => 'sales_invoice', 'controller' => SalesinvController::class], function () {
                     Route::get('/index', 'index')->name('salesinvoice_index');
-                    Route::get('/create', 'create')->name('salesinvoice_create');
+                    Route::post('/create', 'create')->name('salesinvoice_create');
                     Route::post('/store', 'store')->name('salesinvoice_store');
                     Route::get('/show/{id}', 'show')->name('salesinvoice_show');
                     Route::post('/delete/{sale}', 'destroy')->name('salesinvoice_delete');
-                    Route::post('/getproduct', 'getProduct')->name('salesinvoice_getproduct');
-                    Route::get('/getinvoicedata', 'getinvoicedata')->name('salesinvoice_getinvoicedata');
+                    Route::post('/addproduct', 'addProduct')->name('salesinvoice_getproduct');
+                    Route::post('/getinvoicedata', 'getinvoicedata')->name('salesinvoice_getinvoicedata');
                     Route::get('/deleteproduct', 'deleteproduct')->name('salesinvoice_deleteproduct');
                     //  Route::get('/{id}', 'print')->name('salesinvoice_print');
                     Route::get('/intial_sales', 'intial_sales')->name('intial_sales');
-                   
+
+
                 });
                 /*=====> Money Treasary Routes <=====*/
                 Route::group(['prefix' => 'money_treasary', 'controller' => MoenyTreasaryController::class], function () {

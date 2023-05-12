@@ -34,18 +34,73 @@
             <form action="{{ route('salesinvoice_store') }}" method="post" id="invoice">
                 @method ('post')@csrf
                 <div class="card-body" id="print_area">
-                 
+                    <div class="client_data">
+                        <div class="row mb-2">
+                            <div class="col-lg-6">
+                                <div class="input-group input-group-sm">
+                                    <label for="id" class='input-group-text'>{{ trans('invoice.id') }}</label>
+                                    <input type="id" class="form-control" id="inv_id" readonly
+                                        value="{{ $data['sales_invoice']->id }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group input-group-sm">
+                                    <label for="name"
+                                        class="input-group-text">{{ trans('invoice.client_name') }}</label>
+                                    <input value="{{ $data['sales_invoice']->client->name }}" readonly id="name"
+                                        class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="input-group input-group-sm">
+                                    <label for="client_phone"
+                                        class='input-group-text'>{{ trans('invoice.client_phone') }}</label>
+                                    <input type="client_phone" class="form-control" readonly
+                                        value="{{ $data['sales_invoice']->client->phone }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group input-group-sm">
+                                    <label for="address"
+                                        class="input-group-text">{{ trans('invoice.client_address') }}</label>
+                                    <input value="{{ $data['sales_invoice']->client->address }}" readonly id="address"
+                                        class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class='row my-4'>
                         <div class='col-lg-12'>
                             <form method="POST" autocomplete='off'>
-                                <input type="text" placeholder="{{ trans('invoice.add_product') }}" class="form-control"
-                                    id="barcode">
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-12"> <input type="text"
+                                            placeholder="{{ trans('invoice.add_product') }}" class="form-control"
+                                            id="barcode" autofocus></div>
+                                    <div class="col-lg-6 col-sm-12">
+                                        <select class="form-control select2" name="product" id="product_search">
+                                            <option selected disabled>{{ trans('salesinv_search') }}</option>
+                                            @foreach ($data['product'] as $product)
+                                                <option value="{{ $product->id }}">{{ $product->barcode }} -
+                                                    {{ $product->name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                </div>
                                 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
                                 <input type="hidden" id="urladd" value="{{ route('salesinvoice_getproduct') }}">
-                                <span class="alert-error" id="text"></span>
-                            </form>
 
-                            <input type="hidden" value="{{ route('salesinvoice_getinvoicedata') }}" id="getData">
+                                <span class="alert-error" id="text"></span>
+
+                            </form>
+<form method="post">
+    <input type="hidden" id="csrf_get" value="{{ csrf_token() }}">
+
+    <input type="hidden" value="{{ route('salesinvoice_getinvoicedata') }}" id="getData">
+
+</form>
                             <div class="table-responsive my-4">
                                 <table class="table table-bordered">
                                     <thead>
@@ -143,5 +198,4 @@
 @endsection
 @push('js')
     <script src="{{ URL::asset('assets/js/custom_loop.js') }}"></script>
-
 @endpush
