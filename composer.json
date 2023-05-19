@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.10",
         "mcamara/laravel-localization": "^1.7",
+        "milon/barcode": "^10.0",
         "mpdf/mpdf": "v8.1.2",
         "opcodesio/log-viewer": "^1.4",
         "php-flasher/flasher-laravel": "^1.7",

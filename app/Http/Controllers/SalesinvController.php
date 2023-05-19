@@ -9,8 +9,6 @@ use App\Models\MoneyTreasary;
 use App\Models\product;
 use App\Models\product_salesinv;
 use App\Models\salesinv;
-use App\Models\transinv;
-use Carbon\Carbon;
 use Flasher\Noty\Prime\NotyFactory;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
@@ -28,9 +26,10 @@ class SalesinvController extends Controller
 
         return view('backend.Salesinv.index', compact('salesinv'));
     }
+
     public function create(Request $request, ToastrFactory $flasher)
     {
-//        return $request;
+        //        return $request;
         try {
             $serial = salesinv::latest()
                 ->first();
@@ -48,6 +47,7 @@ class SalesinvController extends Controller
             return view('backend.Salesinv.create', ['data' => $data]);
         } catch (\Exception $e) {
             $flasher->addError($e->getMessage());
+
             return redirect()->back();
         }
     }
@@ -81,12 +81,12 @@ class SalesinvController extends Controller
             MoneyTreasary::create([
                 'num' => $request->inv_num,
                 'payed_at' => $request->date,
-                'debit' => $total_inv[0]
+                'debit' => $total_inv[0],
 
             ]);
             $flasher->AddSuccess(trans('general.add_msg'));
 
-            return redirect('sales');
+            return redirect('salesinvoice_index');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
@@ -101,8 +101,9 @@ class SalesinvController extends Controller
             return view('backend.Salesinv.show', compact('inv'), $this->GetData());
         } catch (\Exception $e) {
             $flasher->addError($e->getMessage());
+
             return redirect()->back();
-                //->withErrors(['error' => $e->getMessage()]);
+            //->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -131,13 +132,12 @@ class SalesinvController extends Controller
         }
     }
 
-
-    public function  intial_sales()
+    public function intial_sales()
     {
-
+        $data['salesinv'] = salesinv::latest()
+            ->first();
         if (
-            salesinv::latest()
-            ->first() == null
+            $data['salesinv'] == null
 
         ) {
             $data['id'] = 'LL-0000';
@@ -153,6 +153,7 @@ class SalesinvController extends Controller
 
         return view('backend.Salesinv.initsale', ['data' => $data]);
     }
+
     public function addProduct(Request $request)
     {
 
@@ -160,9 +161,8 @@ class SalesinvController extends Controller
             $salesinvs = new product_salesinv();
             $salesinvs->salesinv_id = $request->inv_id;
             $salesinvs->product_barcode = $request->barcode;
-            $salesinvs->quantity = 1;
+            $salesinvs->quantity = $request->quantity;
             $salesinvs->save();
-
 
             return response()->json([
                 'status' => true,
@@ -174,11 +174,9 @@ class SalesinvController extends Controller
 
     public function getinvoicedata(Request $request)
     {
-        //return $request->inv_id;
-        $ids = product_salesinv::where('salesinv_id', $request->inv_id)->pluck('product_barcode');
-        $products = product::whereIn('barcode', $ids)->get();
-      //  return $products;
-        return view('backend.salesinv.data', compact('products'));
+        $ids = product_salesinv::where('salesinv_id', $request->inv_id)->with('products')->get();
+        //    return $ids;
+        return view('backend.salesinv.data', compact('ids'));
     }
 
     public function deleteproduct(Request $request, ToastrFactory $flasher)
@@ -194,6 +192,4 @@ class SalesinvController extends Controller
             'id' => $id,
         ]);
     }
-
-
 }

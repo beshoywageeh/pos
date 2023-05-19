@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\client;
 use App\Models\MoneyTreasary;
-use Illuminate\Http\Request;
 use Flasher\Toastr\Prime\ToastrFactory;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MoenyTreasaryController extends Controller
@@ -22,7 +22,7 @@ class MoenyTreasaryController extends Controller
 
     public function store(Request $request, ToastrFactory $flasher)
     {
-          //    return $request;
+        //    return $request;
         try {
             if (MoneyTreasary::latest()->first() == null) {
                 $num = '1';
@@ -46,6 +46,7 @@ class MoenyTreasaryController extends Controller
             $money->save();
 
             $flasher->addSuccess(trans('general.add_msg'));
+
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()

@@ -33,21 +33,27 @@ class ProductController extends Controller
         }
     }
 
-    public function store(StoreProductRequest $request, ToastrFactory $flasher)
+    public function store(Request $request, ToastrFactory $flasher)
     {
+        //StoreProductRequest
+       // return $request;
         try {
             product::create([
-                'name' => ['ar' => $request->name, 'en' => $request->name_en],
+                'name' => [
+                    'ar' => $request->name,
+                    'en' => $request->name_en],
                 'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
                 'opening_balance' => $request->opening_balance,
                 'purchase_price' => $request->purchase_price,
                 'sales_price' => $request->sales_price,
+                'sales_unit' => $request->sales_unit,
+                'purchase_unit' => $request->purchase_unit,
                 'notes' => $request->notes,
             ]);
             $flasher->addSuccess(trans('general.add_msg'));
 
-            return redirect()->back();
+            return redirect()->route('product_index');
         } catch (\Exception $e) {
             return redirect()
                 ->back()
@@ -70,15 +76,21 @@ class ProductController extends Controller
         $product = product::findorfail($request->id);
         try {
             $product->update([
-                'name' => ['ar' => $request->name, 'en' => $request->name_en],
-                'price' => $request->price,
+                'name' => [
+                    'ar' => $request->name, 'en' => $request->name_en],
                 'barcode' => $request->barcode,
                 'category_id' => $request->category_id,
+                'opening_balance' => $request->opening_balance,
+                'purchase_price' => $request->purchase_price,
+                'sales_price' => $request->sales_price,
+                'sales_unit' => $request->sales_unit,
+                'purchase_unit' => $request->purchase_unit,
                 'notes' => $request->notes,
             ]);
             $flasher->AddInfo(trans('general.edit_msg'));
 
-            return redirect()->back();
+            return redirect()->route('product_index');
+
         } catch (\Exception $e) {
             return redirect()
                 ->back()

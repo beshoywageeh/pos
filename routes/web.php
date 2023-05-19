@@ -4,10 +4,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\clientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MoenyTreasaryController;
+use App\Http\Controllers\pdfController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesinvController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\pdfController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -40,7 +40,7 @@ Route::group(
                     Route::post('/delete/{category}', 'destroy')->name('category_destroy');
                 });
                 /*=====> Product Routes <=====*/
-                Route::group(['prefix' => 'Product', 'controller' => ProductController::class], function () {
+                Route::group(['prefix' => 'product', 'controller' => ProductController::class], function () {
                     Route::get('/index', 'index')->name('product_index');
                     Route::get('/create', 'create')->name('product_create');
                     Route::post('/save', 'store')->name('product_store');
@@ -71,7 +71,6 @@ Route::group(
                     //  Route::get('/{id}', 'print')->name('salesinvoice_print');
                     Route::get('/intial_sales', 'intial_sales')->name('intial_sales');
 
-
                 });
                 /*=====> Money Treasary Routes <=====*/
                 Route::group(['prefix' => 'money_treasary', 'controller' => MoenyTreasaryController::class], function () {
@@ -101,5 +100,6 @@ Route::group(
 
 Route::get('/migration', function () {
     Artisan::call('migrate:fresh --seed');
+
     return 'done';
 });

@@ -16,7 +16,8 @@
             @forelse($products as $product)
                 <tr role="row" >
                     <td>{{ $loop->iteration }}</td>
-                    <td ><svg class="barcode" jsbarcode-value="{{ $product->barcode}}" jsbarcode-displayvalue="false" jsbarcode-width="1" jsbarcode-height="10"></svg></td>
+                    <td >     <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($product->barcode, 'C39+',1,30,array(1,1,1), true)}}" alt="barcode"   />
+                        <span class="hidden">{{$product->barcode}}</span></td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->category->name }}</td>

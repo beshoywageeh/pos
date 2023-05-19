@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\SettingTrait;
 use App\Models\client;
-use App\Models\MoneyTreasary;
 use App\Models\country;
+use App\Models\MoneyTreasary;
 use App\Models\salesinv;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
@@ -21,6 +21,7 @@ class ClientController extends Controller
 
         return view('backend.client.index', compact('clients', 'countries'));
     }
+
     public function create()
     {
         //
@@ -106,12 +107,14 @@ class ClientController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
+
     public function client_balance_invoice($id)
     {
 
         $debit = MoneyTreasary::where('client_id', $id)->sum('debit');
         $credit = MoneyTreasary::where('client_id', $id)->sum('credit');
         $total = number_format($debit - $credit);
+
         return $total;
     }
 }

@@ -12,8 +12,11 @@ class salesinv extends Model
     use HasFactory;
     use HasTranslations;
     use HasUuids;
+
     protected $garded = [];
+
     public $incrementing = false;
+
     public $translatable = ['name'];
 
     public function client()
@@ -42,7 +45,7 @@ class salesinv extends Model
     }
 
     public function formatcurrncy($money)
-  {
-        return number_format($money, '2') . ' ' . env('MAIN_CURRENCY');
-  }
+    {
+        return number_format($money, '2').' '.env('MAIN_CURRENCY');
+    }
 }

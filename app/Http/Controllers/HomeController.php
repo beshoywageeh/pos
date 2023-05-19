@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\client;
 use App\Models\MoneyTreasary;
 use App\Models\salesinv;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -18,7 +17,7 @@ class HomeController extends Controller
             $data['clientlast'] = client::latest()->take(10)->get();
             $data['saleslast'] = salesinv::latest()->with('client')->take(10)->orderby('inv_date', 'desc')->get();
             $data['money_treasary'] = MoneyTreasary::latest()->with('client')->take(10)->orderby('payed_at', 'desc')->get();
-           // return $data['money_treasary'];
+            // return $data['money_treasary'];
             $data['name'] = \Auth::user()->first_name;
             $data['expenses'] = MoneyTreasary::sum('debit');
             $data['income'] = MoneyTreasary::sum('credit');
@@ -30,28 +29,28 @@ class HomeController extends Controller
                 ->datasets(
                     [
                         [
-                            "label" => trans('general.tsales'),
+                            'label' => trans('general.tsales'),
                             'backgroundColor' => ['rgba(255, 99, 132, 0.5)'],
-                            "pointHoverBackgroundColor" => "#fff",
-                            "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                            'pointHoverBackgroundColor' => '#fff',
+                            'pointHoverBorderColor' => 'rgba(220,220,220,1)',
                             'data' => [$data['total_sales']],
                         ], [
-                            "label" => trans('general.income'),
+                            'label' => trans('general.income'),
                             'backgroundColor' => ['rgba(54, 162, 235, 0.5)'],
-                            "pointHoverBackgroundColor" => "#fff",
-                            "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                            'pointHoverBackgroundColor' => '#fff',
+                            'pointHoverBorderColor' => 'rgba(220,220,220,1)',
                             'data' => [$data['income']],
                         ], [
-                            "label" => trans('general.expenses'),
-                            'backgroundColor' => ["rgba(38, 185, 154, 0.5)"],
-                            "pointHoverBackgroundColor" => "#fff",
-                            "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                            'label' => trans('general.expenses'),
+                            'backgroundColor' => ['rgba(38, 185, 154, 0.5)'],
+                            'pointHoverBackgroundColor' => '#fff',
+                            'pointHoverBorderColor' => 'rgba(220,220,220,1)',
                             'data' => [$data['expenses']],
-                        ]
+                        ],
                     ]
                 )
                 ->options([]);
-           //return $data;
+            //return $data;
             return view('backend/dashboard', ['data' => $data]);
         } catch (\Exception $e) {
             return redirect()->back()

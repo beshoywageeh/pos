@@ -32,7 +32,8 @@ class client extends Model
         $client = $this->id;
         $debit = MoneyTreasary::where('client_id', $client)->sum('debit');
         $credit = MoneyTreasary::where('client_id', $client)->sum('credit');
-        $final_balance = number_format($debit - $credit, '2') . ' ' . env('MAIN_CURRENCY');
+        $final_balance = number_format($debit - $credit, '2').' '.env('MAIN_CURRENCY');
+
         return $final_balance;
     }
 
@@ -45,8 +46,9 @@ class client extends Model
     {
         return $this->hasMany(Client_MoneyTreasary_Salesinvs::class, 'money_treasary', 'id');
     }
+
     public function formatcurrncy($money)
     {
-        return number_format($money, '2') . ' ' . env('MAIN_CURRENCY');
+        return number_format($money, '2').' '.env('MAIN_CURRENCY');
     }
 }

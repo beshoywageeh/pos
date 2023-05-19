@@ -52,7 +52,7 @@
                             <div class="col-lg-12" id='inv_data'>
                                 <div class="input-group">
                                     <label for="inv_num" class="input-group-text">{{ trans('sales.inv_num') }}</label>
-                                    <input type="text" id="inv_num" class="form-control" value="{{$data['ex'][0]}}-{{$data['ex'][1]}}" name='inv_num' readonly>
+                                    <input type="text" id="inv_num" class="form-control" value="{{$data['ex'][0]}}-{{$data['ex'][1]+1}}" name='inv_num' readonly>
                                 </div>
                             </div>
                         </div>

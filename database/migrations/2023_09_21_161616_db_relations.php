@@ -22,7 +22,7 @@ return new class extends Migration
         Schema::table('salesinvs', function (Blueprint $table) {
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('user_id')->references('id')->on('users');
-        });/*
+        }); /*
         Schema::table('product_salesinvs', function (Blueprint $table) {
             $table->foreign('salesinv_id')->references('id')->on('salesinvs')->onDelete('Cascade');
             $table->foreign('product_barcode')->references('barcode')->on('products')->onDelete('Cascade');

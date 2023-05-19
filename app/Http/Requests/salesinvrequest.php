@@ -30,7 +30,7 @@ class salesinvrequest extends FormRequest
 
     public function messages()
     {
-        return[
+        return [
             'client.required' => 'اسم العميل مطلوب',
         ];
     }

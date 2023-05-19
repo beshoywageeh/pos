@@ -8,14 +8,35 @@ $(document).keypress(function (e) {
 function product_submit() {
     let csrf = document.querySelector("#csrf").value,
         urlAdd = document.querySelector("#urladd").value,
-        barcode = document.querySelector("#barcode").value,
+        product_barcode = document.querySelector("#barcode"),
+        product_search = document.querySelector("#product_search"),
+        quantity = document.querySelector("#quantity").value,
         inv_id = document.querySelector("#inv_id").value;
+    /*if (product_barcode.value || product_search.value === null) {
+        alert("يرجي التأكد من إضافة المنتج");
+        return false;
+    }*/
+    if (product_barcode.value != "") {
+        barcode = product_barcode.value;
+        // return false;
+    }
+    if (product_search.value != "no") {
+        barcode = product_search.value;
+        //    return false;
+    }
     $.ajax({
         method: "POST",
         url: urlAdd,
-        data: { barcode: barcode, inv_id: inv_id, _token: csrf },
+        data: {
+            barcode: barcode,
+            inv_id: inv_id,
+            quantity: quantity,
+            _token: csrf,
+        },
         success: function (data, status) {
             $("#barcode").val("");
+            $("#quantity").val(1);
+            //    $("#product_search").val("");
             flasher.success(data.msg);
         },
     });
@@ -33,7 +54,6 @@ function getdata() {
         cache: false,
         success: function (data) {
             $("#order_list").html(data);
-            calTotal();
         },
     });
 }
@@ -63,28 +83,5 @@ function showPreview(event) {
         let src = URL.createObjectURL(event.target.files[0]),
             preview = document.getElementById("preview");
         preview.src = src;
-    }
-}
-
-function Total_product() {
-    $("body").on("keyup", ".qty", function () {
-        let qty = parseFloat($(this).val()),
-            prices = parseFloat($(this).data("price"));
-        $(this)
-            .closest("tr")
-            .find(".product_price")
-            .html(qty * prices);
-        calTotal();
-    });
-}
-function calTotal() {
-    let total = 0,
-        prices = document.querySelectorAll("#order_list .product_price"),
-        discount = document.querySelector("#discount"),
-        tax_value = document.querySelector("#tax_value").value,
-        total_price = document.querySelector("#total_inv");
-    for (let i = 0; i < prices.length; i++) {
-        total += parseFloat(prices[i].innerHTML);
-        total_price.value = total - discount.value;
     }
 }

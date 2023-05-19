@@ -62,14 +62,13 @@ let sale = document.querySelector("#sales_price");
 
 sale.addEventListener("change", function () {
     //alert("test");
-    let salePrice = document.querySelector("#sales_price").value,
-        purcahsePrice = document.querySelector("#purchase_price").value;
-    if (salePrice == purcahsePrice) {
+    let purcahsePrice = document.querySelector("#purchase_price").value;
+    if (sale.value == purcahsePrice) {
         alert("لا يمكن ان يساوي سعر الشراء سعر البيع");
         salePrice.focus();
         return false;
     }
-    if (salePrice < purcahsePrice) {
+    if (sale.value > purcahsePrice) {
         alert("لا يمكن ان يكون سعر البيع اقل من  سعر الشراء");
         salePrice.focus();
         return false;

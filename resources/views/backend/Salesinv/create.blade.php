@@ -16,7 +16,6 @@
     @include('backend.msg')
 
     <div class="col-xl-12 text-center justify-center align-middle">
-
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="row">
@@ -31,8 +30,8 @@
                 </div>
             </div>
             <hr>
-            <form action="{{ route('salesinvoice_store') }}" method="post" id="invoice">
-                @method ('post')@csrf
+            <form action="{{ route('salesinvoice_store') }}" method="POST" id="invoice">
+                @method ('POST')@csrf
                 <div class="card-body" id="print_area">
                     <div class="client_data">
                         <div class="row mb-2">
@@ -74,20 +73,25 @@
                     <div class='row my-4'>
                         <div class='col-lg-12'>
                             <form method="POST" autocomplete='off'>
+                @method ('POST')@csrf
+
                                 <div class="row">
-                                    <div class="col-lg-6 col-sm-12"> <input type="text"
+                                    <div class="col-lg-4 col-sm-12"> <input type="text"
                                             placeholder="{{ trans('invoice.add_product') }}" class="form-control"
                                             id="barcode" autofocus></div>
-                                    <div class="col-lg-6 col-sm-12">
+                                    <div class="col-lg-4 col-sm-12">
                                         <select class="form-control select2" name="product" id="product_search">
-                                            <option selected disabled>{{ trans('salesinv_search') }}</option>
+                                            <option value="no" selected disabled>{{ trans('salesinv_search') }}</option>
                                             @foreach ($data['product'] as $product)
-                                                <option value="{{ $product->id }}">{{ $product->barcode }} -
+                                                <option value="{{ $product->barcode }}">{{ $product->barcode }} -
                                                     {{ $product->name }}</option>
                                             @endforeach
                                         </select>
 
                                     </div>
+                                    <div class="col-lg-4 col-sm-12"> <input type="number"
+                                            placeholder="{{ trans('invoice.quantity') }}" class="form-control"
+                                            id="quantity" value="1"></div>
                                 </div>
                                 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
                                 <input type="hidden" id="urladd" value="{{ route('salesinvoice_getproduct') }}">
@@ -95,14 +99,14 @@
                                 <span class="alert-error" id="text"></span>
 
                             </form>
-<form method="post">
-    <input type="hidden" id="csrf_get" value="{{ csrf_token() }}">
+                            <form method="post">
+                                <input type="hidden" id="csrf_get" value="{{ csrf_token() }}">
 
-    <input type="hidden" value="{{ route('salesinvoice_getinvoicedata') }}" id="getData">
+                                <input type="hidden" value="{{ route('salesinvoice_getinvoicedata') }}" id="getData">
 
-</form>
+                            </form>
                             <div class="table-responsive my-4">
-                                <table class="table table-bordered">
+                                <table class="table table-sm table-bordered">
                                     <thead>
                                         <tr class="table-info">
                                             <th>#</th>
