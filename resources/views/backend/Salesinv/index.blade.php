@@ -17,10 +17,9 @@
     </div>
 @endsection
 @section('content')
-
     @include('backend.msg')
-    
-  
+
+
     <div class="col-xl-12 text-center">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
@@ -29,9 +28,7 @@
                         <h4 class="card-title mg-b-0">{{ trans('sales.title') }}</h4>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route('intial_sales')}}"
-                            class="btn btn-success btn-block"
-                        >
+                        <a href="{{ route('intial_sales') }}" class="btn btn-success btn-block">
                             <i class="fa fa-plus"></i><span>{{ trans('sales.add') }}</span>
                         </a>
                     </div>
@@ -39,80 +36,70 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive text-center ">
-                    @if ($salesinv->count() > 0)
-                        <table id="example2" class="table table-striped table-hover table-bordered">
-                            <thead class='alert-success'>
-                                <tr>
+                    <table id="example2" class="table table-striped table-hover table-bordered table-sm">
+                        <thead class='alert-success'>
+                            <tr>
 
-                                    <th class="wd-2" style="padding: 0;wdith:4px;">#</th>
-                                    <th><span class="data">{{ trans('sales.inv_num') }}</span></th>
-                                    <th><span class="data">{{ trans('sales.client') }}</span></th>
-                                    <th><span class="data">{{ trans('sales.date') }}</span></th>
-                                    <th><span class="data">{{ trans('sales.total') }}</span></th>
-                                    <th><span class="data">{{ trans('sales.actions') }}</span></th>
+                                <th class="wd-2" style="padding: 0;wdith:4px;">#</th>
+                                <th><span class="data">{{ trans('sales.inv_num') }}</span></th>
+                                <th><span class="data">{{ trans('sales.client') }}</span></th>
+                                <th><span class="data">{{ trans('sales.date') }}</span></th>
+                                <th><span class="data">{{ trans('sales.total') }}</span></th>
+                                <th><span class="data">{{ trans('sales.actions') }}</span></th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($salesinv as $sales)
-                                    <tr role="row">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td><a
-                                                href='{{ route('salesinvoice_show', ['id' => $sales->id]) }}'>{{ $sales->inv_num }}</a>
-                                        </td>
-
-                                        <td>
-                                            <a
-                                                href="{{ route('client_show', ['client' => $sales->client_id]) }}">{{ $sales->client->name }}</a>
-                                        </td>
-                                        <td>{{ $sales->inv_date }}</td>
-                                        <td>{{ number_format($sales->total) . ' ' . env('MAIN_CURRENCY') }}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button aria-expanded="false" aria-haspopup="true"
-                                                    class="btn btn-sm ripple btn-info" data-toggle="dropdown"
-                                                    id="dropdownMenuButton" type="button">{{ trans('sales.actions') }}<i
-                                                        class="fas fa-caret-down mx-2"></i></button>
-                                                <div class="dropdown-menu">
-                                                    <button class="dropdown-item"
-                                                        data-target="#Deletesale{{ $sales->id }}" type="button"
-                                                        data-toggle="modal" aria-controls="example">
-                                                        <i
-                                                            class="fas fa-trash fa-1x text-danger mx-2"></i>{{ trans('general.delete') }}
-                                                    </button>
-                                                    <a class="dropdown-item" data-target="#Editclient{{ $sales->id }}"
-                                                        data-toggle="modal" aria-controls="example" type="button">
-                                                        <i class="fas fa-pen fa-1x text-warning mx-2"></i>
-                                                        {{ trans('general.edit') }}
-                                                    </a>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('pdf.salesinv', ['id' => $sales->id]) }}"
-                                                        target="_blank">
-                                                        <i class="fas fa-print fa-1x text-info mx-2"></i>
-                                                        {{ trans('general.print') }}
-                                                    </a>
-                                                </div>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($salesinv as $sales)
+                                <tr role="row">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td><a
+                                            href='{{ route('salesinvoice_show', ['id' => $sales->id]) }}'>{{ $sales->inv_num }}</a>
+                                    </td>
+                                    <td>
+                                        <a
+                                            href="{{ route('client_show', ['client' => $sales->client_id]) }}">{{ $sales->client->name }}</a>
+                                    </td>
+                                    <td>{{ $sales->inv_date }}</td>
+                                    <td>{{ number_format($sales->total) . ' ' . env('MAIN_CURRENCY') }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button aria-expanded="false" aria-haspopup="true"
+                                                class="btn btn-sm ripple btn-info" data-toggle="dropdown"
+                                                id="dropdownMenuButton" type="button">{{ trans('sales.actions') }}<i
+                                                    class="fas fa-caret-down mx-2"></i></button>
+                                            <div class="dropdown-menu">
+                                                <button class="dropdown-item" data-target="#Deletesale{{ $sales->id }}"
+                                                    type="button" data-toggle="modal" aria-controls="example">
+                                                    <i
+                                                        class="fas fa-trash fa-1x text-danger mx-2"></i>{{ trans('general.delete') }}
+                                                </button>
+                                                <a class="dropdown-item" data-target="#Editclient{{ $sales->id }}"
+                                                    data-toggle="modal" aria-controls="example" type="button">
+                                                    <i class="fas fa-pen fa-1x text-warning mx-2"></i>
+                                                    {{ trans('general.edit') }}
+                                                </a>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('pdf.salesinv', ['id' => $sales->id]) }}"
+                                                    target="_blank">
+                                                    <i class="fas fa-print fa-1x text-info mx-2"></i>
+                                                    {{ trans('general.print') }}
+                                                </a>
                                             </div>
-                                        </td>
-
-                                    </tr>
-                                    @include('backend.Salesinv.edit') @include('backend.Salesinv.delete')
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                    @else
-                        <div class="alert alert-solid-danger">
-                            <h5 class='text-white'>{{ trans('general.msg') }}</h5>
-                        </div>
-                    @endif
-
+                                        </div>
+                                    </td>
+                                </tr>
+                                @include('backend.Salesinv.edit') @include('backend.Salesinv.delete')
+                            @empty
+                                <div class="alert alert-solid-danger">
+                                    <h5 class='text-white'>{{ trans('general.msg') }}</h5>
+                                </div>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
     </div>
-
-    @endsection @push('js')
-    <script src="{{URL::asset('assets/js/custom_loop.js')}}"></script>
-@endpush
+    @endsection

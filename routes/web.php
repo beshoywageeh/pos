@@ -70,6 +70,9 @@ Route::group(
                     Route::get('/deleteproduct', 'deleteproduct')->name('salesinvoice_deleteproduct');
                     //  Route::get('/{id}', 'print')->name('salesinvoice_print');
                     Route::get('/intial_sales', 'intial_sales')->name('intial_sales');
+                    Route::post('/salesinvoice_getapprovedata', 'approve_invoice')->name('salesinvoice_getapprovedata');
+                    Route::post('/approve_close_invoice', 'approve_invoice')->name('approve_close_invoice');
+                    
 
                 });
                 /*=====> Money Treasary Routes <=====*/

@@ -1,6 +1,6 @@
 <div class="dropdown">
     <button aria-expanded="false" aria-haspopup="true"
-            class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
+            class="btn btn-primary btn-sm" data-toggle="dropdown"
             id="dropdownMenuButton" type="button">{{trans('category.actions')}} <i
             class="fas fa-caret-down my-1"></i></button>
     <div class="dropdown-menu">

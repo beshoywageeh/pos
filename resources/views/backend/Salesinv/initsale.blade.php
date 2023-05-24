@@ -29,7 +29,8 @@
                 </div>
             </div>
             <hr>
-                <form action="{{ route('salesinvoice_create') }}" method="post" autocomplete="off">
+                <form action="{{ route('salesinvoice_create') }}" method="POST" autocomplete="off">
+                    @method('POST')
                     @csrf
                     <div class="modal-body">
                         <div class="row">

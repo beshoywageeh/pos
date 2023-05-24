@@ -3,9 +3,9 @@
         <td>{{ $loop->iteration }}</td>
         <td>{{ $product->products->name }}</td>
         <td>{{ $product->quantity }}</td>
-        <td>{{ formatcurrncy($product->products->sales_price) }}</td>
+        <td>{{ $product->products->sales_price }}</td>
         <td class="product_price">
-            {{ formatcurrncy($product->quantity * $product->products->sales_price) }}
+            {{ $product->quantity * $product->products->sales_price }}
         </td>
         <td>
             <button onclick="deleteproduct();return false;"class="btn btn-sm btn-danger delete_product"

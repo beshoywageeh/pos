@@ -7,12 +7,8 @@
 		@include('layouts.head')
 	</head>
 
-	<body class="main-body bg-primary-transparent">
-		<!-- Loader -->
-		<div id="global-loader">
-			<img src="{{URL::asset('assets/img/loader.svg')}}" class="loader-img" alt="Loader">
-		</div>
-		<!-- /Loader -->
+	<body class="hold-transition login-page">
+
 		@yield('content')
 		@include('layouts.footer-scripts')
 	</body>

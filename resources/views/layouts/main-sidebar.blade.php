@@ -1,90 +1,86 @@
 <!-- main-sidebar -->
-<div class="app-sidebar__overlay" data-toggle="sidebar">
-    
-</div>
-<aside class="app-sidebar sidebar-scroll">
-    <div class="main-sidebar-header active">
-        <a class="desktop-logo logo-light active" href="{{ url('/' . ($page = 'index')) }}"><img
-                src="{{ URL::asset('assets/img/brand/logo.png') }}" class="main-logo" alt="logo" /></a>
-        <a class="desktop-logo logo-dark active" href="{{ url('/' . ($page = 'index')) }}"><img
-                src="{{ URL::asset('assets/img/brand/logo-white.png') }}" class="main-logo dark-theme"
-                alt="logo" /></a>
-        <a class="logo-icon mobile-logo icon-light active" href="{{ url('/' . ($page = 'index')) }}"><img
-                src="{{ URL::asset('assets/img/brand/favicon.png') }}" class="logo-icon" alt="logo" /></a>
-        <a class="logo-icon mobile-logo icon-dark active" href="{{ url('/' . ($page = 'index')) }}"><img
-                src="{{ URL::asset('assets/img/brand/favicon-white.png') }}" class="logo-icon dark-theme"
-                alt="logo" /></a>
-    </div>
-    <div class="main-sidemenu">
-        <div class="app-sidebar__user clearfix">
-            <div class="dropdown user-pro-body">
-                <div class=""><img alt="user-img" class="avatar avatar-xl brround"
-                        src="{{ URL::asset('assets/img/user.png') }}" /></div>
-                <div class="user-info">
-                    <h4 class="font-weight-semibold mt-3 mb-0">{{ Auth::user()->first_name }}
-                        {{ Auth::user()->last_name }}</h4>
-                    <span class="mb-0 text-muted">{{ Auth::user()->email }}</span>
-                </div>
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a class="brand-link" href="{{ route('dashboard') }}"><img src="{{ URL::asset('assets/img/AdminLTELogo.png') }}"
+            class="brand-image img-circle elevation-3" alt="logo" /> <span
+            class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
+            <div class="img">
+                <img alt="user-img" class="img-circle elevation-2"
+                    src="{{ URL::asset('assets/img/user2-160x160.jpg') }}" />
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{ Auth::user()->first_name }}
+                    {{ Auth::user()->last_name }}</a>
             </div>
         </div>
-        <ul class="side-menu">
-            <li class="slide">
-                <a class="side-menu__item" href="{{ route('dashboard') }}">
-                    <span class="side-menu__icon"><i class="fas fa-tachometer-alt" style="font-size: 23px"></i></span>
-                    <span class="side-menu__label">{{ trans('sidebar.index') }}</span>
-                </a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" href="{{ route('category_index') }}">
-                    <span class="side-menu__icon"><i class="fas fa-tags" style="font-size: 23px;"></i></span>
-                    <span class="side-menu__label">{{ trans('sidebar.Category') }}</span>
-                </a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" href="{{ route('product_index') }}">
-                    <span class="side-menu__icon"><i class="fas fa-store"></i></span>
-                    <span class="side-menu__label">{{ trans('sidebar.product') }}</span>
-                </a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" href="{{ route('client_index') }}">
-                    <span class="side-menu__icon"><i class="fa fa-users"></i></span>
-                    <span class="side-menu__label">{{ trans('sidebar.clients') }}</span>
-                </a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
-                    <span class="side-menu__icon"><i class="fas fa-shopping-cart"></i></span>
-                    <span class="side-menu__label">{{ trans('invoice.invoice') }}</span><i
-                        class="angle fe fe-chevron-down"></i>
-                </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item"
-                            href="{{ route('salesinvoice_index') }}">{{ trans('invoice.salesinvoce') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('salesinvoice_index') }}">{{ trans('invoice.rejctsalesinvoice') }}</a></li>
-                    <li><a class="slide-item"
-                            href="{{ route('salesinvoice_index') }}">{{ trans('invoice.supplyinvoce') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('salesinvoice_index') }}">{{ trans('invoice.rejctsupplyinvoice') }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" href="{{ route('money_treasary_index') }}">
-                    <span class="side-menu__icon"><i class="fe fe-pie-chart"></i></span>
-                    <span class="side-menu__label">{{ trans('sidebar.money_transaction') }}</span>
-                </a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" href="{{ route('index') }}">
-                    <span class="side-menu__icon"><i class="fa fa-cogs"></i></span>
-                    <span class="side-menu__label">{{ trans('sidebar.setting') }}</span>
-                </a>
-            </li>
-        </ul>
+        <nav class='mt-2'>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li class="nav-item">
+
+                    <a class="nav-link {{ request()->is('ar/') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>{{ trans('sidebar.index') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('Category/index*') || request()->is('ar/Category*') ? 'active' : '' }}"
+                        href="{{ route('category_index') }}">
+                        <i class="nav-icon fas fa-tags"></i>
+                        <p>{{ trans('sidebar.Category') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('product/index*') || request()->is('ar/product*') ? 'active' : '' }}" href="{{ route('product_index') }}">
+                        <i class="nav-icon fas fa-store"></i>
+                        <p>{{ trans('sidebar.product') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('client_index') }}">
+                        <i class="nav-icon fa fa-users"></i>
+                        <p>{{ trans('sidebar.clients') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a class="nav-link" data-toggle="nav-link" href="#">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>{{ trans('invoice.invoice') }}</p><i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li><a class="nav-link"
+                                href="{{ route('salesinvoice_index') }}">{{ trans('invoice.salesinvoce') }}</a>
+                        </li>
+                        <li><a class="nav-link"
+                                href="{{ route('salesinvoice_index') }}">{{ trans('invoice.rejctsalesinvoice') }}</a>
+                        </li>
+                        <li><a class="nav-link"
+                                href="{{ route('salesinvoice_index') }}">{{ trans('invoice.supplyinvoce') }}</a>
+                        </li>
+                        <li><a class="nav-link"
+                                href="{{ route('salesinvoice_index') }}">{{ trans('invoice.rejctsupplyinvoice') }}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('money_treasary_index') }}">
+                        <i class="nav-icon fas fa-chart"></i>
+
+                        <p>{{ trans('sidebar.money_transaction') }}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('index') }}">
+                        <i class="nav-icon fa fa-cogs"></i>
+                        <p>{{ trans('sidebar.setting') }}</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </aside>
 <!-- main-sidebar -->

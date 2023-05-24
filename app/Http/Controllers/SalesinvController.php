@@ -26,10 +26,30 @@ class SalesinvController extends Controller
 
         return view('backend.Salesinv.index', compact('salesinv'));
     }
+    public function intial_sales()
+    {
+        $data['salesinv'] = salesinv::latest()
+            ->first();
+        if (
+            $data['salesinv'] == null
 
+        ) {
+            $data['id'] = 'LL-0000';
+            $data['ex'] = explode('-', $data['id']);
+        } else {
+            $data['id'] = salesinv::latest()->first()->id;
+            $data['sales_inv'] = salesinv::find($data['id']);
+
+            $data['ex'] = explode('-', $data['sales_inv']->inv_num);
+        }
+        $data['clients'] = client::all('id', 'name');
+        $data['company'] = $this->GetData();
+
+        return view('backend.Salesinv.initsale', ['data' => $data]);
+    }
     public function create(Request $request, ToastrFactory $flasher)
     {
-        //        return $request;
+    //    return $request;
         try {
             $serial = salesinv::latest()
                 ->first();
@@ -41,10 +61,13 @@ class SalesinvController extends Controller
             $salesinvs->serial = ($serial == null) ? '1' : $serial->serial + 1;
             $salesinvs->save();
             $data['sales_invoice'] = salesinv::where('id', $serial->id)->with('client')->first();
-            $data['product'] = product::all();
+            $data['product'] = product::all(['barcode', 'name']);
             $flasher->AddSuccess(trans('general.add_msg'));
             //return $data;
-            return view('backend.Salesinv.create', ['data' => $data]);
+            return view(
+                'backend.Salesinv.create',
+                ['data' => $data]
+            );
         } catch (\Exception $e) {
             $flasher->addError($e->getMessage());
 
@@ -52,41 +75,26 @@ class SalesinvController extends Controller
         }
     }
 
-    public function store(salesinvrequest $request, ToastrFactory $flasher)
+    public function store(Request $request, ToastrFactory $flasher)
     {
+        // return $request;
         try {
-            $total_inv = explode(' ', $request->total_inv);
-            $details = [];
-            /*            for ($i = 0; $i < count($request->product_id); $i++) {
-                $details[$i]['product_id'] = $request->product_id[$i];
-                $details[$i]['quantity'] = $request->product_qty[$i];
-            }
-*/
-            $salesinvs = new salesinv();
-            $salesinvs->inv_num = $request->inv_num;
-            $salesinvs->inv_date = $request->date;
-            $salesinvs->client_id = $request->client;
-            $salesinvs->discount = $request->discount;
-            $salesinvs->tax_rate = $request->tax_rate;
-            $salesinvs->tax_value = $request->tax_value;
-            $salesinvs->user_id = Auth::user()->id;
-            $salesinvs->total = $total_inv[0];
-            $salesinvs->save();
-            $id = salesinv::latest()->first();
-            $invdata = new product_salesinv();
-            $invdata->salesinv_id = $id->id;
-            $salesinvs->products()
-                ->attach($details);
-            DB::table('transinvs')->truncate();
+            $sales_inv = salesinv::findorfail($request->id);
+            $sales_inv->update([
+                'discount' => $request->discount,
+                'tax_rate' => $request->tax_rate,
+                'tax_value' => $request->tax_value,
+                'total' => $request->total_inv,
+            ]);
             MoneyTreasary::create([
                 'num' => $request->inv_num,
                 'payed_at' => $request->date,
-                'debit' => $total_inv[0],
+                'debit' => $request->total_inv,
 
             ]);
             $flasher->AddSuccess(trans('general.add_msg'));
 
-            return redirect('salesinvoice_index');
+            return redirect()->route('salesinvoice_index');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withErrors(['error' => $e->getMessage()]);
@@ -132,27 +140,7 @@ class SalesinvController extends Controller
         }
     }
 
-    public function intial_sales()
-    {
-        $data['salesinv'] = salesinv::latest()
-            ->first();
-        if (
-            $data['salesinv'] == null
-
-        ) {
-            $data['id'] = 'LL-0000';
-            $data['ex'] = explode('-', $data['id']);
-        } else {
-            $data['id'] = salesinv::latest()->first()->id;
-            $data['sales_inv'] = salesinv::find($data['id']);
-
-            $data['ex'] = explode('-', $data['sales_inv']->inv_num);
-        }
-        $data['clients'] = client::all('id', 'name');
-        $data['company'] = $this->GetData();
-
-        return view('backend.Salesinv.initsale', ['data' => $data]);
-    }
+ 
 
     public function addProduct(Request $request)
     {
@@ -192,4 +180,45 @@ class SalesinvController extends Controller
             'id' => $id,
         ]);
     }
+
+    public function approve_invoice(Request $request)
+    {
+        if ($request->ajax()) {
+            $data['invoice_product_count'] = product_salesinv::where('salesinv_id', $request->inv_id)->sum('quantity');
+            $data['sales_invoice'] = $request->inv_id;
+            return $data;
+                /*  return response()->json([
+                'data' => $data
+            ])*/;
+            //            return view('backend.salesinv.Approve_inv_data', ['data' => $data]);
+        }
+    }
+    public function approve_close_invoice(Request $request, ToastrFactory $flasher)
+    {
+        return $request;
+        try {
+            $sales_inv = salesinv::findorfail($request->id);
+            $sales_inv->update([
+                'discount' => $request->discount,
+                'tax_rate' => $request->tax_rate,
+                'tax_value' => $request->tax_value,
+                'total' => $request->total_inv,
+            ]);
+            MoneyTreasary::create([
+                'num' => $request->inv_num,
+                'payed_at' => $request->date,
+                'debit' => $request->total_inv,
+
+            ]);
+            $flasher->AddSuccess(trans('general.add_msg'));
+
+            return redirect()->route('salesinvoice_index');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    
+    
 }

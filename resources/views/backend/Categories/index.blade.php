@@ -4,47 +4,52 @@
 @endpush
 <!-- Content Header (Page header) -->
 @section('content')
-    <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between">
-        <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{ trans('category.title') }}</h4>
-                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ trans('category.main') }}</span>
-            </div>
-        </div>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">{{ trans('category.title') }}</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">{{ trans('category.main') }}</a></li>
+                        <li class="breadcrumb-item active">{{ trans('category.title') }}</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
-    @include('backend.msg')
 
+
+
+    
+    @include('backend.msg')
+<div class="container-fluid">
+    
     <div class="col-xl-12">
-        <div class="card mg-b-20">
-            <div class="card-header pb-0">
-                <div class="d-flex justify-content-between col-sm-12 col-md-4">
-                    <h4 class="card-title mg-b-0">{{ trans('category.title') }}</h4>
-                </div>
+        <div class="card">
+            <div class="card-header d-flex">
+            
+                <h3 class="card-title p-1">
+                    {{ trans('category.title') }}</h3>
             </div>
             <div class="card-body">
-                <div class="row mb-2">
-                </div>
-                <div class="table-responsive text-center ">
                     {!! $dataTable->table(
                         [
-                            'class' => 'table table-bordered table-hover',
+                            'class' => 'table table-sm',
                             'style' => 'text-align:center',
-                            'data-page-length'=>'50',
-                            'id' => 'print',
+                            'data-page-length' => '50',
                         ],
                         true,
                     ) !!}
-                </div>
-
-            </div>
         </div>
         @include('backend.Categories.create')
         @include('backend.Categories.delete')
         @include('backend.Categories.edit')
     </div>
+</div>
 @endsection
 @push('js')
-<script src="{{ URL::asset('') }}vendor/datatables/buttons.server-side.js"></script>
-{!! $dataTable->scripts() !!}
+    <script src="{{ URL::asset('') }}vendor/datatables/buttons.server-side.js"></script>
+    {!! $dataTable->scripts() !!}
 @endpush

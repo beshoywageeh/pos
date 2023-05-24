@@ -1,7 +1,12 @@
 <!-- Footer opened -->
-	<div class="main-footer ht-40">
-		<div class="container-fluid pd-t-0-f ht-100p">
-			<span>Copyright © {{date('Y')}} <a href="#">{{env('APP_NAME')}}</a>. Designed by <a href="">Loop Labs</a> All rights reserved.</span>
-		</div>
-	</div>
+
+<footer class="main-footer">
+    <strong>Copyright &copy; {{ date('Y') }}-{{ date('Y') + 4 }} <a
+            href="#">{{ env('APP_NAME') }}</a>.</strong>
+    All rights reserved. Loop Labs
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0
+    </div>
+</footer>
+
 <!-- Footer closed -->
