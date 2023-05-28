@@ -14,4 +14,8 @@ class category extends Model
     protected $fillable = ['name', 'notes'];
 
     public $translatable = ['name'];
+    public function format_date()
+    {
+        return $this->created_at->format('Y-m-d');
+    }
 }

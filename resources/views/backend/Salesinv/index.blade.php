@@ -35,6 +35,7 @@
                 </div>
             </div>
             <div class="card-body">
+
                 <div class="table-responsive text-center ">
                     <table id="example2" class="table table-striped table-hover table-bordered table-sm">
                         <thead class='alert-success'>

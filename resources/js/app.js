@@ -6,6 +6,7 @@ require("/bootstrap");
 import Alpine from 'alpinejs';
 import './bootstrap';
 //import DataTable from "datatables.net-dt";
-window.Alpine = Alpine;
-
+window.Alpine = Alpine;/*
+import './../../vendor/power-components/livewire-powergrid/dist/powergrid'
+import './../../vendor/power-components/livewire-powergrid/dist/powergrid.css'*/
 Alpine.start();

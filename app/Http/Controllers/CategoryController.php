@@ -11,15 +11,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(CategoriesDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('backend.Categories.index');
+        $data['categories'] = category::all();
+        return view('backend.Categories.index', ['data' => $data]);
     }
-
-    public function create()
-    {
-    }
-
     public function store(StoreCategoryRequest $request, ToastrFactory $flasher)
     {
         try {
@@ -37,37 +33,24 @@ class CategoryController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-    public function show(category $category)
+        public function show(category $category)
     {
         //return $category->id;
         $products = product::where('category_id', $category->id)->get();
 
         return view('backend.Categories.show', compact('category', 'products'));
     }
-
-    public function edit(category $category)
-    {
-        try {
-            category::findorfail($category);
-        } catch (\Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-
     public function update(StoreCategoryRequest $request, ToastrFactory $flasher)
     {
-        $cat = category::findorfail($request->id);
         try {
+            $cat = category::findorfail($request->id);
             $cat->update([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'notes' => $request->notes,
             ]);
-            $flasher->Addinfo(trans('general.update_msg'));
+            $flasher->Addinfo(trans('general.edit_msg'));
 
-            return redirect('category');
+            return redirect()->route('category_index');
         } catch (\Exception $e) {
             return redirect()
                 ->back()
@@ -79,9 +62,9 @@ class CategoryController extends Controller
     {
         try {
             category::destroy($request->id);
-            $flasher->AddError(trans('general.delete_msg'));
+            $flasher->Addinfo(trans('general.delete_msg'));
 
-            return redirect('category');
+            return redirect()->route('category_index');
         } catch (\Exception $e) {
             return redirect()
                 ->back()

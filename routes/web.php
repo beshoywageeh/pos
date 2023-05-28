@@ -32,12 +32,12 @@ Route::group(
             function () {
                 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
                 /*=====> Category Routes <=====*/
-                Route::group(['prefix' => 'Category', 'controller' => CategoryController::class], function () {
+                Route::group(['prefix' => 'category', 'controller' => CategoryController::class], function () {
                     Route::get('/index', 'index')->name('category_index');
                     Route::post('/save', 'store')->name('category_store');
-                    Route::post('/show/{category}', 'show')->name('category_show');
-                    Route::post('/edit/{category}', 'edit')->name('category_edit');
-                    Route::post('/delete/{category}', 'destroy')->name('category_destroy');
+                    Route::get('/show/{category}', 'show')->name('category_show');
+                    Route::post('/update', 'update')->name('category_update');
+                    Route::post('/delete', 'destroy')->name('category_destroy');
                 });
                 /*=====> Product Routes <=====*/
                 Route::group(['prefix' => 'product', 'controller' => ProductController::class], function () {
@@ -72,7 +72,7 @@ Route::group(
                     Route::get('/intial_sales', 'intial_sales')->name('intial_sales');
                     Route::post('/salesinvoice_getapprovedata', 'approve_invoice')->name('salesinvoice_getapprovedata');
                     Route::post('/approve_close_invoice', 'approve_invoice')->name('approve_close_invoice');
-                    
+
 
                 });
                 /*=====> Money Treasary Routes <=====*/

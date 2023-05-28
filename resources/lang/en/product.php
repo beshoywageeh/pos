@@ -27,7 +27,7 @@ return [
     'edit' => 'Edit',
     'action' => 'Action',
     'actions' => 'Actions',
-    'notemsg' => 'No Notes To Show',
+
     'Add' => 'Added Successfully',
     'Edit' => 'Edited Successfully',
     'Delete' => 'Deleted Successfully',

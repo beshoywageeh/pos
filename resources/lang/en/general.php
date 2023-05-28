@@ -2,6 +2,7 @@
 <?php
 
 return [
+    'notemsg' => 'No Notes To Show',
     'print' => 'print',
     'add' => 'add',
     'edit' => 'edit',
@@ -22,4 +23,8 @@ return [
     'email_msg' => 'Wrong Email',
     'password_msg' => 'Incorrect Password',
     'status_msg' => 'please active your account to login',
+    'empty_msg' => 'no data to show',
+    'actions' => 'actions',
+    'created_at' => 'created at',
+    'notes' => 'notes',
 ];

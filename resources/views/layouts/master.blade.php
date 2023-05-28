@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     @include('layouts.head')
+
+    @livewireStyles
+
 </head>
 
 @if (App::getLocale() == 'en')
@@ -18,7 +21,7 @@
     <!-- Loader -->
 
     <div class="wrapper">
-
+  
         <!-- /Loader -->
         @include('layouts.main-header')
         @include('layouts.main-sidebar')
@@ -36,7 +39,7 @@
 
     </div>
     @include('layouts.footer-scripts')
-
+    @livewireScripts
 </body>
 
 </html>

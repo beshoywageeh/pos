@@ -43,7 +43,7 @@ class CategoriesDataTable extends DataTable
                 Button::raw('<button data-target="#AddCategory" data-toggle="modal"
                                 class="btn  btn-primary btn-sm buttons-create"
                                 tabindex="0" aria-controls="example" type="button">
-                            <i class="fa fa-plus"></i><span>'.trans('general.add').'</span>
+                            <i class="fa fa-plus"></i><span>' . trans('general.add') . '</span>
                         </button>'),
                 Button::make('print')->text('<i class="fa fa-print"></i>'),
                 Button::make(['extend' => 'export', 'text' => '<i class="fa fa-download"></i>']),
@@ -56,17 +56,7 @@ class CategoriesDataTable extends DataTable
 
                     'url' => (App::getLocale() == 'en') ? '' : url('https://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json'),
 
-                ],
-                'initComplete' => " function () {
-		            this.api().columns([0,1]).every(function () {
-		                var column = this;
-		                var input = document.createElement(\"input\");
-		                $(input).appendTo($(column.footer()).empty())
-		                .on('keyup', function () {
-		                    column.search($(this).val(), false, false, true).draw();
-		                });
-		            });
-		        }",
+                ]
 
             ]);
     }
@@ -90,13 +80,12 @@ class CategoriesDataTable extends DataTable
                 ->exportable(false)
                 ->orderable(false)
                 ->printable(false)
-                ->width('20px'),
 
         ];
     }
 
     protected function filename(): string
     {
-        return 'categories_'.date('YmdHis');
+        return 'categories_' . date('YmdHis');
     }
 }
