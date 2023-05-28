@@ -45,7 +45,8 @@ Route::group(
                     Route::get('/create', 'create')->name('product_create');
                     Route::post('/save', 'store')->name('product_store');
                     Route::post('/update', 'update')->name('product_update');
-                    Route::get('/edit/{category}', 'edit')->name('product_edit');
+                    Route::get('/edit/{product}', 'edit')->name('product_edit');
+                    Route::get('/show/{product}', 'show')->name('product_show');
                     Route::post('/delete/{product}', 'destroy')->name('product_destroy');
                 });
                 /*=====> Client Routes <=====*/

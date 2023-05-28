@@ -21,7 +21,7 @@ class product_salesinvFactory extends Factory
         foreach ($sales_inv as $code) {
             return [
                 'salesinv_id' => $code,
-                'product_barcode' => fake()->numberBetween('1', '100'),
+                'product_id' => fake()->numberBetween('1', '100'),
                 'quantity' => fake()->numberBetween('1', '50'),
             ];
         }

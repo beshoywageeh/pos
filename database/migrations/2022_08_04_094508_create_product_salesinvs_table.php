@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('product_salesinvs', function (Blueprint $table) {
             $table->uuid('id');
             $table->uuid('salesinv_id')->nullable();
-            $table->string('product_barcode')->nullable();
+            $table->string('product_id')->nullable();
             $table->integer('quantity')->default(1);
         });
     }

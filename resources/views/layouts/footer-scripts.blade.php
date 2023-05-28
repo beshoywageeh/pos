@@ -25,8 +25,8 @@
 <script src="{{URL::asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
-
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{URL::asset('assets/js/pages/dashboard.js')}}"></script>
 

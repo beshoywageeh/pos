@@ -104,23 +104,28 @@
         </div>
     @endsection
     @push('js')
-        <script>
-            $(function() {
-                $('#category_table').DataTable({
-                    "paging": true,
-                    "lengthChange": true,
-                    "searching": true,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    'language': {
-                        url: '//cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json'
-                    },
+    @if (App::getlocale()=='ar')
+<script>
+
+    let table = new DataTable('#category_table', {
+    responsive: true,
+    language: {
+        url:'//cdn.datatables.net/plug-ins/1.13.4/i18n/ar.json'
+    }
+});
+</script>
 
 
-                });
-            });
-        </script>
+@else
+<script>
+
+    let table = new DataTable('#category_table', {
+    responsive: true,
+});
+</script>
+
+@endif
+
         <script>
             $('#EditCategory').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);

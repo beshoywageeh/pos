@@ -14,7 +14,7 @@ class product_salesinv extends Model
     public $timestamps = false;
 
     //    public $incrementing = false;
-    protected $fillable = ['product_barcode', 'salesinvs_id', 'quantity'];
+    protected $fillable = ['product_id', 'salesinvs_id', 'quantity'];
 
     public function salesinv()
     {
@@ -23,7 +23,7 @@ class product_salesinv extends Model
 
     public function products()
     {
-        return $this->belongsTo(product::class, 'product_barcode', 'barcode');
+        return $this->belongsTo(product::class, 'product_id', 'id');
     }
     public function formatcurrncy($money)
     {

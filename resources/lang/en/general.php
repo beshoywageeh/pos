@@ -27,4 +27,7 @@ return [
     'actions' => 'actions',
     'created_at' => 'created at',
     'notes' => 'notes',
+    'main' => 'main',
+    'name' => 'name',
+    'delconfirm' => 'are you sure you want delete ?'
 ];

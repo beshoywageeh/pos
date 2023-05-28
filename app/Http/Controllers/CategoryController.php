@@ -33,12 +33,10 @@ class CategoryController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-        public function show(category $category)
+    public function show($category)
     {
-        //return $category->id;
-        $products = product::where('category_id', $category->id)->get();
-
-        return view('backend.Categories.show', compact('category', 'products'));
+        $data['category'] = category::where('id', $category)->with('products')->first();
+        return view('backend.Categories.show', ['data' => $data]);
     }
     public function update(StoreCategoryRequest $request, ToastrFactory $flasher)
     {

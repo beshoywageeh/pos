@@ -15,23 +15,10 @@ return [
     */
 
     'title' => 'Products',
-    'main' => 'Main',
-    'add' => 'Add',
-    'name' => 'Name',
     'msg' => 'No Products To Show',
-    'save' => 'Save',
     'arabicname' => 'Arabic Name ',
     'englishname' => 'English Name ',
-    'note' => 'Note',
     'delete' => 'Delete',
-    'edit' => 'Edit',
-    'action' => 'Action',
-    'actions' => 'Actions',
-
-    'Add' => 'Added Successfully',
-    'Edit' => 'Edited Successfully',
-    'Delete' => 'Deleted Successfully',
-    'delconfirm' => 'Are You Sure You Want TO Delete',
     'price' => 'Price',
     'chcat' => '-- Choose Category From List --',
     'category' => 'Choose Category',
@@ -44,5 +31,7 @@ return [
     'opening_balance' => 'opening balance',
     'img' => 'select product image',
     'info' => 'product details',
+    'generate_barcode' => 'generate barcode',
+    'canotdelete' => 'cann\'t delete product has transations'
 
 ];

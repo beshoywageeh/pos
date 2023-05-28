@@ -1,5 +1,8 @@
 <!-- Title -->
-<title> @yield('title',env('APP_NAME'))</title><!-- Favicon -->
+<title> @yield('title',env('APP_NAME'))</title>
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="{{ URL::asset('assets/img/AdminLTELogo.png') }}"/>
+<link rel="icon" type="image/png" href="{{ URL::asset('assets/img/AdminLTELogo.png') }}">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}">
 <!-- Ionicons -->
@@ -31,5 +34,6 @@
 @else
 @endif
 
+<link rel="stylesheet" href="{{URL::asset('assets/css/custom.css')}}">
 
 @stack('css')
