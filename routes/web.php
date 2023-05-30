@@ -74,7 +74,6 @@ Route::group(
                     Route::post('/salesinvoice_getapprovedata', 'approve_invoice')->name('salesinvoice_getapprovedata');
                     Route::post('/approve_close_invoice', 'approve_invoice')->name('approve_close_invoice');
 
-
                 });
                 /*=====> Money Treasary Routes <=====*/
                 Route::group(['prefix' => 'money_treasary', 'controller' => MoenyTreasaryController::class], function () {

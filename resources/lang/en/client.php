@@ -30,4 +30,6 @@ return [
     'balance' => 'client balance',
     'chooseclient' => 'choose client',
     'code' => 'code',
+    'info' => 'client info',
+    'canotdelete' => 'can\'t delete client has transastion',
 ];

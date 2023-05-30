@@ -26,4 +26,8 @@ return [
     'date' => 'invoice date',
     'user' => 'user name',
 
+    'depit' => 'depit',
+    'credit' => 'credit',
+    'balance' => 'balance',
+
 ];

@@ -17,6 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = product::with('category')->get();
+
         return view('backend.products.index', compact('products'));
     }
 
@@ -36,7 +37,7 @@ class ProductController extends Controller
     public function store(Request $request, ToastrFactory $flasher)
     {
         //StoreProductRequest
-       // return $request;
+        // return $request;
         try {
             product::create([
                 'name' => [
@@ -61,15 +62,19 @@ class ProductController extends Controller
         }
     }
 
-    public function show(product $product)
+    public function show($product)
     {
-        //
+        $data['product'] = product::where('id', $product)->with('salesinvs', 'category')->first();
+        // return $data['product'];
+        return view('backend.products.show', ['data' => $data]);
+        //        return $data['product'];
     }
 
     public function edit(product $product)
     {
         // return $product;
         $cats = category::all();
+
         return view('backend.products.edit', compact('product', 'cats'));
     }
 
@@ -105,9 +110,9 @@ class ProductController extends Controller
             $count = product_salesinv::where('product_id', $request->id)->count();
             if ($count == 0) {
                 product::destroy($request->id);
-                $request->session()->put('info', trans('general.delete_msg'));
+                $flasher->AddInfo(trans('general.delete_msg'));
             } else {
-                $request->session()->put('error', trans('product.canotdelete'));
+                $flasher->AddError(trans('product.canotdelete'));
             }
 
             return redirect()->route('product_index');

@@ -11,7 +11,7 @@ class client extends Model
     use HasFactory;
     use HasTranslations;
 
-    protected $fillable = ['name', 'phone', 'address', 'country_id'];
+    protected $fillable = ['name', 'phone', 'address', 'country_id', 'balance', 'code'];
 
     protected $hidden = ['id', 'created_at', 'updated_at', 'opening_balance'];
 
@@ -27,16 +27,6 @@ class client extends Model
         return $this->hasMany(Client_MoneyTreasary_Salesinvs::class, 'salesinv_id', 'id');
     }
 
-    public function totalBalance()
-    {
-        $client = $this->id;
-        $debit = MoneyTreasary::where('client_id', $client)->sum('debit');
-        $credit = MoneyTreasary::where('client_id', $client)->sum('credit');
-        $final_balance = number_format($debit - $credit, '2').' '.env('MAIN_CURRENCY');
-
-        return $final_balance;
-    }
-
     public function user()
     {
         return $this->belongsTo(user::class);
@@ -50,5 +40,15 @@ class client extends Model
     public function formatcurrncy($money)
     {
         return number_format($money, '2').' '.env('MAIN_CURRENCY');
+    }
+
+    public function totalBalance()
+    {
+
+        $debit = MoneyTreasary::where('client_id', $this->id)->sum('debit');
+        $credit = MoneyTreasary::where('client_id', $this->id)->sum('credit');
+
+        return number_format($credit - $debit, '2').' '.env('MAIN_CURRENCY');
+
     }
 }

@@ -14,10 +14,12 @@ class category extends Model
     protected $fillable = ['name', 'notes'];
 
     public $translatable = ['name'];
+
     public function products()
     {
         return $this->hasMany(product::class);
     }
+
     public function format_date()
     {
         return $this->created_at->format('Y-m-d');

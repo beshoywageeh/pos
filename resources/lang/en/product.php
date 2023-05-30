@@ -32,6 +32,6 @@ return [
     'img' => 'select product image',
     'info' => 'product details',
     'generate_barcode' => 'generate barcode',
-    'canotdelete' => 'cann\'t delete product has transations'
+    'canotdelete' => 'cann\'t delete product has transations',
 
 ];

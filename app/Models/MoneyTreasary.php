@@ -37,8 +37,31 @@ class MoneyTreasary extends Model
         $client = $this->client_id;
         $debit = MoneyTreasary::where('client_id', $client)->where('payed_at', '<=', $date)->sum('debit');
         $credit = MoneyTreasary::where('client_id', $client)->where('payed_at', '<=', $date)->sum('credit');
-        $final_balance = number_format($debit - $credit, '2').' '.env('MAIN_CURRENCY');
 
-        return $final_balance;
+        return number_format($credit - $debit, '2').' '.env('MAIN_CURRENCY');
+    }
+
+    public function total_debit()
+    {
+        $debit = MoneyTreasary::where('client_id', $this->client_id)->sum('debit');
+
+        return number_format($debit).' '.env('MAIN_CURRENCY');
+    }
+
+    public function total_credit()
+    {
+        $credit = MoneyTreasary::where('client_id', $this->client_id)->sum('credit');
+
+        return number_format($credit).' '.env('MAIN_CURRENCY');
+    }
+
+    public function totalBalance()
+    {
+
+        $debit = MoneyTreasary::where('client_id', $this->id)->sum('debit');
+        $credit = MoneyTreasary::where('client_id', $this->id)->sum('credit');
+
+        return number_format($debit - $credit, '2').' '.env('MAIN_CURRENCY');
+
     }
 }

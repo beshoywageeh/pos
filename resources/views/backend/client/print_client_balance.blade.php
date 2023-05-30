@@ -2,84 +2,114 @@
     {{ trans('general.print') }}
 @endsection
 @push('css')
-    <link href="{{ URL::asset('assets/css/custom_loop_print.css') }}" rel="stylesheet">
+<style>*{text-transform: capitalize}</style>
 @endpush
 <!-- Content Header (Page header) -->
 @section('content')
     @include('backend.msg')
 
-    <div class="col-xl-12">
-        <div class="card mg-b-20" id="print">
-            <div class="card-header pb-0">
-                <div class="row">
-                    <table id='client_data' class='table text-center table-bordered'>
-                        <tr>
-                            <th colspan="3">{{ $data['name'] }}</th>
-                            <th colspan='3'>
-                                <span>تاريخ الطباعه : </span><span>{{ \Carbon\Carbon::now()->format('Y-m-d') }}</span>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td colspan='6'>{{ trans('client.details') }}</td>
-                        </tr>
-                        <tr>
-                            <td> {{ trans('client.name') }} :</td>
-                            <td>
-                                {{ $client->name }}
-                            </td>
-                            <td>{{ trans('client.phone') }} :</td>
-                            <td>
-                                {{ $client->phone }}
-                            </td>
-                            <td>
-                                {{ trans('client.address') }} : </td>
-                            <td>{{ $client->address }}
+    <div class="container-fluid">
+        <div class="col-xl-12">
+            <div class="card" id="print">
+                <div class="card-header">
+                    <div class="row">
+                        <table class="table text-center table-bordered table-sm">
+                            <thead class="alert-secondary">
+                                <tr>
+                                    <th colspan="4">
+                                        <h5 class=""> {{ trans('client.info') }}</h5>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr role="column">
+                                    <th><span>{{ trans('client.code') }}</span></th>
+                                    <th>{{ $data[0]->client->code }}</th>
+                                    <th><span>{{ trans('client.name') }}</span></th>
+                                    <th>{{ $data[0]->client->name }}</th>
 
-                            </td>
-                        </tr>
-                    </table>
+                                </tr>
+                                <tr role="column">
+                                    <th><span>{{ trans('client.address') }}</span></th>
+                                    <th>{{ $data[0]->client->address }}</th>
+
+                                    <th><span>{{ trans('client.country') }}</span></th>
+                                    <th>{{ $data[0]->client->country->name }}</th>
+
+                                </tr>
+                                <tr role="column">
+                                    <th><span>{{ trans('client.phone') }}</span></th>
+                                    <th>{{ $data[0]->client->phone }}</th>
+
+                                    <th><span class='data'>{{ trans('client.balance') }}</span></th>
+                                    <th><em>{{ $data[0]->client->totalBalance() }}</em></th>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-
-                <div class="table-responsive">
-                    <table class="table  table-bordered text-center" style="width: 98%">
-                        <thead>
+                <div class="card-body">
+                    <table class="table table-bordered text-center table-sm">
+                        <thead class="alert-secondary">
                             <tr>
-                                <th class="wd-2" style="padding: 0;width: 2px; margin: 0">#</th>
-                                <th><span class='data'>{{ trans('sales.inv_num') }}</span></th>
-                                <th><span class='data'>{{ trans('sales.total') }}</span></th>
-                                <th><span class='data'>{{ trans('sales.user') }}</span></th>
-                                <th><span class='data'>{{ trans('sales.date') }}</span></th>
+                                <th colspan="7">
+                                    <h5 class="py-1 fw-bold R">
+                                        {{ trans('client.balance') }}</h5>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th><span>{{ trans('sales.user') }}</span></th>
+                                <th><span>{{ trans('sales.inv_num') }}</span></th>
+                                <th><span>{{ trans('sales.date') }}</span></th>
+                                <th><span>{{ trans('sales.credit') }}</span></th>
+                                <th><span>{{ trans('sales.depit') }}</span></th>
+                                <th><span>{{ trans('sales.balance') }}</span></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($sales as $sale)
+                            @forelse($data as $transaction)
                                 <tr role="row">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $sale->inv_num }}
+
+                                    <td>{{ $transaction->user->first_name }}</td>
+                                    <td>{{ $transaction->num }}
                                     </td>
-                                    <td>{{ $sale->formatcurrncy() }} {{ env('MAIN_CURRENCY') }}</td>
-                                    <td>{{ $sale->user->first_name }}</td>
-                                    <td>{{ $sale->formatdate() }}</td>
+                                    <td>{{ $transaction->payed_at }}</td>
+                                    <td>{{ $transaction->formatcurrncy($transaction->credit) }}
+                                    </td>
+                                    <td>{{ $transaction->formatcurrncy($transaction->debit) }}
+                                    </td>
+                                    <td>{{ $transaction->current_balance() }}</td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="5">{{ trans('client.report_msg') }}</td>
+                                    <td class="text-center" colspan="5">
+                                        {{ trans('client.report_msg') }}</td>
                                 </tr>
                             @endforelse
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="4">{{ trans('general.total') }}</th>
+                                <th>{{ $data[0]->total_credit() }}</th>
+                                <th>{{ $data[0]->total_debit() }}</th>
+
+                                <th>{{ $data[0]->client->totalBalance() }}</th>
+
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
-            </div>
-            <div class='card-footer'>
-                <h5 class='total'>{{ trans('client.balance') }} : <em>{{ $client->totalBalance() }}</em>
-                    {{ env('MAIN_CURRENCY') }}</h5>
+                <div class='card-footer'>
+                    <h5 class='total'>{{ trans('client.balance') }} : <em>{{ $data[0]->totalBalance() }}</em></h5>
 
 
+                </div>
             </div>
+
         </div>
-
     </div>
     @endsection @section('js')
     <script>

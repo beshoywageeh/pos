@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\salesinvrequest;
 use App\Http\Traits\SettingTrait;
 use App\Models\client;
 use App\Models\MoneyTreasary;
@@ -13,7 +12,6 @@ use Flasher\Noty\Prime\NotyFactory;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class SalesinvController extends Controller
 {
@@ -26,6 +24,7 @@ class SalesinvController extends Controller
 
         return view('backend.Salesinv.index', compact('salesinv'));
     }
+
     public function intial_sales()
     {
         $data['salesinv'] = salesinv::latest()
@@ -47,9 +46,10 @@ class SalesinvController extends Controller
 
         return view('backend.Salesinv.initsale', ['data' => $data]);
     }
+
     public function create(Request $request, ToastrFactory $flasher)
     {
-    //    return $request;
+        //    return $request;
         try {
             $serial = salesinv::latest()
                 ->first();
@@ -140,8 +140,6 @@ class SalesinvController extends Controller
         }
     }
 
- 
-
     public function addProduct(Request $request)
     {
 
@@ -186,13 +184,15 @@ class SalesinvController extends Controller
         if ($request->ajax()) {
             $data['invoice_product_count'] = product_salesinv::where('salesinv_id', $request->inv_id)->sum('quantity');
             $data['sales_invoice'] = $request->inv_id;
+
             return $data;
-                /*  return response()->json([
-                'data' => $data
-            ])*/;
+            /*  return response()->json([
+            'data' => $data
+            ])*/
             //            return view('backend.salesinv.Approve_inv_data', ['data' => $data]);
         }
     }
+
     public function approve_close_invoice(Request $request, ToastrFactory $flasher)
     {
         return $request;
@@ -218,7 +218,4 @@ class SalesinvController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-    
-    
 }

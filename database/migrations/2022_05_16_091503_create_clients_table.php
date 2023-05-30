@@ -18,8 +18,9 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('address');
+            $table->integer('code')->unique();
             $table->bigInteger('country_id')->unsigned();
-            $table->integer('opening_balance')->nullable();
+            $table->integer('balance')->nullable();
             $table->timestamps();
         });
     }

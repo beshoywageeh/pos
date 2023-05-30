@@ -29,5 +29,7 @@ return [
     'notes' => 'notes',
     'main' => 'main',
     'name' => 'name',
-    'delconfirm' => 'are you sure you want delete ?'
+    'delconfirm' => 'are you sure you want delete ?',
+    'total' => 'total',
+
 ];

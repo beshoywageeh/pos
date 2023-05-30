@@ -18,15 +18,16 @@ class product_salesinv extends Model
 
     public function salesinv()
     {
-        return $this->hasOne(salesinv::class, 'salesinv_id', 'id');
+        return $this->hasOne(salesinv::class, 'id', 'salesinv_id');
     }
 
     public function products()
     {
         return $this->belongsTo(product::class, 'product_id', 'id');
     }
+
     public function formatcurrncy($money)
     {
-        return number_format($money, '2') . ' ' . env('MAIN_CURRENCY');
+        return number_format($money, '2').' '.env('MAIN_CURRENCY');
     }
 }

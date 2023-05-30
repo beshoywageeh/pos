@@ -18,9 +18,10 @@ class ClientFactory extends Factory
     {
         return [
             'name' => ['ar' => fake()->unique()->name(), 'en' => fake()->unique()->name()],
-            'phone' => fake()->randomNumber(),
+            'phone' => fake()->phoneNumber(),
+            'code' => fake()->unique()->randomNumber(),
             'country_id' => fake()->numberBetween('1', '300'),
-            'opening_balance' => fake()->numberBetween('1000', '1000000'),
+            'balance' => fake()->numberBetween('1000', '1000000'),
             'address' => fake()->unique()->address(),
         ];
     }

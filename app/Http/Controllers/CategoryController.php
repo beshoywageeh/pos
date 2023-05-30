@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\CategoriesDataTable;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\category;
-use App\Models\product;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Http\Request;
 
@@ -14,8 +12,10 @@ class CategoryController extends Controller
     public function index()
     {
         $data['categories'] = category::all();
+
         return view('backend.Categories.index', ['data' => $data]);
     }
+
     public function store(StoreCategoryRequest $request, ToastrFactory $flasher)
     {
         try {
@@ -33,11 +33,14 @@ class CategoryController extends Controller
                 ->withErrors(['error' => $e->getMessage()]);
         }
     }
+
     public function show($category)
     {
         $data['category'] = category::where('id', $category)->with('products')->first();
+
         return view('backend.Categories.show', ['data' => $data]);
     }
+
     public function update(StoreCategoryRequest $request, ToastrFactory $flasher)
     {
         try {

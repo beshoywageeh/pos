@@ -3,7 +3,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a class="brand-link" href="{{ route('dashboard') }}"><img src="{{ URL::asset('assets/img/AdminLTELogo.png') }}"
             class="brand-image img-circle elevation-3" alt="logo" /> <span
-            class="brand-text font-weight-light">AdminLTE 3</span>
+            class="brand-text font-weight-light">{{env('APP_NAME')}}</span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
