@@ -16,12 +16,12 @@ class salesinvFactory extends Factory
      */
     public function definition()
     {
-        $num = 1;
 
         return [
-            'id' => fake()->uuid(),
-            'serial' => $num++,
+            //   'id'=>fake()->unique()->numberBetween('1', '300'),
+            'serial' => fake()->numberBetween('1', '300'),
             'inv_num' => 'LL-'.fake()->unique()->numberBetween('1', '300'),
+            //'inv_manual' => fake()->unique()->numberBetween('1', '300'),
             'inv_date' => fake()->date('Y-m-d'),
             'client_id' => fake()->numberBetween('1', '100'),
             'user_id' => '1',

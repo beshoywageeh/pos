@@ -23,7 +23,7 @@ class product_salesinv extends Model
 
     public function products()
     {
-        return $this->belongsTo(product::class, 'product_id', 'id');
+        return $this->belongsTo(product::class, 'product_id', 'barcode');
     }
 
     public function formatcurrncy($money)

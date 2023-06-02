@@ -14,9 +14,10 @@ class CreateSalesinvsTable extends Migration
     public function up()
     {
         Schema::create('salesinvs', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->integer('serial');
             $table->string('inv_num', '20');
+            $table->string('inv_manual', '20')->nullable();
             $table->date('inv_date');
             $table->bigInteger('client_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
